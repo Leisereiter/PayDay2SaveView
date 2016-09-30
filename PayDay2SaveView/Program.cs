@@ -18,22 +18,22 @@ namespace PayDay2SaveView
             var saveFile = new SaveFile(GetSaveFilePath(steamUtils));
             var sessions = GetPlayedSessions(saveFile)
                 .Select(x => SessionCount.FromDictKvp(x, jobNameResolver))
-                .Where(x=>x.SessionState == SessionState.Completed)
+                .Where(x => x.SessionState == SessionState.Completed)
                 .GroupBy(x => x.NameKey, x => x)
                 .ToDictionary(x => x.Key, x => x.GroupBy(y => y.Difficulty, y => y)
                                                 .ToDictionary(y => y.Key, y => y.FirstOrDefault()));
 
-            Console.Write("Heist".PadLeft(30));
+
             Console.Write("NO".PadLeft(4));
             Console.Write("HD".PadLeft(4));
             Console.Write("VH".PadLeft(4));
             Console.Write("OK".PadLeft(4));
             Console.Write("DW".PadLeft(4));
-            Console.WriteLine();
+            Console.WriteLine("  Heist");
 
             foreach (var name in JobNameResolver.JobNames.OrderBy(x => x.Value))
             {
-                Console.Write(name.Value.PadLeft(30));
+
                 var jobs = sessions.ContainsKey(name.Key) ? sessions[name.Key] : null;
 
                 // Console.WriteLine(FormatCountForDifficulty(Difficulty.Easy, jobs));
@@ -42,14 +42,14 @@ namespace PayDay2SaveView
                 Console.Write(FormatCountForDifficulty(Difficulty.Overkill, jobs));
                 Console.Write(FormatCountForDifficulty(Difficulty.Overkill145, jobs));
                 Console.Write(FormatCountForDifficulty(Difficulty.Overkill290, jobs));
-                Console.WriteLine();
+                Console.WriteLine("  " + name.Value);
             }
         }
 
         private static string FormatCountForDifficulty(Difficulty difficulty, IReadOnlyDictionary<Difficulty, SessionCount> jobs)
         {
             var count = (jobs != null && jobs.ContainsKey(difficulty)) ? jobs[difficulty].Count : 0;
-            return $"{count.ToString().PadLeft(4)}";
+            return count.ToString().PadLeft(4);
         }
 
         private static Dictionary<object, object> GetPlayedSessions(SaveFile saveFile)
