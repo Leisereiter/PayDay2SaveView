@@ -53,26 +53,6 @@ namespace PayDay2SaveView
             return jobs;
         }
 
-        private static void PrintTree(Dictionary<string, object> tree, int depth = 0)
-        {
-            foreach (var item in tree)
-            {
-                Console.Write(new string(' ', depth));
-                Console.Write($@"{item.Key}: ");
-
-                var subTree = item.Value as Dictionary<string, object>;
-                if (subTree == null)
-                {
-                    Console.WriteLine(item.Value);
-                }
-                else
-                {
-                    Console.WriteLine();
-                    Program.PrintTree(subTree, depth + 1);
-                }
-            }
-        }
-
         private static string GetSaveFilePath(SteamUtils steamUtils)
         {
             var steamUsers = steamUtils.GetSteamUser();
