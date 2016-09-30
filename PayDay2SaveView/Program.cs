@@ -59,7 +59,7 @@ namespace PayDay2SaveView
             if (!steamUsers.Any())
                 throw new Exception("Ich finde bei Steam keinen Benutzer der PD2 installiert hat.");
 
-            var steamUser = steamUsers.Count() == 1 ? steamUsers.First() :PromptForSteamUser(steamUsers);
+            var steamUser = steamUsers.Count() == 1 ? steamUsers.First() : PromptForSteamUser(steamUsers);
 
             var payday2SavePath = Path.Combine(steamUtils.GetGameDirectory(steamUser, Pd2SteamId), "remote");
             var currentSaveFile = GetLatestSaveFile(Directory.GetFiles(payday2SavePath, "save*.sav"));
@@ -72,8 +72,7 @@ namespace PayDay2SaveView
             for (var i = 0; i < steamUsers.Count; ++i)
                 Console.WriteLine($" [{i + 1}] {steamUsers[i]}");
 
-            Console.Write(" > ");
-            var line = Console.ReadLine();
+            var line = Prompt();
 
             int choice;
             while (true)
@@ -81,11 +80,16 @@ namespace PayDay2SaveView
                 if (int.TryParse(line, out choice) && choice >= 1 && choice <= steamUsers.Count) break;
                 Console.WriteLine($"Ne, das muss schon eine Zahl zwischen 1 und {steamUsers.Count} sein.");
 
-                Console.Write(" > ");
-                line = Console.ReadLine();
+                line = Prompt();
             }
 
-            return steamUsers[choice-1];
+            return steamUsers[choice - 1];
+        }
+
+        private static string Prompt()
+        {
+            Console.Write(" > ");
+            return Console.ReadLine();
         }
 
         private static string GetLatestSaveFile(IEnumerable<string> files)
