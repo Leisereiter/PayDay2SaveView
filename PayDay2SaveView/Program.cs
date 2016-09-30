@@ -18,6 +18,7 @@ namespace PayDay2SaveView
             var saveFile = new SaveFile(GetSaveFilePath(steamUtils));
             var sessions = GetPlayedSessions(saveFile)
                 .Select(x => SessionCount.FromDictKvp(x, jobNameResolver))
+                .Where(x=>x.SessionState == SessionState.Completed)
                 .GroupBy(x => x.NameKey, x => x)
                 .ToDictionary(x => x.Key, x => x.GroupBy(y => y.Difficulty, y => y)
                                                 .ToDictionary(y => y.Key, y => y
