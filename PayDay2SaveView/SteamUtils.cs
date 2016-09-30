@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Microsoft.Win32;
@@ -15,6 +16,11 @@ namespace PayDay2SaveView
             return (string)Registry.GetValue(@"HKEY_CURRENT_USER\SOFTWARE\Valve\Steam", "SteamPath", null);
         }
 
+        private string GetSteamUserdataDirectory()
+        {
+            return Path.Combine(GetSteamFolder(), "userdata");
+        }
+
         public string GetSteamUser()
         {
             var steamFolder = GetSteamFolder();
@@ -29,14 +35,24 @@ namespace PayDay2SaveView
             return uids.First();
         }
 
-        public string GetSteamUserDirectory(string steamUserId)
+        public string GetSteamUserDirectory(long steamUserId)
         {
-            return Path.Combine(GetSteamFolder(), "userdata", steamUserId);
+            return Path.Combine(GetSteamUserdataDirectory(), steamUserId.ToString());
         }
 
-        public string GetGameDirectory(string steamUserId, int gameId)
+        public string GetGameDirectory(long steamUserId, int gameId)
         {
             return Path.Combine(GetSteamUserDirectory(steamUserId), gameId.ToString());
+        }
+
+        public IEnumerable<long> GetSteamUsersWithGame(int gameId)
+        {
+            foreach (var path in Directory.GetDirectories(GetSteamUserdataDirectory()))
+            {
+                long steamUserId;
+                if (long.TryParse(Path.GetFileName(path), out steamUserId))
+                    yield return steamUserId;
+            }
         }
     }
 }
