@@ -50,9 +50,16 @@ namespace PayDay2SaveView
             foreach (var path in Directory.GetDirectories(GetSteamUserdataDirectory()))
             {
                 long steamUserId;
-                if (long.TryParse(Path.GetFileName(path), out steamUserId))
+                if (!long.TryParse(Path.GetFileName(path), out steamUserId))
+                    continue;
+                if (UserHasGame(steamUserId, gameId))
                     yield return steamUserId;
             }
+        }
+
+        private bool UserHasGame(long steamUserId, int gameId)
+        {
+            return Directory.Exists(Path.Combine(GetSteamUserdataDirectory(), steamUserId.ToString(), gameId.ToString()));
         }
     }
 }
