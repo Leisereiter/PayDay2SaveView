@@ -23,7 +23,7 @@ namespace PayDay2SaveView
                                                 .ToDictionary(y => y.Key, y => y
                                                 .ToList()));
 
-            foreach (var name in JobNameResolver._jobNames.OrderBy(x => x.Value))
+            foreach (var name in JobNameResolver.JobNames.OrderBy(x => x.Value))
             {
                 Console.WriteLine(name.Value);
                 var jobs = sessions.ContainsKey(name.Key) ? sessions[name.Key] : null;

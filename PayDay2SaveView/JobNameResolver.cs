@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
 
 namespace PayDay2SaveView
 {
@@ -7,12 +6,12 @@ namespace PayDay2SaveView
     {
         public string GetJobNameFromKey(string id)
         {
-            if (_jobNames.ContainsKey(id))
-                return _jobNames[id];
-            return _dayNames[id];
+            if (JobNames.ContainsKey(id))
+                return JobNames[id];
+            return DayNames[id];
         }
 
-        public static readonly IReadOnlyDictionary<string, string> _dayNames = new Dictionary<string, string>()
+        public static readonly IReadOnlyDictionary<string, string> DayNames = new Dictionary<string, string>()
         {
             // Armored Transport
             {"arm_for", "Armored Transport: Train Heist"},
@@ -74,7 +73,7 @@ namespace PayDay2SaveView
             {"hox_2", "Hoxton Breakout Day 2"},
         };
 
-        public static readonly IReadOnlyDictionary<string, string> _escapeNames = new Dictionary<string, string>
+        public static readonly IReadOnlyDictionary<string, string> EscapeNames = new Dictionary<string, string>
         {
             {"escape_cafe", "Escape: Cafe"},
             {"escape_cafe_day", "Escape: Cafe (Day)"},
@@ -94,7 +93,7 @@ namespace PayDay2SaveView
         };
 
         // siehe levelstweakdata.lua
-        public static readonly IReadOnlyDictionary<string, string> _jobNames = new Dictionary<string, string>()
+        public static readonly IReadOnlyDictionary<string, string> JobNames = new Dictionary<string, string>()
         {
             // Armored Transport
             {"arm_for", "Armored Transport: Train Heist"},
