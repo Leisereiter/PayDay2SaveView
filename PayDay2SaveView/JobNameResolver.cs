@@ -152,7 +152,7 @@ namespace PayDay2SaveView
             {"nightclub", "Nightclub"},
             {"four_stores", "Four Stores"},
             {"ukrainian_job_prof", "Ukranian Job Professional"},
-            {"ukrainian_job", "Ukranian Job (Used for escape forces)"},
+            {"ukrainian_job", "Ukranian Job (Escape forces)"},
             {"cane", "Santa's Workshop"},
 
             // Jimmy
