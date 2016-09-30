@@ -58,18 +58,13 @@ namespace PayDay2SaveView
             var steamUsers = steamUtils.GetSteamUser();
             var steamUser = steamUsers;
             var payday2SavePath = Path.Combine(steamUtils.GetGameDirectory(steamUser, Pd2SteamId), "remote");
-            var currentSaveFile = GetCurrectSaveFile(Directory.GetFiles(payday2SavePath, "save*.sav"));
+            var currentSaveFile = GetLatestSaveFile(Directory.GetFiles(payday2SavePath, "save*.sav"));
             return currentSaveFile;
         }
 
-        private static string GetCurrectSaveFile(IEnumerable<string> files)
+        private static string GetLatestSaveFile(IEnumerable<string> files)
         {
-            var pathLastAccessTimes = files.Select(path => new
-            {
-                path = path,
-                date = File.GetLastWriteTime(path)
-            });
-
+            var pathLastAccessTimes = files.Select(path => new { path, date = File.GetLastWriteTime(path) });
             return pathLastAccessTimes.OrderByDescending(x => x.date).First().path;
         }
     }
