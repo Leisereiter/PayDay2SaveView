@@ -23,17 +23,25 @@ namespace PayDay2SaveView
                                                 .ToDictionary(y => y.Key, y => y
                                                 .ToList()));
 
+            Console.Write("Heist".PadLeft(30));
+            Console.Write("NO".PadLeft(4));
+            Console.Write("HD".PadLeft(4));
+            Console.Write("VH".PadLeft(4));
+            Console.Write("OK".PadLeft(4));
+            Console.Write("DW".PadLeft(4));
+            Console.WriteLine();
+
             foreach (var name in JobNameResolver.JobNames.OrderBy(x => x.Value))
             {
-                Console.WriteLine(name.Value);
+                Console.Write(name.Value.PadLeft(30));
                 var jobs = sessions.ContainsKey(name.Key) ? sessions[name.Key] : null;
 
                 // Console.WriteLine(FormatCountForDifficulty(Difficulty.Easy, jobs));
-                Console.WriteLine(FormatCountForDifficulty(Difficulty.Normal, jobs));
-                Console.WriteLine(FormatCountForDifficulty(Difficulty.Hard, jobs));
-                Console.WriteLine(FormatCountForDifficulty(Difficulty.Overkill, jobs));
-                Console.WriteLine(FormatCountForDifficulty(Difficulty.Overkill145, jobs));
-                Console.WriteLine(FormatCountForDifficulty(Difficulty.Overkill290, jobs));
+                Console.Write(FormatCountForDifficulty(Difficulty.Normal, jobs));
+                Console.Write(FormatCountForDifficulty(Difficulty.Hard, jobs));
+                Console.Write(FormatCountForDifficulty(Difficulty.Overkill, jobs));
+                Console.Write(FormatCountForDifficulty(Difficulty.Overkill145, jobs));
+                Console.Write(FormatCountForDifficulty(Difficulty.Overkill290, jobs));
                 Console.WriteLine();
             }
         }
@@ -41,7 +49,7 @@ namespace PayDay2SaveView
         private static string FormatCountForDifficulty(Difficulty difficulty, IReadOnlyDictionary<Difficulty, List<SessionCount>> jobs)
         {
             var count = (jobs != null && jobs.ContainsKey(difficulty)) ? jobs[difficulty].Count : 0;
-            return $"  {count.ToString().PadLeft(3)} {EnumUtils.GetStringValue(difficulty)}";
+            return $"{count.ToString().PadLeft(4)}";
         }
 
         private static Dictionary<object, object> GetPlayedSessions(SaveFile saveFile)
