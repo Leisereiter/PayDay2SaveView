@@ -37,19 +37,22 @@ namespace PayDay2SaveView
                 var jobs = sessions.ContainsKey(name.Key) ? sessions[name.Key] : null;
 
                 // Console.WriteLine(FormatCountForDifficulty(Difficulty.Easy, jobs));
-                Console.Write(FormatCountForDifficulty(Difficulty.Normal, jobs));
-                Console.Write(FormatCountForDifficulty(Difficulty.Hard, jobs));
-                Console.Write(FormatCountForDifficulty(Difficulty.Overkill, jobs));
-                Console.Write(FormatCountForDifficulty(Difficulty.Overkill145, jobs));
-                Console.Write(FormatCountForDifficulty(Difficulty.Overkill290, jobs));
+                PrintCountForDifficulty(Difficulty.Normal, jobs);
+                PrintCountForDifficulty(Difficulty.Hard, jobs);
+                PrintCountForDifficulty(Difficulty.Overkill, jobs);
+                PrintCountForDifficulty(Difficulty.Overkill145, jobs);
+                PrintCountForDifficulty(Difficulty.Overkill290, jobs);
                 Console.WriteLine("  " + name.Value);
             }
         }
 
-        private static string FormatCountForDifficulty(Difficulty difficulty, IReadOnlyDictionary<Difficulty, SessionCount> jobs)
+        private static void PrintCountForDifficulty(Difficulty difficulty, IReadOnlyDictionary<Difficulty, SessionCount> jobs)
         {
             var count = (jobs != null && jobs.ContainsKey(difficulty)) ? jobs[difficulty].Count : 0;
-            return count.ToString().PadLeft(4);
+            var orgFgColor = Console.ForegroundColor;
+            if (count == 0) Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write(count.ToString().PadLeft(4));
+            Console.ForegroundColor = orgFgColor;
         }
 
         private static Dictionary<object, object> GetPlayedSessions(SaveFile saveFile)
