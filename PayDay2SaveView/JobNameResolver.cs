@@ -11,7 +11,6 @@ namespace PayDay2SaveView
             return _dayNames[id];
         }
 
-        // http://www.unknowncheats.me/wiki/PayDay_2:Job_ID%27s/Level_ID%27s
         public static readonly IReadOnlyDictionary<string, string> _dayNames = new Dictionary<string, string>()
         {
             // Armored Transport
@@ -83,6 +82,7 @@ namespace PayDay2SaveView
             {"hox_2", "Hoxton Breakout Day 2"},
         };
 
+        // siehe levelstweakdata.lua
         public static readonly IReadOnlyDictionary<string, string> _jobNames = new Dictionary<string, string>()
         {
             // Armored Transport

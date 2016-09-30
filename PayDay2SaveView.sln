@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayDay2SaveView", "PayDay2S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaydaySaveEditor", "PaydaySaveEditor\PaydaySaveEditor.csproj", "{2C42FA08-DB59-41A2-BD6B-B8160943ED7D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{3E6D07D7-581D-4297-8501-1E1F9B16778D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,14 @@ Global
 		{2C42FA08-DB59-41A2-BD6B-B8160943ED7D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2C42FA08-DB59-41A2-BD6B-B8160943ED7D}.Release|x86.ActiveCfg = Release|Any CPU
 		{2C42FA08-DB59-41A2-BD6B-B8160943ED7D}.Release|x86.Build.0 = Release|Any CPU
+		{3E6D07D7-581D-4297-8501-1E1F9B16778D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E6D07D7-581D-4297-8501-1E1F9B16778D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E6D07D7-581D-4297-8501-1E1F9B16778D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3E6D07D7-581D-4297-8501-1E1F9B16778D}.Debug|x86.Build.0 = Debug|Any CPU
+		{3E6D07D7-581D-4297-8501-1E1F9B16778D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E6D07D7-581D-4297-8501-1E1F9B16778D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E6D07D7-581D-4297-8501-1E1F9B16778D}.Release|x86.ActiveCfg = Release|Any CPU
+		{3E6D07D7-581D-4297-8501-1E1F9B16778D}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
