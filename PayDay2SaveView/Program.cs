@@ -21,8 +21,7 @@ namespace PayDay2SaveView
                 .Where(x=>x.SessionState == SessionState.Completed)
                 .GroupBy(x => x.NameKey, x => x)
                 .ToDictionary(x => x.Key, x => x.GroupBy(y => y.Difficulty, y => y)
-                                                .ToDictionary(y => y.Key, y => y
-                                                .ToList()));
+                                                .ToDictionary(y => y.Key, y => y.FirstOrDefault()));
 
             Console.Write("Heist".PadLeft(30));
             Console.Write("NO".PadLeft(4));
@@ -47,7 +46,7 @@ namespace PayDay2SaveView
             }
         }
 
-        private static string FormatCountForDifficulty(Difficulty difficulty, IReadOnlyDictionary<Difficulty, List<SessionCount>> jobs)
+        private static string FormatCountForDifficulty(Difficulty difficulty, IReadOnlyDictionary<Difficulty, SessionCount> jobs)
         {
             var count = (jobs != null && jobs.ContainsKey(difficulty)) ? jobs[difficulty].Count : 0;
             return $"{count.ToString().PadLeft(4)}";
