@@ -2,20 +2,20 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Microsoft.Win32;
 using PaydaySaveEditor.PD2;
 
 namespace PayDay2SaveView
 {
     public static class Program
     {
-        private const string Pd2SteamId = "218620";
+        private const int Pd2SteamId = 218620;
 
         public static void Main(string[] args)
         {
             var jobNameResolver = new JobNameResolver();
+            var steamUtils = new SteamUtils();
 
-            var saveFile = new SaveFile(GetSaveFilePath());
+            var saveFile = new SaveFile(GetSaveFilePath(steamUtils));
             var sessions = GetPlayedSessions(saveFile)
                 .Select(x => SessionCount.FromDictKvp(x, jobNameResolver))
                 .GroupBy(x => x.NameKey, x => x)
@@ -68,20 +68,17 @@ namespace PayDay2SaveView
                 else
                 {
                     Console.WriteLine();
-                    PrintTree(subTree, depth + 1);
+                    Program.PrintTree(subTree, depth + 1);
                 }
             }
         }
 
-        private static string GetSaveFilePath()
+        private static string GetSaveFilePath(SteamUtils steamUtils)
         {
-            //return @"D:\temp\out\save098.sav";
-            var steamFolder = GetSteamFolder();
-            if (string.IsNullOrEmpty(steamFolder))
-                throw new Exception("Steam nicht gefunden :(");
-
-            var userDataPath = Path.Combine(steamFolder, "userdata", GetSteamUser(steamFolder), Pd2SteamId, "remote");
-            var currentSaveFile = GetCurrectSaveFile(Directory.GetFiles(userDataPath, "save*.sav"));
+            var steamUsers = steamUtils.GetSteamUser();
+            var steamUser = steamUsers;
+            var payday2SavePath = Path.Combine(steamUtils.GetGameDirectory(steamUser, Pd2SteamId), "remote");
+            var currentSaveFile = GetCurrectSaveFile(Directory.GetFiles(payday2SavePath, "save*.sav"));
             return currentSaveFile;
         }
 
@@ -94,22 +91,6 @@ namespace PayDay2SaveView
             });
 
             return pathLastAccessTimes.OrderByDescending(x => x.date).First().path;
-        }
-
-        private static string GetSteamUser(string steamFolder)
-        {
-            // HKEY_CURRENT_USER\SOFTWARE\Valve\Steam\Users
-            var hcu = Registry.CurrentUser.OpenSubKey(@"SOFTWARE\Valve\Steam\Users");
-            var uids = hcu.GetSubKeyNames();
-            if (uids.Length > 1)
-                throw new NotImplementedException();
-            return uids.First();
-        }
-
-        private static string GetSteamFolder()
-        {
-            // HKEY_CURRENT_USER\SOFTWARE\Valve\Steam\SteamPath
-            return (string)Registry.GetValue(@"HKEY_CURRENT_USER\SOFTWARE\Valve\Steam", "SteamPath", null);
         }
     }
 }
