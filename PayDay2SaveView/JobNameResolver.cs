@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace PayDay2SaveView
 {
@@ -68,7 +69,13 @@ namespace PayDay2SaveView
             {"ukrainian_job", "Ukranian Job"},
             {"four_stores", "Four Stores"},
 
-            // Escapes
+            // Hoxton Breakout
+            {"hox_1", "Hoxton Breakout Day 1"},
+            {"hox_2", "Hoxton Breakout Day 2"},
+        };
+
+        public static readonly IReadOnlyDictionary<string, string> _escapeNames = new Dictionary<string, string>
+        {
             {"escape_cafe", "Escape: Cafe"},
             {"escape_cafe_day", "Escape: Cafe (Day)"},
             {"escape_park", "Escape: Park"},
@@ -78,8 +85,12 @@ namespace PayDay2SaveView
             {"escape_street", "Escape: Street"},
             {"escape_garage", "Escape: Garage"},
 
-            {"hox_1", "Hoxton Breakout Day 1"},
-            {"hox_2", "Hoxton Breakout Day 2"},
+            {"election_day_3", "?election_day_3"},
+            // {"arm_for", "Armored Transport: Train Heist"},
+            {"escape_hell", "?escape_hell"},
+            {"blueharvest_3", "?blueharvest_3"},
+            {"driving_escapes_industry_day", "?driving_escapes_industry_day"},
+            {"driving_escapes_city_day", "?driving_escapes_city_day"}
         };
 
         // siehe levelstweakdata.lua
@@ -158,7 +169,7 @@ namespace PayDay2SaveView
             {"hox", "Hoxton Breakout"},
             {"hox_prof", "Hoxton Breakout (Pro Job)"},
             {"hox_3", "Hoxton Revenge" },
-            { "mus", "The Diamond" },
+            {"mus", "The Diamond" },
             {"gallery", "Art Gallery" },
             {"pines", "White Xmas" },
             {"rat", "Cook Off" },
