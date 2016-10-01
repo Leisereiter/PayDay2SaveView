@@ -23,7 +23,6 @@ namespace PayDay2SaveView
                 .ToDictionary(x => x.Key, x => x.GroupBy(y => y.Difficulty, y => y)
                                                 .ToDictionary(y => y.Key, y => y.FirstOrDefault()));
 
-
             Console.Write("NO".PadLeft(4));
             Console.Write("HD".PadLeft(4));
             Console.Write("VH".PadLeft(4));
@@ -33,7 +32,6 @@ namespace PayDay2SaveView
 
             foreach (var name in JobNameResolver.JobNames.OrderBy(x => x.Value))
             {
-
                 var jobs = sessions.ContainsKey(name.Key) ? sessions[name.Key] : null;
 
                 // Console.WriteLine(FormatCountForDifficulty(Difficulty.Easy, jobs));
