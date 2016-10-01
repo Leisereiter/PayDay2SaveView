@@ -50,10 +50,15 @@ namespace PayDay2SaveView
         {
             var count = (jobs != null && jobs.ContainsKey(difficulty)) ? jobs[difficulty].Count : 0;
             var orgFgColor = Console.ForegroundColor;
-            if (count == 0 && difficulty != Difficulty.Normal)
-                Console.ForegroundColor = ConsoleColor.Red;
+            if (count == 0)
+                Console.ForegroundColor = ColorFromDifficulty(difficulty);
             Console.Write(count.ToString().PadLeft(4));
             Console.ForegroundColor = orgFgColor;
+        }
+
+        private static ConsoleColor ColorFromDifficulty(Difficulty difficulty)
+        {
+            return ConsoleColor.Red;
         }
 
         private static Dictionary<object, object> GetPlayedSessions(SaveFile saveFile)
