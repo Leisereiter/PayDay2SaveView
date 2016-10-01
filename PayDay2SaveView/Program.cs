@@ -49,14 +49,13 @@ namespace PayDay2SaveView
         private static void PrintCountForDifficulty(Difficulty difficulty, IReadOnlyDictionary<Difficulty, SessionCount> jobs)
         {
             var count = (jobs != null && jobs.ContainsKey(difficulty)) ? jobs[difficulty].Count : 0;
-            var orgFgColor = Console.ForegroundColor;
-            if (count == 0)
-                Console.ForegroundColor = ColorFromDifficulty(difficulty);
+            var defaultFgColor = Console.ForegroundColor;
+            if (count == 0) Console.ForegroundColor = ColorFromDifficulty(difficulty, defaultFgColor);
             Console.Write(count.ToString().PadLeft(4));
-            Console.ForegroundColor = orgFgColor;
+            Console.ForegroundColor = defaultFgColor;
         }
 
-        private static ConsoleColor ColorFromDifficulty(Difficulty difficulty)
+        private static ConsoleColor ColorFromDifficulty(Difficulty difficulty, ConsoleColor defaultColor)
         {
             switch (difficulty)
             {
@@ -70,12 +69,11 @@ namespace PayDay2SaveView
 
                 case Difficulty.Easy:
                 case Difficulty.Normal:
-                    return ConsoleColor.White;
+                    return defaultColor;
 
                 default:
                     throw new ArgumentOutOfRangeException(nameof(difficulty), difficulty, null);
             }
-            return ConsoleColor.Red;
         }
 
         private static Dictionary<object, object> GetPlayedSessions(SaveFile saveFile)
