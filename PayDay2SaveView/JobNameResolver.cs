@@ -95,98 +95,97 @@ namespace PayDay2SaveView
         // siehe levelstweakdata.lua
         public static readonly IReadOnlyDictionary<string, string> JobNames = new Dictionary<string, string>()
         {
-            // Armored Transport
-            {"arm_for", "Armored Transport: Train Heist"},
-            {"arm_hcm", "Armored Transport: Downtown"},
-            {"arm_cro", "Armored Transport: Crossroads"},
-            {"arm_fac", "Armored Transport: Harbor"},
-            {"arm_par", "Armored Transport: Park"},
-            {"arm_und", "Armored Transport: Underpass"},
+            { "safehouse", "Safehouse" },
+            { "haunted", "?haunted" }, // Haloween special?
 
             // Miscellaneous
-            {"roberts", "GO Bank"},
-            {"kosugi", "Shadow Raid"},
-            {"safehouse", "Safehouse"},
-            {"family", "Diamond Heist"},
-            {"jewelry_store", "Jewelry Store"},
-            {"branchbank", "Bank Heist"},
-            {"branchbank_cash", "Bank Heist: Cash" },
-            {"branchbank_deposit", "Bank Heist Deposit"},
-            {"branchbank_prof", "Bank Heist Professional"},
-            {"branchbank_gold_prof", "Bank Heist Gold Professional"},
+            { "gallery", "Art Gallery" },
+            { "branchbank", "Bank Heist" },
+            { "branchbank_prof", "Bank Heist (Pro Job)" },
+            { "branchbank_cash", "Bank Heist: Cash" },
+            { "branchbank_deposit", "Bank Heist Deposit" },
+            { "branchbank_gold_prof", "Bank Heist Gold (Pro Job)" },
 
-            // Firestarter
-            {"firestarter", "Firestarter"},
-            {"firestarter_prof", "Firestarter Professional"},
+            { "cage", "Car Shop" },
+            { "rat", "Cook Off" },
+            { "family", "Diamond Store" },
+            { "roberts", "GO Bank" },
+            { "jewelry_store", "Jewelry Store" },
+            { "kosugi", "Shadow Raid" },
+            { "arena", "The Alesso Heist" },
+            
+            // Armored Transport
+            { "arm_cro", "Armored Transport: Crossroads" },
+            { "arm_hcm", "Armored Transport: Downtown" },
+            { "arm_fac", "Armored Transport: Harbor" },
+            { "arm_par", "Armored Transport: Park" },
+            { "arm_for", "Armored Transport: Train Heist" },
+            { "arm_und", "Armored Transport: Underpass" },
 
-            // Rats
-            {"alex", "Rats"},
-            {"alex_prof", "Rats Professional"},
+            // Classics
+            { "pal", "Counterfeit" },
+            { "red2", "First World Bank" },
+            { "dinner", "Slaughterhouse" },
+            { "man", "Undercover" },
 
-            // Watchdogs
-            {"watchdogs", "Watchdogs"},
-            {"watchdogs_night", "Watchdogs (Night)"},
-            {"watchdogs_prof", "Watchdogs Professional"},
-            {"watchdogs_night_prof", "Watchdogs (Night) Professional"},
+            // Events
+            { "nail", "Lab Rats" },
 
-            // Framing Frame
-            {"framing_frame", "Framing Frame"},
-            {"framing_frame_prof", "Framing Frame Professional"},
-
-            // The Elephant
-            {"welcome_to_the_jungle", "Big Oil"},
-            {"welcome_to_the_jungle_prof", "Big Oil Professional"},
-            {"welcome_to_the_jungle_night_prof", "Big Oil (Night) Professional"},
-            {"born", "The Biker Heist"},
-            {"born_pro", "The Biker Heist (Pro Job)"},
-
-            // Election Day
-            {"election_day", "Election Day"},
-            {"election_day_prof", "Election Day Professional"},
-
-            // The Dentist
-            {"big", "Big Bank"},
-
-            // Vlad
-            {"mallcrasher", "Mallcrasher"},
-            {"nightclub", "Nightclub"},
-            {"four_stores", "Four Stores"},
-            {"ukrainian_job_prof", "Ukranian Job Professional"},
-            {"ukrainian_job", "Ukranian Job (Escape forces)"},
-            {"cane", "Santa's Workshop"},
+            // Hector
+            { "firestarter", "Firestarter" },
+            { "firestarter_prof", "Firestarter (Pro Job)" },
+            { "alex", "Rats" },
+            { "alex_prof", "Rats Professional" },
+            { "watchdogs", "Watchdogs" },
+            { "watchdogs_night", "Watchdogs (Night)" },
+            { "watchdogs_prof", "Watchdogs (Pro Job)" },
+            { "watchdogs_night_prof", "Watchdogs (Night) (Pro Job)" },
 
             // Jimmy
-            {"dark", "Murky Station"},
-            {"mad", "Boiling Point"},
+            { "dark", "Murky Station" },
+            { "mad", "Boiling Point" },
 
-            // Nicht eingeordnet
-            {"mia", "Hotline Miami" },
-            {"mia_prof", "Hotline Miami (Pro Job)" },
-            {"arena", "The Alesso Heist" },
-            {"kenaz", "Golden Grin Casino" },
-            {"cage", "Car Shop" },
-            {"hox", "Hoxton Breakout"},
-            {"hox_prof", "Hoxton Breakout (Pro Job)"},
-            {"hox_3", "Hoxton Revenge" },
-            {"mus", "The Diamond" },
-            {"gallery", "Art Gallery" },
-            {"pines", "White Xmas" },
-            {"rat", "Cook Off" },
-            {"crojob1", "The Bomb: Dockyard" },
-            {"crojob2", "The Bomb: Forest" },
-            {"shoutout_raid", "Meltdown" },
-            {"peta", "Goat Simulator" },
-            {"peta_prof", "Goat Simulator (Pro Job)" },
-            {"pal", "Counterfeit" },
-            {"pbr", "Beneath The Mountain" },
-            {"pbr2", "Birth of Sky" },
-            {"dinner", "Slaughterhouse" },
-            {"jolly", "Aftershock" },
-            {"nail", "Lab Rats" },
-            {"man", "Undercover" },
+            // Locke
+            { "pbr", "Beneath The Mountain" },
+            { "pbr2", "Birth of Sky" },
 
-            { "red2", "?red2" },
-            { "haunted", "?haunted" },
+            // The Butcher
+            { "crojob1", "The Bomb: Dockyard" },
+            { "crojob2", "The Bomb: Forest" },
+
+            // The Dentist
+            { "kenaz", "Golden Grin Casino" },
+            { "mia", "Hotline Miami" },
+            { "mia_prof", "Hotline Miami (Pro Job)" },
+            { "hox", "Hoxton Breakout"},
+            { "hox_prof", "Hoxton Breakout (Pro Job)"},
+            { "hox_3", "Hoxton Revenge" },
+            { "big", "Big Bank" },
+            { "mus", "The Diamond" },
+
+            // Vlad
+            { "jolly", "Aftershock" },
+            { "four_stores", "Four Stores"},
+            { "peta", "Goat Simulator" },
+            { "peta_prof", "Goat Simulator (Pro Job)" },
+            { "mallcrasher", "Mallcrasher"},
+            { "shoutout_raid", "Meltdown" },
+            { "nightclub", "Nightclub"},
+            { "cane", "Santa's Workshop"},
+            { "ukrainian_job", "Ukranian Job (Escape forces)"},
+            { "ukrainian_job_prof", "Ukranian Job (Pro Job)"},
+            { "pines", "White Xmas" },
+
+            // The Elephant
+            { "welcome_to_the_jungle", "Big Oil"},
+            { "welcome_to_the_jungle_prof", "Big Oil (Pro Job)"},
+            { "welcome_to_the_jungle_night_prof", "Big Oil (Night) (Pro Job)" },
+            { "election_day", "Election Day" },
+            { "election_day_prof", "Election Day (Pro Job)" },
+            { "framing_frame", "Framing Frame" },
+            { "framing_frame_prof", "Framing Frame (Pro Job)" },
+            { "born", "The Biker Heist" },
+            { "born_pro", "The Biker Heist (Pro Job)" },
         };
     }
 }
