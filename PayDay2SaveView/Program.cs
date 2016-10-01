@@ -58,6 +58,23 @@ namespace PayDay2SaveView
 
         private static ConsoleColor ColorFromDifficulty(Difficulty difficulty)
         {
+            switch (difficulty)
+            {
+                case Difficulty.Hard:
+                case Difficulty.Overkill:
+                case Difficulty.Overkill145:
+                    return ConsoleColor.Red;
+
+                case Difficulty.Overkill290:
+                    return ConsoleColor.DarkRed;
+
+                case Difficulty.Easy:
+                case Difficulty.Normal:
+                    return ConsoleColor.White;
+
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(difficulty), difficulty, null);
+            }
             return ConsoleColor.Red;
         }
 
