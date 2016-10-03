@@ -98,6 +98,10 @@ namespace PayDay2SaveView
             { "safehouse", "Safehouse" },
             { "haunted", "?haunted" }, // Haloween special?
 
+            // Tutorial
+            { "short1", "Tutorial I"},
+            { "short2", "Tutorial II"},
+
             // Miscellaneous
             { "gallery", "Art Gallery" },
             { "branchbank", "Bank Heist" },
