@@ -6,9 +6,9 @@ namespace PayDay2SaveView
     {
         public string GetJobNameFromKey(string id)
         {
-            if (JobNames.ContainsKey(id))
-                return JobNames[id];
-            return DayNames[id];
+            if (JobNames.ContainsKey(id)) return JobNames[id];
+            if (DayNames.ContainsKey(id)) return DayNames[id];
+            return $"?{id}";
         }
 
         public static readonly IReadOnlyDictionary<string, string> DayNames = new Dictionary<string, string>()
