@@ -12,24 +12,48 @@ namespace PayDay2SaveView
 
         public static void Main(string[] args)
         {
-            if (args.Length >= 1)
+            var arg_help = false;
+            var arg_list_unknown_maps = false;
+            IList<string> args_positional = new List<string>();
+
+            foreach (var arg in args)
             {
-                switch (args[0])
+                switch (arg)
                 {
                     case "--help":
-                        Console.WriteLine("Beispiele:");
-                        Console.WriteLine(@"PayDay2SaveView.exe");
-                        Console.WriteLine(@"PayDay2SaveView.exe ""%LOCALAPPDATA%\PAYDAY 2\saves\<STEAMUSER>\save098.sav""");
-                        return;
+                        arg_help = true;
+                        break;
+
+                    case "--list-unknown-maps":
+                        arg_list_unknown_maps = true;
+                        break;
+
+                    default:
+                        args_positional.Add(arg);
+                        break;
                 }
+            }
+
+            if (arg_help)
+            {
+                Console.WriteLine("Beispiele:");
+                Console.WriteLine(@"PayDay2SaveView.exe");
+                Console.WriteLine(@"PayDay2SaveView.exe ""%LOCALAPPDATA%\PAYDAY 2\saves\<STEAMUSER>\save098.sav""");
+                return;
             }
 
             var jobNameResolver = new JobNameResolver();
             var steamUtils = new SteamUtils();
 
-            var saveFilePath = args.Length > 0 ? args[0] : GetSaveFilePath(steamUtils);
-
+            var saveFilePath = args_positional.Any() ? args_positional.First() : GetSaveFilePath(steamUtils);
             var saveFile = new SaveFile(saveFilePath);
+
+            if (arg_list_unknown_maps)
+            {
+                ListUnknownMaps(saveFile, jobNameResolver);
+                return;
+            }
+
             var sessions = GetPlayedSessions(saveFile)
                 .Select(x => SessionCount.FromDictKvp(x, jobNameResolver))
                 .Where(x => x.SessionState == SessionState.Completed)
@@ -56,6 +80,23 @@ namespace PayDay2SaveView
                 PrintCountForDifficulty(Difficulty.Overkill290, jobs);
                 Console.WriteLine("  " + name.Value);
             }
+        }
+
+        private static void ListUnknownMaps(SaveFile saveFile, JobNameResolver jobNameResolver)
+        {
+            var sessions = GetPlayedSessions(saveFile);
+            var counters = sessions.Select(kvp => SessionCount.FromDictKvp(kvp, jobNameResolver));
+            ISet<string> allKeys = new SortedSet<string>(counters.Select(x => x.NameKey));
+
+            ISet<string> allKnwonKeys = new HashSet<string>();
+            foreach (var nameKey in JobNameResolver.DayNames.Keys) allKnwonKeys.Add(nameKey);
+            foreach (var nameKey in JobNameResolver.EscapeNames.Keys) allKnwonKeys.Add(nameKey);
+            foreach (var nameKey in JobNameResolver.JobNames.Keys) allKnwonKeys.Add(nameKey);
+
+            foreach (var unknownKey in allKeys.Except(allKnwonKeys))
+                Console.WriteLine(unknownKey);
+
+            Console.WriteLine("done.");
         }
 
         private static void PrintCountForDifficulty(Difficulty difficulty, IReadOnlyDictionary<Difficulty, SessionCount> jobs)
