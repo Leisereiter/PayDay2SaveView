@@ -8,6 +8,7 @@ namespace PayDay2SaveView
         {
             if (JobNames.ContainsKey(id)) return JobNames[id];
             if (DayNames.ContainsKey(id)) return DayNames[id];
+            if (EscapeNames.ContainsKey(id)) return EscapeNames[id];
             return $"?{id}";
         }
 
