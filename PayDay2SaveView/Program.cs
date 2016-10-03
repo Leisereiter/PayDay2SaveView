@@ -12,10 +12,20 @@ namespace PayDay2SaveView
 
         public static void Main(string[] args)
         {
+            if (args.Length >= 1 && args[0] == "--help")
+            {
+                Console.WriteLine("Beispiele:");
+                Console.WriteLine(@"PayDay2SaveView.exe");
+                Console.WriteLine(@"PayDay2SaveView.exe ""%LOCALAPPDATA%\PAYDAY 2\saves\<STEAMUSER>\save098.sav""");
+                return;
+            }
+
             var jobNameResolver = new JobNameResolver();
             var steamUtils = new SteamUtils();
 
-            var saveFile = new SaveFile(GetSaveFilePath(steamUtils));
+            var saveFilePath = args.Length > 0 ? args[0] : GetSaveFilePath(steamUtils);
+
+            var saveFile = new SaveFile(saveFilePath);
             var sessions = GetPlayedSessions(saveFile)
                 .Select(x => SessionCount.FromDictKvp(x, jobNameResolver))
                 .Where(x => x.SessionState == SessionState.Completed)
