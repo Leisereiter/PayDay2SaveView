@@ -44,7 +44,7 @@ namespace PayDay2SaveView
             var sessions = GetPlayedSessions(saveFile)
                 .Select(x => SessionCount.FromDictKvp(x, jobNameResolver))
                 .Where(x => x.SessionState == SessionState.Completed)
-                .GroupBy(x => x.NameKey, x => x)
+                .GroupBy(x => x.Heist.Key, x => x)
                 .ToDictionary(x => x.Key, x => x.GroupBy(y => y.Difficulty, y => y)
                                                 .ToDictionary(y => y.Key, y => y.FirstOrDefault()));
 
@@ -57,9 +57,9 @@ namespace PayDay2SaveView
             Console.Write("SM".PadLeft(4));
             Console.WriteLine("  Heist");
 
-            foreach (var name in HeistDb.JobNames.OrderBy(x => x.Value.Name))
+            foreach (var pair in HeistDb.JobNames.OrderBy(x => x.Value.Name))
             {
-                var jobs = sessions.ContainsKey(name.Key) ? sessions[name.Key] : null;
+                var jobs = sessions.ContainsKey(pair.Key) ? sessions[pair.Key] : null;
 
                 // Console.WriteLine(FormatCountForDifficulty(Difficulty.Easy, jobs));
                 PrintCountForDifficulty(Difficulty.Normal, jobs);
@@ -69,7 +69,7 @@ namespace PayDay2SaveView
                 PrintCountForDifficulty(Difficulty.EasyWish, jobs);
                 PrintCountForDifficulty(Difficulty.Overkill290, jobs);
                 PrintCountForDifficulty(Difficulty.SmWish, jobs);
-                Console.WriteLine("  " + name.Value);
+                Console.WriteLine("  " + pair.Value.Name);
             }
         }
 
@@ -86,7 +86,7 @@ namespace PayDay2SaveView
         {
             var sessions = GetPlayedSessions(saveFile);
             var counters = sessions.Select(kvp => SessionCount.FromDictKvp(kvp, heistDb));
-            ISet<string> allKeys = new SortedSet<string>(counters.Select(x => x.NameKey));
+            ISet<string> allKeys = new SortedSet<string>(counters.Select(x => x.Heist.Key));
 
             ISet<string> allKnwonKeys = new HashSet<string>();
             foreach (var nameKey in HeistDb.DayNames.Keys) allKnwonKeys.Add(nameKey);

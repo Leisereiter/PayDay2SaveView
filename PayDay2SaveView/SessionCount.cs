@@ -48,17 +48,15 @@ namespace PayDay2SaveView
 
     public class SessionCount
     {
-        public string NameKey { get; }
-        public string Name { get; }
+        public Heist Heist { get; }
         public SessionType SessionType { get; }
         public Difficulty Difficulty { get; }
         public SessionState SessionState { get; }
         public int Count { get; }
 
-        private SessionCount(string nameKey, string name, SessionType sessionType, Difficulty difficulty, SessionState sessionState, int count)
+        private SessionCount(Heist heist, SessionType sessionType, Difficulty difficulty, SessionState sessionState, int count)
         {
-            NameKey = nameKey;
-            Name = name;
+            Heist = heist;
             SessionType = sessionType;
             SessionState = sessionState;
             Difficulty = difficulty;
@@ -67,7 +65,7 @@ namespace PayDay2SaveView
 
         public override string ToString()
         {
-            return $"{Name.PadLeft(30)} {SessionType.ToString().PadRight(7)} {Difficulty.ToString().PadRight(12)} {SessionState} : {Count}";
+            return $"{Heist.Name.PadLeft(30)} {SessionType.ToString().PadRight(7)} {Difficulty.ToString().PadRight(12)} {SessionState} : {Count}";
         }
 
         public static SessionCount FromDictKvp(KeyValuePair<object, object> kvp, HeistDb resolver)
@@ -85,7 +83,7 @@ namespace PayDay2SaveView
 
             var count = ValueHelper.ConvertToInt(kvp.Value);
 
-            return new SessionCount(nameKey, heist.Name, sessionType, difficulty, state, count);
+            return new SessionCount(heist, sessionType, difficulty, state, count);
         }
     }
 }
