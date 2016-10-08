@@ -103,8 +103,8 @@ namespace PayDay2SaveView
             new Heist("haunted", "?haunted"),
 
             // Tutorial
-            new Heist("short1", "Tutorial I"),
-            new Heist("short2", "Tutorial II"),
+            new Heist("short1", "Tutorial I", IsAvailable:false),
+            new Heist("short2", "Tutorial II", IsAvailable:false),
 
             // Miscellaneous
             new Heist("gallery", "Art Gallery"),
