@@ -123,7 +123,7 @@ namespace PayDay2SaveView
             Console.WriteLine("done.");
         }
 
-        private static void PrintCountForDifficulty(Difficulty difficulty, IReadOnlyDictionary<Difficulty, SessionCount> jobs)
+        private static void PrintCountForDifficulty(Difficulty difficulty, IDictionary<Difficulty, SessionCount> jobs)
         {
             var count = jobs != null && jobs.ContainsKey(difficulty) ? jobs[difficulty].Count : 0;
             var defaultFgColor = Console.ForegroundColor;
