@@ -138,7 +138,8 @@ namespace PayDay2SaveView
         private static void PrintCountForDifficulty(Difficulty difficulty, IDictionary<Difficulty, SessionCount> job, Heist heist)
         {
             var count = job != null && job.ContainsKey(difficulty) ? job[difficulty].Count : 0;
-            WriteInColor(() => Console.Write(count.ToString().PadLeft(4)), ColorFromDifficulty(difficulty, heist, ConsoleColor.Gray));
+            var color = count > 0 ? ConsoleColor.Gray : ColorFromDifficulty(difficulty, heist, ConsoleColor.Gray);
+            WriteInColor(() => Console.Write(count.ToString().PadLeft(4)), color);
         }
 
         private static ConsoleColor ColorFromDifficulty(Difficulty difficulty, Heist heist, ConsoleColor defaultColor)
