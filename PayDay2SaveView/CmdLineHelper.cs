@@ -4,6 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 
+// ReSharper disable UnusedAutoPropertyAccessor.Local
+
 namespace PayDay2SaveView
 {
     public class CmdLineHelper
@@ -26,25 +28,19 @@ namespace PayDay2SaveView
 
         public void Parse(IEnumerable<string> args)
         {
+            var flagTable = CreateFlagTable();
+
             foreach (var arg in args)
             {
-                switch (arg)
+                if (arg.StartsWith("--"))
                 {
-                    case "--help":
-                        IsHelp = true;
-                        break;
-
-                    case "--list-unknown-maps":
-                        IsListUnknownMaps = true;
-                        break;
-
-                    case "--list-sessions":
-                        IsListSessions = true;
-                        break;
-
-                    default:
-                        Positional.Add(arg);
-                        break;
+                    var name = arg.Substring(2);
+                    if (!flagTable.ContainsKey(name)) throw new Exception($"Unbekannter Parameter {name}");
+                    flagTable[name].SetValue(this, true, null);
+                }
+                else
+                {
+                    Positional.Add(arg);
                 }
             }
         }
@@ -73,6 +69,18 @@ namespace PayDay2SaveView
         private static IEnumerable<T> GetAttibutesOfType<T>(MemberInfo member)
         {
             return member.GetCustomAttributes(typeof(T), false).Cast<T>();
+        }
+
+        private static IDictionary<string, PropertyInfo> CreateFlagTable()
+        {
+            IDictionary<string, PropertyInfo> flagTable = new Dictionary<string, PropertyInfo>();
+            foreach (var propertyInfo in typeof(CmdLineHelper).GetProperties())
+            {
+                var desc = GetAttibutesOfType<ArgumentAttribute>(propertyInfo).FirstOrDefault();
+                if (desc == null) continue;
+                flagTable.Add(desc.Name, propertyInfo);
+            }
+            return flagTable;
         }
     }
 
