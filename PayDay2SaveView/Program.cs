@@ -17,9 +17,7 @@ namespace PayDay2SaveView
 
             if (cmd.IsHelp)
             {
-                Console.WriteLine("Beispiele:");
-                Console.WriteLine(@"PayDay2SaveView.exe");
-                Console.WriteLine(@"PayDay2SaveView.exe ""%LOCALAPPDATA%\PAYDAY 2\saves\<STEAMUSER>\save098.sav""");
+                cmd.PrintHelp(Console.Out);
                 return;
             }
 
