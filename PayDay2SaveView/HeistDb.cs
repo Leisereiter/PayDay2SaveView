@@ -15,7 +15,7 @@ namespace PayDay2SaveView
             //if (DayNames.ContainsKey(key)) return DayNames[key];
             //if (EscapeNames.ContainsKey(key)) return EscapeNames[key];
             //return $"?{key}";
-            throw new Exception("Inknown Heist");
+            throw new Exception($"Unknown Heist: {key}");
         }
 
         public static readonly IDictionary<string, string> DayNames = new Dictionary<string, string>()
@@ -102,7 +102,7 @@ namespace PayDay2SaveView
         public static readonly IList<Heist> Heists = new List<Heist>
         {
             new Heist("safehouse", "Safehouse", Villain.None),
-            new Heist("haunted", "?haunted", Villain.Events),
+            new Heist("chill", "Safehouse II", Villain.None),
 
             // Tutorial
             new Heist("short1", "Tutorial I", Villain.None, isAvailable:false),
@@ -140,6 +140,7 @@ namespace PayDay2SaveView
 
             // Events
             new Heist("nail", "Lab Rats", Villain.Events),
+            new Heist("haunted", "?haunted", Villain.Events),
 
             // Hector
             new Heist("firestarter", "Firestarter", Villain.Hector, isStealthable:true),
