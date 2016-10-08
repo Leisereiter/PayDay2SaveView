@@ -109,10 +109,10 @@ namespace PayDay2SaveView
             // Miscellaneous
             new Heist("gallery", "Art Gallery"),
             new Heist("branchbank", "Bank Heist"),
-            new Heist("branchbank_prof", "Bank Heist (Pro Job)"),
+            new Heist("branchbank_prof", "Bank Heist (Pro Job)", IsAvailable:false),
             new Heist("branchbank_cash", "Bank Heist: Cash"),
             new Heist("branchbank_deposit", "Bank Heist Deposit"),
-            new Heist("branchbank_gold_prof", "Bank Heist Gold (Pro Job)"),
+            new Heist("branchbank_gold_prof", "Bank Heist Gold (Pro Job)", IsAvailable:false),
 
             new Heist("cage", "Car Shop"),
             new Heist("rat", "Cook Off"),
@@ -141,13 +141,13 @@ namespace PayDay2SaveView
 
             // Hector
             new Heist("firestarter", "Firestarter"),
-            new Heist("firestarter_prof", "Firestarter (Pro Job)"),
+            new Heist("firestarter_prof", "Firestarter (Pro Job)", IsAvailable:false),
             new Heist("alex", "Rats"),
             new Heist("alex_prof", "Rats Professional"),
             new Heist("watchdogs", "Watchdogs"),
             new Heist("watchdogs_night", "Watchdogs (Night)"),
-            new Heist("watchdogs_prof", "Watchdogs (Pro Job)"),
-            new Heist("watchdogs_night_prof", "Watchdogs (Night) (Pro Job)"),
+            new Heist("watchdogs_prof", "Watchdogs (Pro Job)", IsAvailable:false),
+            new Heist("watchdogs_night_prof", "Watchdogs (Night) (Pro Job)", IsAvailable:false),
 
             // Jimmy
             new Heist("dark", "Murky Station"),
@@ -164,9 +164,9 @@ namespace PayDay2SaveView
             // The Dentist
             new Heist("kenaz", "Golden Grin Casino"),
             new Heist("mia", "Hotline Miami"),
-            new Heist("mia_prof", "Hotline Miami (Pro Job)"),
+            new Heist("mia_prof", "Hotline Miami (Pro Job)", IsAvailable:false),
             new Heist("hox", "Hoxton Breakout"),
-            new Heist("hox_prof", "Hoxton Breakout (Pro Job)"),
+            new Heist("hox_prof", "Hoxton Breakout (Pro Job)", IsAvailable:false),
             new Heist("hox_3", "Hoxton Revenge"),
             new Heist("big", "Big Bank"),
             new Heist("mus", "The Diamond"),
@@ -175,25 +175,25 @@ namespace PayDay2SaveView
             new Heist("jolly", "Aftershock"),
             new Heist("four_stores", "Four Stores"),
             new Heist("peta", "Goat Simulator"),
-            new Heist("peta_prof", "Goat Simulator (Pro Job)"),
+            new Heist("peta_prof", "Goat Simulator (Pro Job)", IsAvailable:false),
             new Heist("mallcrasher", "Mallcrasher"),
             new Heist("shoutout_raid", "Meltdown"),
             new Heist("nightclub", "Nightclub"),
             new Heist("cane", "Santa's Workshop"),
-            new Heist("ukrainian_job", "Ukranian Job (Escape forces)"),
-            new Heist("ukrainian_job_prof", "Ukranian Job (Pro Job)"),
+            new Heist("ukrainian_job", "Ukranian Job (Escape forces)", IsAvailable:false),
+            new Heist("ukrainian_job_prof", "Ukranian Job (Pro Job)", IsAvailable:false),
             new Heist("pines", "White Xmas"),
 
             // The Elephant
             new Heist("welcome_to_the_jungle", "Big Oil"),
-            new Heist("welcome_to_the_jungle_prof", "Big Oil (Pro Job)"),
-            new Heist("welcome_to_the_jungle_night_prof", "Big Oil (Night) (Pro Job)"),
+            new Heist("welcome_to_the_jungle_prof", "Big Oil (Pro Job)", IsAvailable:false),
+            new Heist("welcome_to_the_jungle_night_prof", "Big Oil (Night) (Pro Job)", IsAvailable:false),
             new Heist("election_day", "Election Day"),
-            new Heist("election_day_prof", "Election Day (Pro Job)"),
+            new Heist("election_day_prof", "Election Day (Pro Job)", IsAvailable:false),
             new Heist("framing_frame", "Framing Frame"),
-            new Heist("framing_frame_prof", "Framing Frame (Pro Job)"),
+            new Heist("framing_frame_prof", "Framing Frame (Pro Job)", IsAvailable:false),
             new Heist("born", "The Biker Heist"),
-            new Heist("born_pro", "The Biker Heist (Pro Job)"),
+            new Heist("born_pro", "The Biker Heist (Pro Job)", IsAvailable:false),
         };
     };
 }
