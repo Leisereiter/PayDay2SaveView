@@ -145,7 +145,7 @@ namespace PayDay2SaveView
                     return defaultColor;
 
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(difficulty), difficulty, null);
+                    return defaultColor;
             }
         }
 
