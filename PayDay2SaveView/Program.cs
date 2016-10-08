@@ -8,32 +8,34 @@ namespace PayDay2SaveView
 {
     public static class Program
     {
+        private static CmdLineHelper CmdArgs { get; set; }
+
         private const int Pd2SteamId = 218620;
 
         public static void Main(string[] args)
         {
-            var cmd = new CmdLineHelper();
-            cmd.Parse(args);
+            CmdArgs = new CmdLineHelper();
+            CmdArgs.Parse(args);
 
-            if (cmd.IsHelp)
+            if (CmdArgs.IsHelp)
             {
-                cmd.PrintHelp(Console.Out);
+                CmdArgs.PrintHelp(Console.Out);
                 return;
             }
 
             var jobNameResolver = new JobNameResolver();
             var steamUtils = new SteamUtils();
 
-            var saveFilePath = cmd.Positional.Any() ? cmd.Positional.First() : GetSaveFilePath(steamUtils);
+            var saveFilePath = CmdArgs.Positional.Any() ? CmdArgs.Positional.First() : GetSaveFilePath(steamUtils);
             var saveFile = new SaveFile(saveFilePath);
 
-            if (cmd.IsListUnknownMaps)
+            if (CmdArgs.IsListUnknownMaps)
             {
                 ListUnknownMaps(saveFile, jobNameResolver);
                 return;
             }
 
-            if (cmd.IsListSessions)
+            if (CmdArgs.IsListSessions)
             {
                 ListallSessions(saveFile);
                 return;
