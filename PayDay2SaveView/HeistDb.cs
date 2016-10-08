@@ -105,16 +105,16 @@ namespace PayDay2SaveView
             new Heist("haunted", "?haunted", Villain.Events),
 
             // Tutorial
-            new Heist("short1", "Tutorial I", Villain.None, IsAvailable:false),
-            new Heist("short2", "Tutorial II", Villain.None, IsAvailable:false),
+            new Heist("short1", "Tutorial I", Villain.None, isAvailable:false),
+            new Heist("short2", "Tutorial II", Villain.None, isAvailable:false),
 
             // Miscellaneous
             new Heist("gallery", "Art Gallery", Villain.Bain),
             new Heist("branchbank", "Bank Heist", Villain.Bain),
-            new Heist("branchbank_prof", "Bank Heist (Pro Job)", Villain.Bain, IsAvailable:false),
+            new Heist("branchbank_prof", "Bank Heist (Pro Job)", Villain.Bain, isAvailable:false),
             new Heist("branchbank_cash", "Bank Heist: Cash", Villain.Bain),
             new Heist("branchbank_deposit", "Bank Heist Deposit", Villain.Bain),
-            new Heist("branchbank_gold_prof", "Bank Heist Gold (Pro Job)", Villain.Bain, IsAvailable:false),
+            new Heist("branchbank_gold_prof", "Bank Heist Gold (Pro Job)", Villain.Bain, isAvailable:false),
 
             new Heist("cage", "Car Shop", Villain.Bain),
             new Heist("rat", "Cook Off", Villain.Bain),
@@ -143,13 +143,13 @@ namespace PayDay2SaveView
 
             // Hector
             new Heist("firestarter", "Firestarter", Villain.Hector),
-            new Heist("firestarter_prof", "Firestarter (Pro Job)", Villain.Hector, IsAvailable:false),
+            new Heist("firestarter_prof", "Firestarter (Pro Job)", Villain.Hector, isAvailable:false),
             new Heist("alex", "Rats", Villain.Hector),
             new Heist("alex_prof", "Rats Professional", Villain.Hector),
             new Heist("watchdogs", "Watchdogs", Villain.Hector),
             new Heist("watchdogs_night", "Watchdogs (Night)", Villain.Hector),
-            new Heist("watchdogs_prof", "Watchdogs (Pro Job)", Villain.Hector, IsAvailable:false),
-            new Heist("watchdogs_night_prof", "Watchdogs (Night) (Pro Job)", Villain.Hector, IsAvailable:false),
+            new Heist("watchdogs_prof", "Watchdogs (Pro Job)", Villain.Hector, isAvailable:false),
+            new Heist("watchdogs_night_prof", "Watchdogs (Night) (Pro Job)", Villain.Hector, isAvailable:false),
 
             // Jimmy
             new Heist("dark", "Murky Station", Villain.Jimmy),
@@ -166,9 +166,9 @@ namespace PayDay2SaveView
             // The Dentist
             new Heist("kenaz", "Golden Grin Casino", Villain.TheDentist),
             new Heist("mia", "Hotline Miami", Villain.TheDentist),
-            new Heist("mia_prof", "Hotline Miami (Pro Job)", Villain.TheDentist, IsAvailable:false),
+            new Heist("mia_prof", "Hotline Miami (Pro Job)", Villain.TheDentist, isAvailable:false),
             new Heist("hox", "Hoxton Breakout", Villain.TheDentist),
-            new Heist("hox_prof", "Hoxton Breakout (Pro Job)", Villain.TheDentist, IsAvailable:false),
+            new Heist("hox_prof", "Hoxton Breakout (Pro Job)", Villain.TheDentist, isAvailable:false),
             new Heist("hox_3", "Hoxton Revenge", Villain.TheDentist),
             new Heist("big", "Big Bank", Villain.TheDentist),
             new Heist("mus", "The Diamond", Villain.TheDentist),
@@ -177,25 +177,25 @@ namespace PayDay2SaveView
             new Heist("jolly", "Aftershock", Villain.Vlad),
             new Heist("four_stores", "Four Stores", Villain.Vlad),
             new Heist("peta", "Goat Simulator", Villain.Vlad),
-            new Heist("peta_prof", "Goat Simulator (Pro Job)", Villain.Vlad, IsAvailable:false),
+            new Heist("peta_prof", "Goat Simulator (Pro Job)", Villain.Vlad, isAvailable:false),
             new Heist("mallcrasher", "Mallcrasher", Villain.Vlad),
             new Heist("shoutout_raid", "Meltdown", Villain.Vlad),
             new Heist("nightclub", "Nightclub", Villain.Vlad),
             new Heist("cane", "Santa's Workshop", Villain.Vlad),
-            new Heist("ukrainian_job", "Ukranian Job (Escape forces)", Villain.Vlad, IsAvailable:false),
-            new Heist("ukrainian_job_prof", "Ukranian Job (Pro Job)", Villain.Vlad, IsAvailable:false),
+            new Heist("ukrainian_job", "Ukranian Job (Escape forces)", Villain.Vlad, isAvailable:false),
+            new Heist("ukrainian_job_prof", "Ukranian Job (Pro Job)", Villain.Vlad, isAvailable:false),
             new Heist("pines", "White Xmas", Villain.Vlad),
 
             // The Elephant
             new Heist("welcome_to_the_jungle", "Big Oil", Villain.TheElephant),
-            new Heist("welcome_to_the_jungle_prof", "Big Oil (Pro Job)", Villain.TheElephant, IsAvailable:false),
-            new Heist("welcome_to_the_jungle_night_prof", "Big Oil (Night) (Pro Job)", Villain.TheElephant, IsAvailable:false),
+            new Heist("welcome_to_the_jungle_prof", "Big Oil (Pro Job)", Villain.TheElephant, isAvailable:false),
+            new Heist("welcome_to_the_jungle_night_prof", "Big Oil (Night) (Pro Job)", Villain.TheElephant, isAvailable:false),
             new Heist("election_day", "Election Day", Villain.TheElephant),
-            new Heist("election_day_prof", "Election Day (Pro Job)", Villain.TheElephant, IsAvailable:false),
+            new Heist("election_day_prof", "Election Day (Pro Job)", Villain.TheElephant, isAvailable:false),
             new Heist("framing_frame", "Framing Frame", Villain.TheElephant),
-            new Heist("framing_frame_prof", "Framing Frame (Pro Job)", Villain.TheElephant, IsAvailable:false),
+            new Heist("framing_frame_prof", "Framing Frame (Pro Job)", Villain.TheElephant, isAvailable:false),
             new Heist("born", "The Biker Heist", Villain.TheElephant),
-            new Heist("born_pro", "The Biker Heist (Pro Job)", Villain.TheElephant, IsAvailable:false),
+            new Heist("born_pro", "The Biker Heist (Pro Job)", Villain.TheElephant, isAvailable:false),
         };
     };
 }

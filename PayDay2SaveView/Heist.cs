@@ -22,12 +22,12 @@
         public Villain Villain { get; private set; }
         public bool IsAvailable { get; private set; }
 
-        public Heist(string key, string name, Villain villain, bool IsAvailable = true)
+        public Heist(string key, string name, Villain villain, bool isAvailable = true)
         {
             Key = key;
             Name = name;
             Villain = villain;
-            this.IsAvailable = IsAvailable;
+            IsAvailable = isAvailable;
         }
     }
 }
