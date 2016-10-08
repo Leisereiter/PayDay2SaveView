@@ -13,7 +13,9 @@ namespace PayDay2SaveView
         public static void Main(string[] args)
         {
             var arg_help = false;
+            var arg_list_sessions = false;
             var arg_list_unknown_maps = false;
+
             IList<string> args_positional = new List<string>();
 
             foreach (var arg in args)
@@ -28,6 +30,9 @@ namespace PayDay2SaveView
                         arg_list_unknown_maps = true;
                         break;
 
+                    case "--list-sessions":
+                        arg_list_sessions = true;
+                        break;
                     default:
                         args_positional.Add(arg);
                         break;
@@ -51,6 +56,12 @@ namespace PayDay2SaveView
             if (arg_list_unknown_maps)
             {
                 ListUnknownMaps(saveFile, jobNameResolver);
+                return;
+            }
+
+            if (arg_list_sessions)
+            {
+                ListallSessions(saveFile);
                 return;
             }
 
@@ -79,6 +90,15 @@ namespace PayDay2SaveView
                 PrintCountForDifficulty(Difficulty.Overkill145, jobs);
                 PrintCountForDifficulty(Difficulty.Overkill290, jobs);
                 Console.WriteLine("  " + name.Value);
+            }
+        }
+
+        private static void ListallSessions(SaveFile saveFile)
+        {
+            var sessions = GetPlayedSessions(saveFile);
+            foreach (var session in sessions)
+            {
+                Console.WriteLine($"{session.Key} => {session.Value}");
             }
         }
 
