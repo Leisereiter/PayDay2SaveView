@@ -12,34 +12,10 @@ namespace PayDay2SaveView
 
         public static void Main(string[] args)
         {
-            var arg_help = false;
-            var arg_list_sessions = false;
-            var arg_list_unknown_maps = false;
+            var cmd = new CmdLineHelper();
+            cmd.Parse(args);
 
-            IList<string> args_positional = new List<string>();
-
-            foreach (var arg in args)
-            {
-                switch (arg)
-                {
-                    case "--help":
-                        arg_help = true;
-                        break;
-
-                    case "--list-unknown-maps":
-                        arg_list_unknown_maps = true;
-                        break;
-
-                    case "--list-sessions":
-                        arg_list_sessions = true;
-                        break;
-                    default:
-                        args_positional.Add(arg);
-                        break;
-                }
-            }
-
-            if (arg_help)
+            if (cmd.IsHelp)
             {
                 Console.WriteLine("Beispiele:");
                 Console.WriteLine(@"PayDay2SaveView.exe");
@@ -50,16 +26,16 @@ namespace PayDay2SaveView
             var jobNameResolver = new JobNameResolver();
             var steamUtils = new SteamUtils();
 
-            var saveFilePath = args_positional.Any() ? args_positional.First() : GetSaveFilePath(steamUtils);
+            var saveFilePath = cmd.Positional.Any() ? cmd.Positional.First() : GetSaveFilePath(steamUtils);
             var saveFile = new SaveFile(saveFilePath);
 
-            if (arg_list_unknown_maps)
+            if (cmd.IsListUnknownMaps)
             {
                 ListUnknownMaps(saveFile, jobNameResolver);
                 return;
             }
 
-            if (arg_list_sessions)
+            if (cmd.IsListSessions)
             {
                 ListallSessions(saveFile);
                 return;

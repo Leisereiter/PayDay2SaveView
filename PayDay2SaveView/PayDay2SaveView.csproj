@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CmdLineHelper.cs" />
     <Compile Include="EnumUtils.cs" />
     <Compile Include="JobNameResolver.cs" />
     <Compile Include="Program.cs" />
