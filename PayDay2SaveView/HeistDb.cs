@@ -1,19 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace PayDay2SaveView
 {
-    public class JobNameResolver
+    public class HeistDb
     {
         private static IDictionary<string, Heist> _jobNames;
         public static IDictionary<string, Heist> JobNames => _jobNames ?? (_jobNames = Heists.ToDictionary(x => x.Key, x => x));
 
-        public string GetJobNameFromKey(string key)
+        public Heist GetHeistFromNameKey(string key)
         {
-            if (JobNames.ContainsKey(key)) return JobNames[key].Name;
-            if (DayNames.ContainsKey(key)) return DayNames[key];
-            if (EscapeNames.ContainsKey(key)) return EscapeNames[key];
-            return $"?{key}";
+            if (JobNames.ContainsKey(key)) return JobNames[key];
+            //if (DayNames.ContainsKey(key)) return DayNames[key];
+            //if (EscapeNames.ContainsKey(key)) return EscapeNames[key];
+            //return $"?{key}";
+            throw new Exception("Inknown Heist");
         }
 
         public static readonly IDictionary<string, string> DayNames = new Dictionary<string, string>()

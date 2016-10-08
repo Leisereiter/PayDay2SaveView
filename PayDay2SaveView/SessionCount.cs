@@ -70,7 +70,7 @@ namespace PayDay2SaveView
             return $"{Name.PadLeft(30)} {SessionType.ToString().PadRight(7)} {Difficulty.ToString().PadRight(12)} {SessionState} : {Count}";
         }
 
-        public static SessionCount FromDictKvp(KeyValuePair<object, object> kvp, JobNameResolver resolver)
+        public static SessionCount FromDictKvp(KeyValuePair<object, object> kvp, HeistDb resolver)
         {
             var key = (string)kvp.Key;
 
@@ -79,13 +79,13 @@ namespace PayDay2SaveView
             var state = keyParser.ReadSessionState();
             var difficulty = keyParser.ReadDifficulty();
             var nameKey = keyParser.ReadJobId();
-            var name = resolver.GetJobNameFromKey(nameKey);
+            var heist = resolver.GetHeistFromNameKey(nameKey);
 
             var sessionType = PayDay2SaveView.SessionType.Level;
 
             var count = ValueHelper.ConvertToInt(kvp.Value);
 
-            return new SessionCount(nameKey, name, sessionType, difficulty, state, count);
+            return new SessionCount(nameKey, heist.Name, sessionType, difficulty, state, count);
         }
     }
 }

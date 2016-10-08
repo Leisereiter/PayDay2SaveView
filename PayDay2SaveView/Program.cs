@@ -23,7 +23,7 @@ namespace PayDay2SaveView
                 return;
             }
 
-            var jobNameResolver = new JobNameResolver();
+            var jobNameResolver = new HeistDb();
             var steamUtils = new SteamUtils();
 
             var saveFilePath = CmdArgs.Positional.Any() ? CmdArgs.Positional.First() : GetSaveFilePath(steamUtils);
@@ -57,7 +57,7 @@ namespace PayDay2SaveView
             Console.Write("SM".PadLeft(4));
             Console.WriteLine("  Heist");
 
-            foreach (var name in JobNameResolver.JobNames.OrderBy(x => x.Value.Name))
+            foreach (var name in HeistDb.JobNames.OrderBy(x => x.Value.Name))
             {
                 var jobs = sessions.ContainsKey(name.Key) ? sessions[name.Key] : null;
 
@@ -82,16 +82,16 @@ namespace PayDay2SaveView
             }
         }
 
-        private static void ListUnknownMaps(SaveFile saveFile, JobNameResolver jobNameResolver)
+        private static void ListUnknownMaps(SaveFile saveFile, HeistDb heistDb)
         {
             var sessions = GetPlayedSessions(saveFile);
-            var counters = sessions.Select(kvp => SessionCount.FromDictKvp(kvp, jobNameResolver));
+            var counters = sessions.Select(kvp => SessionCount.FromDictKvp(kvp, heistDb));
             ISet<string> allKeys = new SortedSet<string>(counters.Select(x => x.NameKey));
 
             ISet<string> allKnwonKeys = new HashSet<string>();
-            foreach (var nameKey in JobNameResolver.DayNames.Keys) allKnwonKeys.Add(nameKey);
-            foreach (var nameKey in JobNameResolver.EscapeNames.Keys) allKnwonKeys.Add(nameKey);
-            foreach (var nameKey in JobNameResolver.JobNames.Keys) allKnwonKeys.Add(nameKey);
+            foreach (var nameKey in HeistDb.DayNames.Keys) allKnwonKeys.Add(nameKey);
+            foreach (var nameKey in HeistDb.EscapeNames.Keys) allKnwonKeys.Add(nameKey);
+            foreach (var nameKey in HeistDb.JobNames.Keys) allKnwonKeys.Add(nameKey);
 
             foreach (var unknownKey in allKeys.Except(allKnwonKeys))
                 Console.WriteLine(unknownKey);

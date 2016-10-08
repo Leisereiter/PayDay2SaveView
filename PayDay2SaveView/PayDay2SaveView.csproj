@@ -45,7 +45,7 @@
     <Compile Include="ArgumentAttribute.cs" />
     <Compile Include="CmdLineHelper.cs" />
     <Compile Include="Heist.cs" />
-    <Compile Include="JobNameResolver.cs" />
+    <Compile Include="HeistDb.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SessionCount.cs" />
