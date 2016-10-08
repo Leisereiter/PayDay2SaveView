@@ -57,7 +57,9 @@ namespace PayDay2SaveView
             Console.Write("SM".PadLeft(4));
             Console.WriteLine("  Heist");
 
-            foreach (var pair in HeistDb.JobNames.OrderBy(x => x.Value.Name))
+            var heistsToList = HeistDb.JobNames.Where(x => x.Value.IsAvailable);
+
+            foreach (var pair in heistsToList.OrderBy(x => x.Value.Name))
             {
                 var jobs = sessions.ContainsKey(pair.Key) ? sessions[pair.Key] : null;
 
