@@ -81,16 +81,17 @@ namespace PayDay2SaveView
             foreach (var pair in heistsToList.OrderBy(x => x.Value.Name))
             {
                 var jobs = sessions.ContainsKey(pair.Key) ? sessions[pair.Key] : null;
+                var heist = pair.Value;
 
                 // Console.WriteLine(FormatCountForDifficulty(Difficulty.Easy, jobs));
-                PrintCountForDifficulty(Difficulty.Normal, jobs);
-                PrintCountForDifficulty(Difficulty.Hard, jobs);
-                PrintCountForDifficulty(Difficulty.Overkill, jobs);
-                PrintCountForDifficulty(Difficulty.Overkill145, jobs);
-                PrintCountForDifficulty(Difficulty.EasyWish, jobs);
-                PrintCountForDifficulty(Difficulty.Overkill290, jobs);
-                PrintCountForDifficulty(Difficulty.SmWish, jobs);
-                WriteInColor(() => Console.WriteLine("  " + pair.Value.Name), GetColorForHeistName(pair.Value));
+                PrintCountForDifficulty(Difficulty.Normal, jobs, heist);
+                PrintCountForDifficulty(Difficulty.Hard, jobs, heist);
+                PrintCountForDifficulty(Difficulty.Overkill, jobs, heist);
+                PrintCountForDifficulty(Difficulty.Overkill145, jobs, heist);
+                PrintCountForDifficulty(Difficulty.EasyWish, jobs, heist);
+                PrintCountForDifficulty(Difficulty.Overkill290, jobs, heist);
+                PrintCountForDifficulty(Difficulty.SmWish, jobs, heist);
+                WriteInColor(() => Console.WriteLine("  " + heist.Name), GetColorForHeistName(heist));
             }
         }
 
@@ -134,13 +135,13 @@ namespace PayDay2SaveView
             Console.WriteLine("done.");
         }
 
-        private static void PrintCountForDifficulty(Difficulty difficulty, IDictionary<Difficulty, SessionCount> jobs)
+        private static void PrintCountForDifficulty(Difficulty difficulty, IDictionary<Difficulty, SessionCount> job, Heist heist)
         {
-            var count = jobs != null && jobs.ContainsKey(difficulty) ? jobs[difficulty].Count : 0;
-            WriteInColor(() => Console.Write(count.ToString().PadLeft(4)), ColorFromDifficulty(difficulty, ConsoleColor.Gray));
+            var count = job != null && job.ContainsKey(difficulty) ? job[difficulty].Count : 0;
+            WriteInColor(() => Console.Write(count.ToString().PadLeft(4)), ColorFromDifficulty(difficulty, heist, ConsoleColor.Gray));
         }
 
-        private static ConsoleColor ColorFromDifficulty(Difficulty difficulty, ConsoleColor defaultColor)
+        private static ConsoleColor ColorFromDifficulty(Difficulty difficulty, Heist heist, ConsoleColor defaultColor)
         {
             switch (difficulty)
             {
@@ -152,7 +153,7 @@ namespace PayDay2SaveView
 
                 case Difficulty.Overkill290:
                 case Difficulty.SmWish:
-                    return ConsoleColor.DarkRed;
+                    return heist.IsStealthable ? ConsoleColor.Red : ConsoleColor.DarkRed;
 
                 case Difficulty.Easy:
                 case Difficulty.Normal:
