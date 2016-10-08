@@ -36,8 +36,14 @@ namespace PayDay2SaveView
         [StringValue("Overkill")]
         Overkill145,
 
+        [StringValue("Mayhem")]
+        EasyWish,
+
         [StringValue("Death Wish")]
-        Overkill290
+        Overkill290,
+
+        [StringValue("One Down")]
+        SmWish
     }
 
     public class SessionCount

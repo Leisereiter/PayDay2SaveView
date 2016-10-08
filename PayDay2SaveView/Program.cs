@@ -76,7 +76,9 @@ namespace PayDay2SaveView
             Console.Write("HD".PadLeft(4));
             Console.Write("VH".PadLeft(4));
             Console.Write("OK".PadLeft(4));
+            Console.Write("EW".PadLeft(4));
             Console.Write("DW".PadLeft(4));
+            Console.Write("SM".PadLeft(4));
             Console.WriteLine("  Heist");
 
             foreach (var name in JobNameResolver.JobNames.OrderBy(x => x.Value))
@@ -88,7 +90,9 @@ namespace PayDay2SaveView
                 PrintCountForDifficulty(Difficulty.Hard, jobs);
                 PrintCountForDifficulty(Difficulty.Overkill, jobs);
                 PrintCountForDifficulty(Difficulty.Overkill145, jobs);
+                PrintCountForDifficulty(Difficulty.EasyWish, jobs);
                 PrintCountForDifficulty(Difficulty.Overkill290, jobs);
+                PrintCountForDifficulty(Difficulty.SmWish, jobs);
                 Console.WriteLine("  " + name.Value);
             }
         }
@@ -121,7 +125,7 @@ namespace PayDay2SaveView
 
         private static void PrintCountForDifficulty(Difficulty difficulty, IReadOnlyDictionary<Difficulty, SessionCount> jobs)
         {
-            var count = (jobs != null && jobs.ContainsKey(difficulty)) ? jobs[difficulty].Count : 0;
+            var count = jobs != null && jobs.ContainsKey(difficulty) ? jobs[difficulty].Count : 0;
             var defaultFgColor = Console.ForegroundColor;
             if (count == 0) Console.ForegroundColor = ColorFromDifficulty(difficulty, defaultFgColor);
             Console.Write(count.ToString().PadLeft(4));
@@ -135,9 +139,11 @@ namespace PayDay2SaveView
                 case Difficulty.Hard:
                 case Difficulty.Overkill:
                 case Difficulty.Overkill145:
+                case Difficulty.EasyWish:
                     return ConsoleColor.Red;
 
                 case Difficulty.Overkill290:
+                case Difficulty.SmWish:
                     return ConsoleColor.DarkRed;
 
                 case Difficulty.Easy:

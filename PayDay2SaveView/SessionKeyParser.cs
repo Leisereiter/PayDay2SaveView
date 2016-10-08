@@ -54,7 +54,7 @@ namespace PayDay2SaveView
         public Difficulty ReadDifficulty()
         {
             // => networkaccountsteam.lua
-            // easy | normal | hard | overkill | overkill 145 | overkill_290
+            // easy | normal | hard | overkill | overkill 145 | overkill_290 | sm_wish | easy_wish
 
             var token = _tokens.Pop();
             switch (token)
@@ -79,8 +79,21 @@ namespace PayDay2SaveView
                     Expect("overkill", _tokens.Pop());
                     return Difficulty.Overkill290;
 
+                case "wish":
+                    var next = _tokens.Pop();
+                    switch (next)
+                    {
+                        case "easy":
+                            return Difficulty.EasyWish;
+
+                        case "sm":
+                            return Difficulty.SmWish;
+
+                        default:
+                            throw new InvalidOperationException($"Unexpected token '{next}' before 'wish'");
+                    }
                 default:
-                    throw new InvalidOperationException($"Unexpected token {token}");
+                    throw new InvalidOperationException($"Unexpected token '{token}'");
             }
         }
 
