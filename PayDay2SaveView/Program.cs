@@ -90,8 +90,14 @@ namespace PayDay2SaveView
                 PrintCountForDifficulty(Difficulty.EasyWish, jobs);
                 PrintCountForDifficulty(Difficulty.Overkill290, jobs);
                 PrintCountForDifficulty(Difficulty.SmWish, jobs);
-                Console.WriteLine("  " + pair.Value.Name);
+                WriteInColor(() => Console.WriteLine("  " + pair.Value.Name), GetColorForHeistName(pair.Value));
             }
+        }
+
+        private static ConsoleColor GetColorForHeistName(Heist heist)
+        {
+            //if (heist.IsStealthable) return ConsoleColor.DarkYellow;
+            return ConsoleColor.Gray;
         }
 
         private static void WriteInColor(Action action, ConsoleColor color)
