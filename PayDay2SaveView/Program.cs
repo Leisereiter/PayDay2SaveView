@@ -57,8 +57,27 @@ namespace PayDay2SaveView
             Console.Write("SM".PadLeft(4));
             Console.WriteLine("  Heist");
 
-            var heistsToList = HeistDb.JobNames.Where(x => x.Value.IsAvailable);
+            ShowSessionsPerVillain(sessions, Villain.Bain);
+            ShowSessionsPerVillain(sessions, Villain.Classics);
+            ShowSessionsPerVillain(sessions, Villain.Events);
+            ShowSessionsPerVillain(sessions, Villain.Jimmy);
+            ShowSessionsPerVillain(sessions, Villain.Locke);
+            ShowSessionsPerVillain(sessions, Villain.TheButcher);
+            ShowSessionsPerVillain(sessions, Villain.TheDentist);
+            ShowSessionsPerVillain(sessions, Villain.TheElephant);
+            ShowSessionsPerVillain(sessions, Villain.Vlad);
+            ShowSessionsPerVillain(sessions, Villain.Hector);
+        }
 
+        private static void ShowSessionsPerVillain(IDictionary<string, Dictionary<Difficulty, SessionCount>> sessions, Villain villain)
+        {
+            var heistsToList = HeistDb.JobNames
+                .Where(x => x.Value.IsAvailable)
+                .Where(x => x.Value.Villain == villain);
+            Console.Write("----------------------------- ");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine(villain);
+            Console.ForegroundColor = ConsoleColor.Gray;
             foreach (var pair in heistsToList.OrderBy(x => x.Value.Name))
             {
                 var jobs = sessions.ContainsKey(pair.Key) ? sessions[pair.Key] : null;
