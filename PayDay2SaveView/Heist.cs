@@ -1,5 +1,19 @@
 ﻿namespace PayDay2SaveView
 {
+    public enum Villain
+    {
+        Bain,
+        Classics,
+        Events,
+        Hector,
+        Jimmy,
+        Locke,
+        TheButcher,
+        TheDentist,
+        TheElephant,
+        Vlad,
+    }
+
     public class Heist
     {
         public string Key { get; private set; }
