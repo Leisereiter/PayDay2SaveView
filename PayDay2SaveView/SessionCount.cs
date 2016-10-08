@@ -79,11 +79,9 @@ namespace PayDay2SaveView
             var nameKey = keyParser.ReadJobId();
             var heist = resolver.GetHeistFromNameKey(nameKey);
 
-            var sessionType = PayDay2SaveView.SessionType.Level;
-
             var count = ValueHelper.ConvertToInt(kvp.Value);
 
-            return new SessionCount(heist, sessionType, difficulty, state, count);
+            return new SessionCount(heist, SessionType.Level, difficulty, state, count);
         }
     }
 }
