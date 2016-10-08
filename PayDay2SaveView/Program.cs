@@ -23,7 +23,7 @@ namespace PayDay2SaveView
                 return;
             }
 
-            var jobNameResolver = new HeistDb();
+            var heistDb = new HeistDb();
             var steamUtils = new SteamUtils();
 
             var saveFilePath = CmdArgs.Positional.Any() ? CmdArgs.Positional.First() : GetSaveFilePath(steamUtils);
@@ -31,7 +31,7 @@ namespace PayDay2SaveView
 
             if (CmdArgs.IsListUnknownMaps)
             {
-                ListUnknownMaps(saveFile, jobNameResolver);
+                ListUnknownMaps(saveFile, heistDb);
                 return;
             }
 
@@ -42,7 +42,7 @@ namespace PayDay2SaveView
             }
 
             var sessions = GetPlayedSessions(saveFile)
-                .Select(x => SessionCount.FromDictKvp(x, jobNameResolver))
+                .Select(x => SessionCount.FromDictKvp(x, heistDb))
                 .Where(x => x.SessionState == SessionState.Completed)
                 .GroupBy(x => x.Heist.Key, x => x)
                 .ToDictionary(x => x.Key, x => x.GroupBy(y => y.Difficulty, y => y)
