@@ -57,7 +57,7 @@ namespace PayDay2SaveView
             Console.Write("SM".PadLeft(4));
             Console.WriteLine("  Heist");
 
-            foreach (var name in JobNameResolver.JobNames.OrderBy(x => x.Value))
+            foreach (var name in JobNameResolver.JobNames.OrderBy(x => x.Value.Name))
             {
                 var jobs = sessions.ContainsKey(name.Key) ? sessions[name.Key] : null;
 

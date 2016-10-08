@@ -1,15 +1,19 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace PayDay2SaveView
 {
     public class JobNameResolver
     {
-        public string GetJobNameFromKey(string id)
+        private static IDictionary<string, Heist> _jobNames;
+        public static IDictionary<string, Heist> JobNames => _jobNames ?? (_jobNames = Heists.ToDictionary(x => x.Key, x => x));
+
+        public string GetJobNameFromKey(string key)
         {
-            if (JobNames.ContainsKey(id)) return JobNames[id];
-            if (DayNames.ContainsKey(id)) return DayNames[id];
-            if (EscapeNames.ContainsKey(id)) return EscapeNames[id];
-            return $"?{id}";
+            if (JobNames.ContainsKey(key)) return JobNames[key].Name;
+            if (DayNames.ContainsKey(key)) return DayNames[key];
+            if (EscapeNames.ContainsKey(key)) return EscapeNames[key];
+            return $"?{key}";
         }
 
         public static readonly IDictionary<string, string> DayNames = new Dictionary<string, string>()
@@ -93,104 +97,103 @@ namespace PayDay2SaveView
             {"driving_escapes_city_day", "?driving_escapes_city_day"}
         };
 
-        // siehe levelstweakdata.lua
-        public static readonly IDictionary<string, string> JobNames = new Dictionary<string, string>()
+        public static readonly IList<Heist> Heists = new List<Heist>
         {
-            { "safehouse", "Safehouse" },
-            { "haunted", "?haunted" }, // Haloween special?
+            new Heist("safehouse", "Safehouse"),
+            new Heist("haunted", "?haunted"),
 
             // Tutorial
-            { "short1", "Tutorial I"},
-            { "short2", "Tutorial II"},
+            new Heist("short1", "Tutorial I"),
+            new Heist("short2", "Tutorial II"),
 
             // Miscellaneous
-            { "gallery", "Art Gallery" },
-            { "branchbank", "Bank Heist" },
-            { "branchbank_prof", "Bank Heist (Pro Job)" },
-            { "branchbank_cash", "Bank Heist: Cash" },
-            { "branchbank_deposit", "Bank Heist Deposit" },
-            { "branchbank_gold_prof", "Bank Heist Gold (Pro Job)" },
+            new Heist("gallery", "Art Gallery"),
+            new Heist("branchbank", "Bank Heist"),
+            new Heist("branchbank_prof", "Bank Heist (Pro Job)"),
+            new Heist("branchbank_cash", "Bank Heist: Cash"),
+            new Heist("branchbank_deposit", "Bank Heist Deposit"),
+            new Heist("branchbank_gold_prof", "Bank Heist Gold (Pro Job)"),
 
-            { "cage", "Car Shop" },
-            { "rat", "Cook Off" },
-            { "family", "Diamond Store" },
-            { "roberts", "GO Bank" },
-            { "jewelry_store", "Jewelry Store" },
-            { "kosugi", "Shadow Raid" },
-            { "arena", "The Alesso Heist" },
-            
+            new Heist("cage", "Car Shop"),
+            new Heist("rat", "Cook Off"),
+            new Heist("family", "Diamond Store"),
+            new Heist("roberts", "GO Bank"),
+            new Heist("jewelry_store", "Jewelry Store"),
+            new Heist("kosugi", "Shadow Raid"),
+            new Heist("arena", "The Alesso Heist"),
+
             // Armored Transport
-            { "arm_cro", "Armored Transport: Crossroads" },
-            { "arm_hcm", "Armored Transport: Downtown" },
-            { "arm_fac", "Armored Transport: Harbor" },
-            { "arm_par", "Armored Transport: Park" },
-            { "arm_for", "Armored Transport: Train Heist" },
-            { "arm_und", "Armored Transport: Underpass" },
+            new Heist("arm_cro", "Armored Transport: Crossroads"),
+            new Heist("arm_hcm", "Armored Transport: Downtown"),
+            new Heist("arm_fac", "Armored Transport: Harbor"),
+            new Heist("arm_par", "Armored Transport: Park"),
+            new Heist("arm_for", "Armored Transport: Train Heist"),
+            new Heist("arm_und", "Armored Transport: Underpass"),
 
             // Classics
-            { "pal", "Counterfeit" },
-            { "red2", "First World Bank" },
-            { "dinner", "Slaughterhouse" },
-            { "man", "Undercover" },
+            new Heist("pal", "Counterfeit"),
+            new Heist("red2", "First World Bank"),
+            new Heist("dinner", "Slaughterhouse"),
+            new Heist("man", "Undercover"),
 
             // Events
-            { "nail", "Lab Rats" },
+            new Heist("nail", "Lab Rats"),
 
             // Hector
-            { "firestarter", "Firestarter" },
-            { "firestarter_prof", "Firestarter (Pro Job)" },
-            { "alex", "Rats" },
-            { "alex_prof", "Rats Professional" },
-            { "watchdogs", "Watchdogs" },
-            { "watchdogs_night", "Watchdogs (Night)" },
-            { "watchdogs_prof", "Watchdogs (Pro Job)" },
-            { "watchdogs_night_prof", "Watchdogs (Night) (Pro Job)" },
+            new Heist("firestarter", "Firestarter"),
+            new Heist("firestarter_prof", "Firestarter (Pro Job)"),
+            new Heist("alex", "Rats"),
+            new Heist("alex_prof", "Rats Professional"),
+            new Heist("watchdogs", "Watchdogs"),
+            new Heist("watchdogs_night", "Watchdogs (Night)"),
+            new Heist("watchdogs_prof", "Watchdogs (Pro Job)"),
+            new Heist("watchdogs_night_prof", "Watchdogs (Night) (Pro Job)"),
 
             // Jimmy
-            { "dark", "Murky Station" },
-            { "mad", "Boiling Point" },
+            new Heist("dark", "Murky Station"),
+            new Heist("mad", "Boiling Point"),
 
             // Locke
-            { "pbr", "Beneath The Mountain" },
-            { "pbr2", "Birth of Sky" },
+            new Heist("pbr", "Beneath The Mountain"),
+            new Heist("pbr2", "Birth of Sky"),
 
             // The Butcher
-            { "crojob1", "The Bomb: Dockyard" },
-            { "crojob2", "The Bomb: Forest" },
+            new Heist("crojob1", "The Bomb: Dockyard"),
+            new Heist("crojob2", "The Bomb: Forest"),
 
             // The Dentist
-            { "kenaz", "Golden Grin Casino" },
-            { "mia", "Hotline Miami" },
-            { "mia_prof", "Hotline Miami (Pro Job)" },
-            { "hox", "Hoxton Breakout"},
-            { "hox_prof", "Hoxton Breakout (Pro Job)"},
-            { "hox_3", "Hoxton Revenge" },
-            { "big", "Big Bank" },
-            { "mus", "The Diamond" },
+            new Heist("kenaz", "Golden Grin Casino"),
+            new Heist("mia", "Hotline Miami"),
+            new Heist("mia_prof", "Hotline Miami (Pro Job)"),
+            new Heist("hox", "Hoxton Breakout"),
+            new Heist("hox_prof", "Hoxton Breakout (Pro Job)"),
+            new Heist("hox_3", "Hoxton Revenge"),
+            new Heist("big", "Big Bank"),
+            new Heist("mus", "The Diamond"),
 
             // Vlad
-            { "jolly", "Aftershock" },
-            { "four_stores", "Four Stores"},
-            { "peta", "Goat Simulator" },
-            { "peta_prof", "Goat Simulator (Pro Job)" },
-            { "mallcrasher", "Mallcrasher"},
-            { "shoutout_raid", "Meltdown" },
-            { "nightclub", "Nightclub"},
-            { "cane", "Santa's Workshop"},
-            { "ukrainian_job", "Ukranian Job (Escape forces)"},
-            { "ukrainian_job_prof", "Ukranian Job (Pro Job)"},
-            { "pines", "White Xmas" },
+            new Heist("jolly", "Aftershock"),
+            new Heist("four_stores", "Four Stores"),
+            new Heist("peta", "Goat Simulator"),
+            new Heist("peta_prof", "Goat Simulator (Pro Job)"),
+            new Heist("mallcrasher", "Mallcrasher"),
+            new Heist("shoutout_raid", "Meltdown"),
+            new Heist("nightclub", "Nightclub"),
+            new Heist("cane", "Santa's Workshop"),
+            new Heist("ukrainian_job", "Ukranian Job (Escape forces)"),
+            new Heist("ukrainian_job_prof", "Ukranian Job (Pro Job)"),
+            new Heist("pines", "White Xmas"),
 
             // The Elephant
-            { "welcome_to_the_jungle", "Big Oil"},
-            { "welcome_to_the_jungle_prof", "Big Oil (Pro Job)"},
-            { "welcome_to_the_jungle_night_prof", "Big Oil (Night) (Pro Job)" },
-            { "election_day", "Election Day" },
-            { "election_day_prof", "Election Day (Pro Job)" },
-            { "framing_frame", "Framing Frame" },
-            { "framing_frame_prof", "Framing Frame (Pro Job)" },
-            { "born", "The Biker Heist" },
-            { "born_pro", "The Biker Heist (Pro Job)" },
+            new Heist("welcome_to_the_jungle", "Big Oil"),
+            new Heist("welcome_to_the_jungle_prof", "Big Oil (Pro Job)"),
+            new Heist("welcome_to_the_jungle_night_prof", "Big Oil (Night) (Pro Job)"),
+            new Heist("election_day", "Election Day"),
+            new Heist("election_day_prof", "Election Day (Pro Job)"),
+            new Heist("framing_frame", "Framing Frame"),
+            new Heist("framing_frame_prof", "Framing Frame (Pro Job)"),
+            new Heist("born", "The Biker Heist"),
+            new Heist("born_pro", "The Biker Heist (Pro Job)"),
         };
-    }
+    };
 }
