@@ -2,6 +2,7 @@
 {
     public enum Villain
     {
+        None,
         Bain,
         Classics,
         Events,
@@ -18,12 +19,14 @@
     {
         public string Key { get; private set; }
         public string Name { get; private set; }
+        public Villain Villain { get; private set; }
         public bool IsAvailable { get; private set; }
 
-        public Heist(string key, string name, bool IsAvailable = true)
+        public Heist(string key, string name, Villain villain, bool IsAvailable = true)
         {
             Key = key;
             Name = name;
+            Villain = villain;
             this.IsAvailable = IsAvailable;
         }
     }
