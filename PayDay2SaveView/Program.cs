@@ -74,10 +74,10 @@ namespace PayDay2SaveView
             var heistsToList = HeistDb.JobNames
                 .Where(x => x.Value.IsAvailable)
                 .Where(x => x.Value.Villain == villain);
+
             Console.Write("----------------------------- ");
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine(villain);
-            Console.ForegroundColor = ConsoleColor.Gray;
+            WriteInColor(() => Console.WriteLine(villain), ConsoleColor.White);
+
             foreach (var pair in heistsToList.OrderBy(x => x.Value.Name))
             {
                 var jobs = sessions.ContainsKey(pair.Key) ? sessions[pair.Key] : null;
@@ -92,6 +92,14 @@ namespace PayDay2SaveView
                 PrintCountForDifficulty(Difficulty.SmWish, jobs);
                 Console.WriteLine("  " + pair.Value.Name);
             }
+        }
+
+        private static void WriteInColor(Action action, ConsoleColor color)
+        {
+            var backup = Console.ForegroundColor;
+            Console.ForegroundColor = color;
+            action();
+            Console.ForegroundColor = backup;
         }
 
         private static void ListallSessions(SaveFile saveFile)
@@ -123,10 +131,7 @@ namespace PayDay2SaveView
         private static void PrintCountForDifficulty(Difficulty difficulty, IDictionary<Difficulty, SessionCount> jobs)
         {
             var count = jobs != null && jobs.ContainsKey(difficulty) ? jobs[difficulty].Count : 0;
-            var defaultFgColor = Console.ForegroundColor;
-            if (count == 0) Console.ForegroundColor = ColorFromDifficulty(difficulty, defaultFgColor);
-            Console.Write(count.ToString().PadLeft(4));
-            Console.ForegroundColor = defaultFgColor;
+            WriteInColor(() => Console.Write(count.ToString().PadLeft(4)), ColorFromDifficulty(difficulty, ConsoleColor.Gray));
         }
 
         private static ConsoleColor ColorFromDifficulty(Difficulty difficulty, ConsoleColor defaultColor)
