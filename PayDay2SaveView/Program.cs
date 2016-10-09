@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using PaydaySaveEditor.PD2;
 
 namespace PayDay2SaveView
