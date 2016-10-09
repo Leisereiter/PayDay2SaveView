@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using PaydaySaveEditor.PD2;
 
 namespace PayDay2SaveView
@@ -91,14 +92,17 @@ namespace PayDay2SaveView
                 PrintCountForDifficulty(Difficulty.EasyWish, jobs, heist);
                 PrintCountForDifficulty(Difficulty.Overkill290, jobs, heist);
                 PrintCountForDifficulty(Difficulty.SmWish, jobs, heist);
-                WriteInColor(() => Console.WriteLine("  " + heist.Name), GetColorForHeistName(heist));
+                Console.Write("  ");
+                FormatHeistName(heist);
+                Console.WriteLine();
             }
         }
 
-        private static ConsoleColor GetColorForHeistName(Heist heist)
+        private static void FormatHeistName(Heist heist)
         {
-            //if (heist.IsStealthable) return ConsoleColor.DarkYellow;
-            return ConsoleColor.Gray;
+            Console.Write(heist.Name);
+            if (heist.IsStealthable)
+                WriteInColor(() => Console.Write("*"), ConsoleColor.DarkCyan);
         }
 
         private static void WriteInColor(Action action, ConsoleColor color)
