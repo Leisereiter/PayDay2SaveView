@@ -110,11 +110,11 @@ namespace PayDay2SaveView
 
             // Miscellaneous
             new Heist("gallery", "Art Gallery", Villain.Bain, isStealthable:true),
-            new Heist("branchbank", "Bank Heist", Villain.Bain, isStealthable:true),
-            new Heist("branchbank_prof", "Bank Heist (Pro Job)", Villain.Bain, isStealthable:true, isAvailable:false),
+            new Heist("branchbank", "Bank Heist", Villain.Bain, isStealthable:true, isAvailable:false),
+            new Heist("branchbank_prof", "Bank Heist: Random", Villain.Bain, isStealthable:true),
             new Heist("branchbank_cash", "Bank Heist: Cash", Villain.Bain, isStealthable:true),
             new Heist("branchbank_deposit", "Bank Heist: Deposit", Villain.Bain, isStealthable:true),
-            new Heist("branchbank_gold_prof", "Bank Heist Gold (Pro Job)", Villain.Bain, isStealthable:true, isAvailable:false),
+            new Heist("branchbank_gold_prof", "Bank Heist: Gold", Villain.Bain, isStealthable:true),
 
             new Heist("cage", "Car Shop", Villain.Bain, isStealthable:true),
             new Heist("rat", "Cook Off", Villain.Bain),
@@ -171,7 +171,7 @@ namespace PayDay2SaveView
             new Heist("hox", "Hoxton Breakout", Villain.TheDentist),
             new Heist("hox_prof", "Hoxton Breakout (Pro Job)", Villain.TheDentist, isAvailable:false),
             new Heist("hox_3", "Hoxton Revenge", Villain.TheDentist, isStealthable:true),
-            new Heist("big", "Big Bank", Villain.TheDentist, isStealthable:true),
+            new Heist("big", "The Big Bank", Villain.TheDentist, isStealthable:true),
             new Heist("mus", "The Diamond", Villain.TheDentist, isStealthable:true),
 
             // Vlad
