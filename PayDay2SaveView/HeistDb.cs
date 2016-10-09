@@ -140,7 +140,7 @@ namespace PayDay2SaveView
 
             // Events
             new Heist("nail", "Lab Rats", Villain.Events),
-            new Heist("haunted", "?haunted", Villain.Events),
+            new Heist("haunted", "Safe House Nightmare", Villain.Events),
 
             // Hector
             new Heist("firestarter", "Firestarter", Villain.Hector, isStealthable:true),
