@@ -125,12 +125,12 @@ namespace PayDay2SaveView
             new Heist("arena", "The Alesso Heist", Villain.Bain, isStealthable:true),
 
             // Armored Transport
-            new Heist("arm_cro", "Armored Transport: Crossroads", Villain.Bain),
-            new Heist("arm_hcm", "Armored Transport: Downtown", Villain.Bain),
-            new Heist("arm_fac", "Armored Transport: Harbor", Villain.Bain),
-            new Heist("arm_par", "Armored Transport: Park", Villain.Bain),
-            new Heist("arm_for", "Armored Transport: Train Heist", Villain.Bain),
-            new Heist("arm_und", "Armored Transport: Underpass", Villain.Bain),
+            new Heist("arm_cro", "Transport: Crossroads", Villain.Bain),
+            new Heist("arm_hcm", "Transport: Downtown", Villain.Bain),
+            new Heist("arm_fac", "Transport: Harbor", Villain.Bain),
+            new Heist("arm_par", "Transport: Park", Villain.Bain),
+            new Heist("arm_for", "Transport: Train Heist", Villain.Bain),
+            new Heist("arm_und", "Transport: Underpass", Villain.Bain),
 
             // Classics
             new Heist("pal", "Counterfeit", Villain.Classics),
