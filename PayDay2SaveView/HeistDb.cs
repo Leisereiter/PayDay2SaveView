@@ -113,7 +113,7 @@ namespace PayDay2SaveView
             new Heist("branchbank", "Bank Heist", Villain.Bain, isStealthable:true),
             new Heist("branchbank_prof", "Bank Heist (Pro Job)", Villain.Bain, isStealthable:true, isAvailable:false),
             new Heist("branchbank_cash", "Bank Heist: Cash", Villain.Bain, isStealthable:true),
-            new Heist("branchbank_deposit", "Bank Heist Deposit", Villain.Bain, isStealthable:true),
+            new Heist("branchbank_deposit", "Bank Heist: Deposit", Villain.Bain, isStealthable:true),
             new Heist("branchbank_gold_prof", "Bank Heist Gold (Pro Job)", Villain.Bain, isStealthable:true, isAvailable:false),
 
             new Heist("cage", "Car Shop", Villain.Bain, isStealthable:true),
@@ -183,7 +183,7 @@ namespace PayDay2SaveView
             new Heist("shoutout_raid", "Meltdown", Villain.Vlad),
             new Heist("nightclub", "Nightclub", Villain.Vlad, isStealthable:true),
             new Heist("cane", "Santa's Workshop", Villain.Vlad),
-            new Heist("ukrainian_job", "Ukranian Job (Escape forces)", Villain.Vlad, isStealthable:true, isAvailable:false),
+            new Heist("ukrainian_job", "Ukranian Job (Escape forces)", Villain.Vlad, isStealthable:true),
             new Heist("ukrainian_job_prof", "Ukranian Job (Pro Job)", Villain.Vlad, isStealthable:true, isAvailable:false),
             new Heist("pines", "White Xmas", Villain.Vlad),
 
