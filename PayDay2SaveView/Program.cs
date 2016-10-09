@@ -77,7 +77,7 @@ namespace PayDay2SaveView
                 .Where(x => x.Value.Villain == villain);
 
             Console.Write("----------------------------- ");
-            WriteInColor(() => Console.WriteLine(villain), ConsoleColor.White);
+            WriteInColor(() => Console.WriteLine(EnumUtils.GetString(villain)), ConsoleColor.White);
 
             foreach (var pair in heistsToList.OrderBy(x => x.Value.Name))
             {
