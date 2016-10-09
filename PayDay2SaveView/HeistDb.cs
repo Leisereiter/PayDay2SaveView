@@ -188,9 +188,9 @@ namespace PayDay2SaveView
             new Heist("pines", "White Xmas", Villain.Vlad),
 
             // The Elephant
-            new Heist("welcome_to_the_jungle", "Big Oil", Villain.TheElephant),
-            new Heist("welcome_to_the_jungle_prof", "Big Oil (Pro Job)", Villain.TheElephant, isAvailable:false),
-            new Heist("welcome_to_the_jungle_night_prof", "Big Oil (Night) (Pro Job)", Villain.TheElephant, isAvailable:false),
+            new Heist("welcome_to_the_jungle", "Big Oil (Prae 109.1)", Villain.TheElephant, isAvailable:false),
+            new Heist("welcome_to_the_jungle_prof", "Big Oil", Villain.TheElephant),
+            new Heist("welcome_to_the_jungle_night_prof", "Big Oil (Night)", Villain.TheElephant),
             new Heist("election_day", "Election Day", Villain.TheElephant, isStealthable:true),
             new Heist("election_day_prof", "Election Day (Pro Job)", Villain.TheElephant, isStealthable:true, isAvailable:false),
             new Heist("framing_frame", "Framing Frame", Villain.TheElephant, isStealthable:true),
