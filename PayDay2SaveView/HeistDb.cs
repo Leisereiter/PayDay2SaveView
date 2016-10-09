@@ -146,7 +146,7 @@ namespace PayDay2SaveView
             new Heist("firestarter", "Firestarter", Villain.Hector, isStealthable:true),
             new Heist("firestarter_prof", "Firestarter (Pro Job)", Villain.Hector, isStealthable:true, isAvailable:false),
             new Heist("alex", "Rats", Villain.Hector),
-            new Heist("alex_prof", "Rats Professional", Villain.Hector),
+            new Heist("alex_prof", "Rats Professional", Villain.Hector, isAvailable:false),
             new Heist("watchdogs", "Watchdogs", Villain.Hector),
             new Heist("watchdogs_night", "Watchdogs (Night)", Villain.Hector),
             new Heist("watchdogs_prof", "Watchdogs (Pro Job)", Villain.Hector, isAvailable:false),
