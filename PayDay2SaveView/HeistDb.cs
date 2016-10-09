@@ -183,8 +183,8 @@ namespace PayDay2SaveView
             new Heist("shoutout_raid", "Meltdown", Villain.Vlad),
             new Heist("nightclub", "Nightclub", Villain.Vlad, isStealthable:true),
             new Heist("cane", "Santa's Workshop", Villain.Vlad),
-            new Heist("ukrainian_job", "Ukranian Job (Escape forces)", Villain.Vlad, isStealthable:true),
-            new Heist("ukrainian_job_prof", "Ukranian Job (Pro Job)", Villain.Vlad, isStealthable:true, isAvailable:false),
+            new Heist("ukrainian_job", "Ukranian Job (Escape forces)", Villain.Vlad, isAvailable:false, isStealthable:true),
+            new Heist("ukrainian_job_prof", "Ukranian Job", Villain.Vlad, isStealthable:true),
             new Heist("pines", "White Xmas", Villain.Vlad),
 
             // The Elephant
