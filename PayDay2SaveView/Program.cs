@@ -60,13 +60,13 @@ namespace PayDay2SaveView
             ShowSessionsPerVillain(sessions, Villain.Bain);
             ShowSessionsPerVillain(sessions, Villain.Classics);
             ShowSessionsPerVillain(sessions, Villain.Events);
+            ShowSessionsPerVillain(sessions, Villain.Hector);
             ShowSessionsPerVillain(sessions, Villain.Jimmy);
             ShowSessionsPerVillain(sessions, Villain.Locke);
             ShowSessionsPerVillain(sessions, Villain.TheButcher);
             ShowSessionsPerVillain(sessions, Villain.TheDentist);
             ShowSessionsPerVillain(sessions, Villain.TheElephant);
             ShowSessionsPerVillain(sessions, Villain.Vlad);
-            ShowSessionsPerVillain(sessions, Villain.Hector);
         }
 
         private static void ShowSessionsPerVillain(IDictionary<string, Dictionary<Difficulty, SessionCount>> sessions, Villain villain)
