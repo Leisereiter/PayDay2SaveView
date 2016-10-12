@@ -57,22 +57,22 @@ namespace PayDay2SaveView
             Console.Write("SM".PadLeft(4));
             Console.WriteLine("  Heist");
 
-            ShowSessionsPerVillain(sessions, Villain.Unknown);
-            ShowSessionsPerVillain(sessions, Villain.Bain);
-            ShowSessionsPerVillain(sessions, Villain.Classics);
-            ShowSessionsPerVillain(sessions, Villain.Events);
-            ShowSessionsPerVillain(sessions, Villain.Hector);
-            ShowSessionsPerVillain(sessions, Villain.Jimmy);
-            ShowSessionsPerVillain(sessions, Villain.Locke);
-            ShowSessionsPerVillain(sessions, Villain.TheButcher);
-            ShowSessionsPerVillain(sessions, Villain.TheDentist);
-            ShowSessionsPerVillain(sessions, Villain.TheElephant);
-            ShowSessionsPerVillain(sessions, Villain.Vlad);
+            ShowSessionsPerVillain(sessions, Villain.Unknown, heistDb);
+            ShowSessionsPerVillain(sessions, Villain.Bain, heistDb);
+            ShowSessionsPerVillain(sessions, Villain.Classics, heistDb);
+            ShowSessionsPerVillain(sessions, Villain.Events, heistDb);
+            ShowSessionsPerVillain(sessions, Villain.Hector, heistDb);
+            ShowSessionsPerVillain(sessions, Villain.Jimmy, heistDb);
+            ShowSessionsPerVillain(sessions, Villain.Locke, heistDb);
+            ShowSessionsPerVillain(sessions, Villain.TheButcher, heistDb);
+            ShowSessionsPerVillain(sessions, Villain.TheDentist, heistDb);
+            ShowSessionsPerVillain(sessions, Villain.TheElephant, heistDb);
+            ShowSessionsPerVillain(sessions, Villain.Vlad, heistDb);
         }
 
-        private static void ShowSessionsPerVillain(IDictionary<string, Dictionary<Difficulty, SessionCount>> sessions, Villain villain)
+        private static void ShowSessionsPerVillain(IDictionary<string, Dictionary<Difficulty, SessionCount>> sessions, Villain villain, HeistDb heistDb)
         {
-            var heistsToList = GetAllJobsFromHeistDbAndSession(sessions)
+            var heistsToList = GetAllJobsFromHeistDbAndSession(sessions, heistDb)
                 .Where(x => x.Value.IsAvailable)
                 .Where(x => !(CmdArgs.IsHideDlc && x.Value.IsDlc))
                 .Where(x => x.Value.Villain == villain)
@@ -108,9 +108,8 @@ namespace PayDay2SaveView
             return villain == Villain.Unknown ? ConsoleColor.Red : ConsoleColor.White;
         }
 
-        private static IEnumerable<KeyValuePair<string, Heist>> GetAllJobsFromHeistDbAndSession(IDictionary<string, Dictionary<Difficulty, SessionCount>> sessions)
+        private static IEnumerable<KeyValuePair<string, Heist>> GetAllJobsFromHeistDbAndSession(IDictionary<string, Dictionary<Difficulty, SessionCount>> sessions, HeistDb heistDb)
         {
-            var heistDb = new HeistDb();
             return HeistDb.JobNames.Union(sessions.Keys.ToDictionary(x => x, x => heistDb.GetHeistFromNameKey(x)));
         }
 
