@@ -19,6 +19,9 @@ namespace PayDay2SaveView
         [Argument("list-unknown-maps", "Listet die gespielten Sessions und deren Anzhl als rohdaten")]
         public bool IsListUnknownMaps { get; private set; }
 
+        [Argument("hide-dlc", "Verstecke Heists an die nur durch DLCs zugänglich sind")]
+        public bool IsHideDlc { get; private set; }
+
         public IList<string> Positional { get; }
 
         public CmdLineHelper()

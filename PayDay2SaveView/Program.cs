@@ -73,6 +73,7 @@ namespace PayDay2SaveView
         {
             var heistsToList = HeistDb.JobNames
                 .Where(x => x.Value.IsAvailable)
+                .Where(x => !(CmdArgs.IsHideDlc && x.Value.IsDlc))
                 .Where(x => x.Value.Villain == villain);
 
             Console.Write("----------------------------- ");
@@ -102,8 +103,8 @@ namespace PayDay2SaveView
             Console.Write(heist.Name);
             if (heist.IsStealthable)
                 WriteInColor(() => Console.Write("*"), ConsoleColor.DarkCyan);
-            if(heist.IsDlc)
-                WriteInColor(()=>Console.Write(" (DLC)"), ConsoleColor.DarkYellow);
+            if (heist.IsDlc)
+                WriteInColor(() => Console.Write(" (DLC)"), ConsoleColor.DarkYellow);
         }
 
         private static void WriteInColor(Action action, ConsoleColor color)
