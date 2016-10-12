@@ -57,6 +57,7 @@ namespace PayDay2SaveView
             Console.Write("SM".PadLeft(4));
             Console.WriteLine("  Heist");
 
+            ShowSessionsPerVillain(sessions, Villain.Unknown);
             ShowSessionsPerVillain(sessions, Villain.Bain);
             ShowSessionsPerVillain(sessions, Villain.Classics);
             ShowSessionsPerVillain(sessions, Villain.Events);
@@ -71,7 +72,7 @@ namespace PayDay2SaveView
 
         private static void ShowSessionsPerVillain(IDictionary<string, Dictionary<Difficulty, SessionCount>> sessions, Villain villain)
         {
-            var heistsToList = HeistDb.JobNames
+            var heistsToList = GetAllJobsFromHeistDbAndSession(sessions)
                 .Where(x => x.Value.IsAvailable)
                 .Where(x => !(CmdArgs.IsHideDlc && x.Value.IsDlc))
                 .Where(x => x.Value.Villain == villain)
@@ -102,6 +103,12 @@ namespace PayDay2SaveView
             }
         }
 
+        private static IEnumerable<KeyValuePair<string, Heist>> GetAllJobsFromHeistDbAndSession(IDictionary<string, Dictionary<Difficulty, SessionCount>> sessions)
+        {
+            var heistDb = new HeistDb();
+            return HeistDb.JobNames.Union(sessions.Keys.ToDictionary(x => x, x => heistDb.GetHeistFromNameKey(x)));
+        }
+
         private static void FormatHeistName(Heist heist)
         {
             Console.Write(heist.Name);
@@ -123,9 +130,7 @@ namespace PayDay2SaveView
         {
             var sessions = GetPlayedSessions(saveFile);
             foreach (var session in sessions)
-            {
                 Console.WriteLine($"{session.Key} => {session.Value}");
-            }
         }
 
         private static void ListUnknownMaps(SaveFile saveFile, HeistDb heistDb)
@@ -181,6 +186,10 @@ namespace PayDay2SaveView
             var statisticsManager = (Dictionary<object, object>)gameData["StatisticsManager"];
             var sessions = (Dictionary<object, object>)statisticsManager["sessions"];
             var jobs = (Dictionary<object, object>)sessions["jobs"];
+#if DEBUG
+            jobs["foo_normal_completed"] = 12;
+            jobs["foo_hard_completed"] = 12;
+#endif
             return jobs;
         }
 
