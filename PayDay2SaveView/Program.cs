@@ -47,10 +47,9 @@ namespace PayDay2SaveView
 
             var sessions = GetPlayedSessions(saveFile)
                 .Select(x => SessionCount.FromDictKvp(x, context.HeistDb))
-                .Where(x => x.SessionState == SessionState.Completed)
                 .GroupBy(x => x.Heist.Key, x => x)
                 .ToDictionary(x => x.Key, x => x.GroupBy(y => y.Difficulty, y => y)
-                                                .ToDictionary(y => y.Key, y => y.FirstOrDefault()));
+                                                .ToDictionary(y => y.Key, y => y.ToList()));
 
             Console.Write("NO".PadLeft(4));
             Console.Write("HD".PadLeft(4));
@@ -74,7 +73,7 @@ namespace PayDay2SaveView
             ShowSessionsPerVillain(context, sessions, Villain.Vlad);
         }
 
-        private static void ShowSessionsPerVillain(Context context, IDictionary<string, Dictionary<Difficulty, SessionCount>> sessions, Villain villain)
+        private static void ShowSessionsPerVillain(Context context, Dictionary<string, Dictionary<Difficulty, List<SessionCount>>> sessions, Villain villain)
         {
             var heistsToList = GetAllJobsFromHeistDbAndSession(context, sessions)
                 .Where(x => x.Value.IsAvailable)
@@ -112,7 +111,7 @@ namespace PayDay2SaveView
             return villain == Villain.Unknown ? ConsoleColor.Red : ConsoleColor.White;
         }
 
-        private static IEnumerable<KeyValuePair<string, Heist>> GetAllJobsFromHeistDbAndSession(Context context, IDictionary<string, Dictionary<Difficulty, SessionCount>> sessions)
+        private static IEnumerable<KeyValuePair<string, Heist>> GetAllJobsFromHeistDbAndSession(Context context, Dictionary<string, Dictionary<Difficulty, List<SessionCount>>> sessions)
         {
             var allHeistsInSessions = sessions.Keys.ToDictionary(x => x, x => context.HeistDb.GetHeistFromNameKey(x));
             return HeistDb.JobNames.Union(allHeistsInSessions);
@@ -159,11 +158,18 @@ namespace PayDay2SaveView
             Console.WriteLine("done.");
         }
 
-        private static void PrintCountForDifficulty(Difficulty difficulty, IDictionary<Difficulty, SessionCount> job, Heist heist)
+        private static void PrintCountForDifficulty(Difficulty difficulty, IDictionary<Difficulty, List<SessionCount>> sessionsByDifficulty, Heist heist)
         {
-            var count = job != null && job.ContainsKey(difficulty) ? job[difficulty].Count : 0;
+            var count = GetCountForDifficulty(difficulty, sessionsByDifficulty);
             var color = count > 0 ? ConsoleColor.Gray : ColorFromDifficulty(difficulty, heist, ConsoleColor.Gray);
             WriteInColor(() => Console.Write(count.ToString().PadLeft(4)), color);
+        }
+
+        private static int GetCountForDifficulty(Difficulty difficulty, IDictionary<Difficulty, List<SessionCount>> sessionsByDifficulty)
+        {
+            if (!sessionsByDifficulty.ContainsKey(difficulty)) return 0;
+            var completedSessions = sessionsByDifficulty[difficulty].FirstOrDefault(x => x.SessionState == SessionState.Completed);
+            return completedSessions?.Count ?? 0;
         }
 
         private static ConsoleColor ColorFromDifficulty(Difficulty difficulty, Heist heist, ConsoleColor defaultColor)
