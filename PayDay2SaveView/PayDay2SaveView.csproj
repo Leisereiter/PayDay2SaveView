@@ -55,6 +55,7 @@
     <Compile Include="SteamUtils.cs" />
     <Compile Include="StringValue.cs" />
     <Compile Include="ValueHelper.cs" />
+    <Compile Include="XlsFriendlyFormatter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

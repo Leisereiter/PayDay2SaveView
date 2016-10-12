@@ -70,10 +70,7 @@ namespace PayDay2SaveView
         private static IFormatter ChooseFormatter(CmdLineHelper cmdLineHelper)
         {
             if (cmdLineHelper.IsXls)
-            {
-                throw new NotImplementedException("Noch nicht, sorry.");
-            }
-
+                return new XlsFriendlyFormatter();
             return new ConsoleFormatter();
         }
 
