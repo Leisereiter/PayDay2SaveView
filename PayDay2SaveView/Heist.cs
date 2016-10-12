@@ -14,7 +14,7 @@
         TheElephant,
         Vlad,
 
-        Unknown = 999999
+        Unknown
     }
 
     public class Heist
