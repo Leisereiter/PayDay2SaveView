@@ -82,7 +82,7 @@ namespace PayDay2SaveView
                 return;
 
             Console.Write("----------------------------- ");
-            WriteInColor(() => Console.WriteLine(EnumUtils.GetString(villain)), ConsoleColor.White);
+            WriteInColor(() => Console.WriteLine(EnumUtils.GetString(villain)), GetVillainNameColor(villain));
 
             foreach (var pair in heistsToList.OrderBy(x => x.Value.Name))
             {
@@ -101,6 +101,11 @@ namespace PayDay2SaveView
                 FormatHeistName(heist);
                 Console.WriteLine();
             }
+        }
+
+        private static ConsoleColor GetVillainNameColor(Villain villain)
+        {
+            return villain == Villain.Unknown ? ConsoleColor.Red : ConsoleColor.White;
         }
 
         private static IEnumerable<KeyValuePair<string, Heist>> GetAllJobsFromHeistDbAndSession(IDictionary<string, Dictionary<Difficulty, SessionCount>> sessions)

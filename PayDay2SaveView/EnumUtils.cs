@@ -9,7 +9,7 @@ namespace PayDay2SaveView
             switch (villain)
             {
                 case Villain.None: return "None";
-                case Villain.Unknown: return "! UNKNOWN HEISTS";
+                case Villain.Unknown: return "UNKNOWN HEISTS";
                 case Villain.Bain: return "Bain";
                 case Villain.Classics: return "Classics";
                 case Villain.Events: return "Events";
