@@ -26,7 +26,7 @@
         public bool IsAvailable { get; private set; }
         public bool IsDlc { get; private set; }
 
-        public Heist(string key, string name, Villain villain, bool isStealthable=false, bool isAvailable = true, bool isDlc=false)
+        public Heist(string key, string name, Villain villain, bool isStealthable = false, bool isAvailable = true, bool isDlc = false)
         {
             Key = key;
             Name = name;

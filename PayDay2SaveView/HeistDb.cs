@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace PayDay2SaveView
@@ -11,11 +10,7 @@ namespace PayDay2SaveView
 
         public Heist GetHeistFromNameKey(string key)
         {
-            if (JobNames.ContainsKey(key)) return JobNames[key];
-            //if (DayNames.ContainsKey(key)) return DayNames[key];
-            //if (EscapeNames.ContainsKey(key)) return EscapeNames[key];
-            //return $"?{key}";
-            throw new Exception($"Unknown Heist: {key}");
+            return JobNames.ContainsKey(key) ? JobNames[key] : new UnknownHeist(key);
         }
 
         public static readonly IDictionary<string, string> DayNames = new Dictionary<string, string>()
