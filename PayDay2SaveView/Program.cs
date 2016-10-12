@@ -75,6 +75,8 @@ namespace PayDay2SaveView
                 .Where(x => x.Value.IsAvailable)
                 .Where(x => !(CmdArgs.IsHideDlc && x.Value.IsDlc))
                 .Where(x => x.Value.Villain == villain);
+            if (!heistsToList.Any())
+                return;
 
             Console.Write("----------------------------- ");
             WriteInColor(() => Console.WriteLine(EnumUtils.GetString(villain)), ConsoleColor.White);
