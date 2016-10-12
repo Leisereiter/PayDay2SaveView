@@ -22,14 +22,16 @@
         public Villain Villain { get; private set; }
         public bool IsStealthable { get; private set; }
         public bool IsAvailable { get; private set; }
+        public bool IsDlc { get; private set; }
 
-        public Heist(string key, string name, Villain villain, bool isStealthable=false, bool isAvailable = true)
+        public Heist(string key, string name, Villain villain, bool isStealthable=false, bool isAvailable = true, bool isDlc=false)
         {
             Key = key;
             Name = name;
             Villain = villain;
             IsStealthable = isStealthable;
             IsAvailable = isAvailable;
+            IsDlc = isDlc;
         }
     }
 }
