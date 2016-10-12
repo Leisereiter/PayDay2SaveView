@@ -13,6 +13,8 @@
         TheDentist,
         TheElephant,
         Vlad,
+
+        Unknown = 999999
     }
 
     public class Heist
