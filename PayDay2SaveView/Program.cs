@@ -23,7 +23,11 @@ namespace PayDay2SaveView
                 return;
             }
 
-            var heistDb = new HeistDb();
+            var context = new Context
+            {
+                HeistDb = new HeistDb()
+            };
+
             var steamUtils = new SteamUtils();
 
             var saveFilePath = CmdArgs.Positional.Any() ? CmdArgs.Positional.First() : GetSaveFilePath(steamUtils);
@@ -31,7 +35,7 @@ namespace PayDay2SaveView
 
             if (CmdArgs.IsListUnknownMaps)
             {
-                ListUnknownMaps(saveFile, heistDb);
+                ListUnknownMaps(context, saveFile);
                 return;
             }
 
@@ -42,7 +46,7 @@ namespace PayDay2SaveView
             }
 
             var sessions = GetPlayedSessions(saveFile)
-                .Select(x => SessionCount.FromDictKvp(x, heistDb))
+                .Select(x => SessionCount.FromDictKvp(x, context.HeistDb))
                 .Where(x => x.SessionState == SessionState.Completed)
                 .GroupBy(x => x.Heist.Key, x => x)
                 .ToDictionary(x => x.Key, x => x.GroupBy(y => y.Difficulty, y => y)
@@ -57,22 +61,22 @@ namespace PayDay2SaveView
             Console.Write("SM".PadLeft(4));
             Console.WriteLine("  Heist");
 
-            ShowSessionsPerVillain(sessions, Villain.Unknown, heistDb);
-            ShowSessionsPerVillain(sessions, Villain.Bain, heistDb);
-            ShowSessionsPerVillain(sessions, Villain.Classics, heistDb);
-            ShowSessionsPerVillain(sessions, Villain.Events, heistDb);
-            ShowSessionsPerVillain(sessions, Villain.Hector, heistDb);
-            ShowSessionsPerVillain(sessions, Villain.Jimmy, heistDb);
-            ShowSessionsPerVillain(sessions, Villain.Locke, heistDb);
-            ShowSessionsPerVillain(sessions, Villain.TheButcher, heistDb);
-            ShowSessionsPerVillain(sessions, Villain.TheDentist, heistDb);
-            ShowSessionsPerVillain(sessions, Villain.TheElephant, heistDb);
-            ShowSessionsPerVillain(sessions, Villain.Vlad, heistDb);
+            ShowSessionsPerVillain(context, sessions, Villain.Unknown);
+            ShowSessionsPerVillain(context, sessions, Villain.Bain);
+            ShowSessionsPerVillain(context, sessions, Villain.Classics);
+            ShowSessionsPerVillain(context, sessions, Villain.Events);
+            ShowSessionsPerVillain(context, sessions, Villain.Hector);
+            ShowSessionsPerVillain(context, sessions, Villain.Jimmy);
+            ShowSessionsPerVillain(context, sessions, Villain.Locke);
+            ShowSessionsPerVillain(context, sessions, Villain.TheButcher);
+            ShowSessionsPerVillain(context, sessions, Villain.TheDentist);
+            ShowSessionsPerVillain(context, sessions, Villain.TheElephant);
+            ShowSessionsPerVillain(context, sessions, Villain.Vlad);
         }
 
-        private static void ShowSessionsPerVillain(IDictionary<string, Dictionary<Difficulty, SessionCount>> sessions, Villain villain, HeistDb heistDb)
+        private static void ShowSessionsPerVillain(Context context, IDictionary<string, Dictionary<Difficulty, SessionCount>> sessions, Villain villain)
         {
-            var heistsToList = GetAllJobsFromHeistDbAndSession(sessions, heistDb)
+            var heistsToList = GetAllJobsFromHeistDbAndSession(context, sessions)
                 .Where(x => x.Value.IsAvailable)
                 .Where(x => !(CmdArgs.IsHideDlc && x.Value.IsDlc))
                 .Where(x => x.Value.Villain == villain)
@@ -108,9 +112,10 @@ namespace PayDay2SaveView
             return villain == Villain.Unknown ? ConsoleColor.Red : ConsoleColor.White;
         }
 
-        private static IEnumerable<KeyValuePair<string, Heist>> GetAllJobsFromHeistDbAndSession(IDictionary<string, Dictionary<Difficulty, SessionCount>> sessions, HeistDb heistDb)
+        private static IEnumerable<KeyValuePair<string, Heist>> GetAllJobsFromHeistDbAndSession(Context context, IDictionary<string, Dictionary<Difficulty, SessionCount>> sessions)
         {
-            return HeistDb.JobNames.Union(sessions.Keys.ToDictionary(x => x, x => heistDb.GetHeistFromNameKey(x)));
+            var allHeistsInSessions = sessions.Keys.ToDictionary(x => x, x => context.HeistDb.GetHeistFromNameKey(x));
+            return HeistDb.JobNames.Union(allHeistsInSessions);
         }
 
         private static void FormatHeistName(Heist heist)
@@ -137,10 +142,10 @@ namespace PayDay2SaveView
                 Console.WriteLine($"{session.Key} => {session.Value}");
         }
 
-        private static void ListUnknownMaps(SaveFile saveFile, HeistDb heistDb)
+        private static void ListUnknownMaps(Context context, SaveFile saveFile)
         {
             var sessions = GetPlayedSessions(saveFile);
-            var counters = sessions.Select(kvp => SessionCount.FromDictKvp(kvp, heistDb));
+            var counters = sessions.Select(kvp => SessionCount.FromDictKvp(kvp, context.HeistDb));
             ISet<string> allKeys = new SortedSet<string>(counters.Select(x => x.Heist.Key));
 
             ISet<string> allKnwonKeys = new HashSet<string>();
@@ -241,5 +246,10 @@ namespace PayDay2SaveView
             var pathLastAccessTimes = files.Select(path => new { path, date = File.GetLastWriteTime(path) });
             return pathLastAccessTimes.OrderByDescending(x => x.date).First().path;
         }
+    }
+
+    public class Context
+    {
+        public HeistDb HeistDb { set; get; }
     }
 }
