@@ -22,6 +22,9 @@ namespace PayDay2SaveView
         [Argument("hide-dlc", "Verstecke Heists die nur durch DLCs zugänglich sind")]
         public bool IsHideDlc { get; private set; }
 
+        [Argument("xls", "Excel-freundliche Ausgabe, falls verfügbar.")]
+        public bool IsXls { get; private set; }
+
         public IList<string> Positional { get; }
 
         public CmdLineHelper()
