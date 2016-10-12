@@ -74,7 +74,9 @@ namespace PayDay2SaveView
             var heistsToList = HeistDb.JobNames
                 .Where(x => x.Value.IsAvailable)
                 .Where(x => !(CmdArgs.IsHideDlc && x.Value.IsDlc))
-                .Where(x => x.Value.Villain == villain);
+                .Where(x => x.Value.Villain == villain)
+                .ToList();
+
             if (!heistsToList.Any())
                 return;
 
