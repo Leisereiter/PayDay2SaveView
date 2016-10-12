@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="ArgumentAttribute.cs" />
     <Compile Include="CmdLineHelper.cs" />
+    <Compile Include="ConsoleFormatter.cs" />
     <Compile Include="EnumUtils.cs" />
     <Compile Include="Heist.cs" />
     <Compile Include="HeistDb.cs" />
