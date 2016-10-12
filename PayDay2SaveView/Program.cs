@@ -102,6 +102,8 @@ namespace PayDay2SaveView
             Console.Write(heist.Name);
             if (heist.IsStealthable)
                 WriteInColor(() => Console.Write("*"), ConsoleColor.DarkCyan);
+            if(heist.IsDlc)
+                WriteInColor(()=>Console.Write(" (DLC)"), ConsoleColor.DarkYellow);
         }
 
         private static void WriteInColor(Action action, ConsoleColor color)
