@@ -29,6 +29,11 @@ namespace PayDay2SaveView
             Positional = new List<string>();
         }
 
+        public CmdLineHelper(IEnumerable<string> args) : this()
+        {
+            Parse(args);
+        }
+
         public void Parse(IEnumerable<string> args)
         {
             var flagTable = CreateFlagTable();

@@ -8,38 +8,34 @@ namespace PayDay2SaveView
 {
     public static class Program
     {
-        private static CmdLineHelper CmdArgs { get; set; }
-
         private const int Pd2SteamId = 218620;
 
         public static void Main(string[] args)
         {
-            CmdArgs = new CmdLineHelper();
-            CmdArgs.Parse(args);
-
-            if (CmdArgs.IsHelp)
+            var context = new Context
             {
-                CmdArgs.PrintHelp(Console.Out);
+                HeistDb = new HeistDb(),
+                Args = new CmdLineHelper(args)
+            };
+
+            if (context.Args.IsHelp)
+            {
+                context.Args.PrintHelp(Console.Out);
                 return;
             }
 
-            var context = new Context
-            {
-                HeistDb = new HeistDb()
-            };
-
             var steamUtils = new SteamUtils();
 
-            var saveFilePath = CmdArgs.Positional.Any() ? CmdArgs.Positional.First() : GetSaveFilePath(steamUtils);
+            var saveFilePath = context.Args.Positional.Any() ? context.Args.Positional.First() : GetSaveFilePath(steamUtils);
             var saveFile = new SaveFile(saveFilePath);
 
-            if (CmdArgs.IsListUnknownMaps)
+            if (context.Args.IsListUnknownMaps)
             {
                 ListUnknownMaps(context, saveFile);
                 return;
             }
 
-            if (CmdArgs.IsListSessions)
+            if (context.Args.IsListSessions)
             {
                 ListallSessions(saveFile);
                 return;
@@ -77,7 +73,7 @@ namespace PayDay2SaveView
         {
             var heistsToList = GetAllJobsFromHeistDbAndSession(context, sessions)
                 .Where(x => x.Value.IsAvailable)
-                .Where(x => !(CmdArgs.IsHideDlc && x.Value.IsDlc))
+                .Where(x => !(context.Args.IsHideDlc && x.Value.IsDlc))
                 .Where(x => x.Value.Villain == villain)
                 .ToList();
 
@@ -258,5 +254,6 @@ namespace PayDay2SaveView
     public class Context
     {
         public HeistDb HeistDb { set; get; }
+        public CmdLineHelper Args { get; set; }
     }
 }
