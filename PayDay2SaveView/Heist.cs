@@ -36,4 +36,12 @@
             IsDlc = isDlc;
         }
     }
+
+    public class UnknownHeist : Heist
+    {
+        public UnknownHeist(string key) : base(key, key, Villain.Unknown)
+        {
+
+        }
+    }
 }
