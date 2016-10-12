@@ -196,8 +196,9 @@ namespace PayDay2SaveView
             var sessions = (Dictionary<object, object>)statisticsManager["sessions"];
             var jobs = (Dictionary<object, object>)sessions["jobs"];
 #if DEBUG
-            jobs["foo_normal_completed"] = 12;
-            jobs["foo_hard_completed"] = 12;
+            jobs["foo_normal_completed"] = 1;
+            jobs["foo_hard_completed"] = 23;
+            jobs["bar_sm_wish_started"] = 3;
 #endif
             return jobs;
         }
