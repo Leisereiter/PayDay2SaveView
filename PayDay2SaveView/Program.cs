@@ -20,7 +20,7 @@ namespace PayDay2SaveView
 
             if (context.Args.IsHelp)
             {
-                context.Args.PrintHelp(Console.Out);
+                CmdLineHelper.PrintHelp(Console.Out);
                 return;
             }
 

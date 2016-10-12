@@ -27,7 +27,7 @@ namespace PayDay2SaveView
 
         public IList<string> Positional { get; }
 
-        public CmdLineHelper()
+        private CmdLineHelper()
         {
             Positional = new List<string>();
         }
@@ -37,7 +37,7 @@ namespace PayDay2SaveView
             Parse(args);
         }
 
-        public void Parse(IEnumerable<string> args)
+        private void Parse(IEnumerable<string> args)
         {
             var flagTable = CreateFlagTable();
 
@@ -56,7 +56,7 @@ namespace PayDay2SaveView
             }
         }
 
-        public void PrintHelp(TextWriter writer)
+        public static void PrintHelp(TextWriter writer)
         {
             writer.WriteLine("Aufruf: ");
             writer.WriteLine("  PayDay2SaveView.exe [FLAGS]");
