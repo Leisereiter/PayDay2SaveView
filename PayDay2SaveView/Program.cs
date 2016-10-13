@@ -30,12 +30,6 @@ namespace PayDay2SaveView
                 return;
             }
 
-            if (context.Args.IsListUnknownMaps)
-            {
-                ListUnknownMaps(context);
-                return;
-            }
-
             if (context.Args.IsListSessions)
             {
                 ListallSessions(context);
@@ -100,22 +94,6 @@ namespace PayDay2SaveView
             var sessions = GetPlayedSessions(context.SaveFile);
             foreach (var session in sessions)
                 context.Formatter.WriteRawSession(session);
-        }
-
-        private static void ListUnknownMaps(Context context)
-        {
-            var sessions = GetPlayedSessions(context.SaveFile);
-            var counters = sessions.Select(kvp => SessionCount.FromDictKvp(kvp, context.HeistDb));
-            ISet<string> allKeys = new SortedSet<string>(counters.Select(x => x.Heist.Key));
-
-            ISet<string> allKnwonKeys = new HashSet<string>();
-            foreach (var nameKey in HeistDb.DayNames.Keys) allKnwonKeys.Add(nameKey);
-            foreach (var nameKey in HeistDb.EscapeNames.Keys) allKnwonKeys.Add(nameKey);
-            foreach (var nameKey in HeistDb.JobNames.Keys) allKnwonKeys.Add(nameKey);
-
-            foreach (var unknownKey in allKeys.Except(allKnwonKeys))
-                context.Formatter.UnknownKeyRaw(unknownKey);
-            context.Formatter.UnknownKeysEnd();
         }
 
         private static Dictionary<object, object> GetPlayedSessions(SaveFile saveFile)

@@ -16,9 +16,6 @@ namespace PayDay2SaveView
         [Argument("list-sessions", "Listet alle Name-keys die nicht dem JobNameResolver bekannt sind")]
         public bool IsListSessions { get; private set; }
 
-        [Argument("list-unknown-maps", "Listet die gespielten Sessions und deren Anzhl als rohdaten")]
-        public bool IsListUnknownMaps { get; private set; }
-
         [Argument("hide-dlc", "Verstecke Heists die nur durch DLCs zugänglich sind")]
         public bool IsHideDlc { get; private set; }
 
