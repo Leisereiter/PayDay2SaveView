@@ -58,6 +58,7 @@
     <Compile Include="SteamUtils.cs" />
     <Compile Include="StringValue.cs" />
     <Compile Include="ListHeistsAction.cs" />
+    <Compile Include="TreeDumpAction.cs" />
     <Compile Include="ValueHelper.cs" />
     <Compile Include="XlsFriendlyFormatter.cs" />
   </ItemGroup>

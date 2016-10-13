@@ -30,56 +30,17 @@ namespace PayDay2SaveView
                 return;
             }
 
-            if (context.Args.IsTreeDump)
-            {
-                PrintTreeDump(context);
-                return;
-            }
-
             GetCallable(context).Run(context);
         }
 
         private static ICallable GetCallable(Context context)
         {
-            if(context.Args.IsListSessions)
+            if (context.Args.IsListSessions)
                 return new ListSessionsAction();
+            if (context.Args.IsTreeDump)
+                return new TreeDumpAction();
+
             return new ListHeistsAction();
-        }
-
-        private static void PrintTreeDump(Context context)
-        {
-            PrintTreeDump(context, context.SaveFile.GameData, depth: 0);
-        }
-
-        private static void PrintTreeDump(Context context, Dictionary<object, object> saveFile, int depth)
-        {
-            var entries = saveFile
-                .OrderBy(x => IsGameDataDict(x.Value))
-                .ThenBy(x => x.Key.ToString());
-
-            foreach (var kv in entries)
-            {
-                if (depth > 0)
-                {
-                    var padding = string.Concat(new string(' ', depth * 2), "- ");
-                    Console.Write(padding);
-                }
-
-                if (IsGameDataDict(kv.Value))
-                {
-                    Console.WriteLine($"{kv.Key}:");
-                    PrintTreeDump(context, (Dictionary<object, object>)kv.Value, depth + 1);
-                }
-                else
-                {
-                    Console.WriteLine($"{kv.Key}: {kv.Value}");
-                }
-            }
-        }
-
-        private static bool IsGameDataDict(object x)
-        {
-            return x is Dictionary<object, object>;
         }
 
         private static IFormatter ChooseFormatter(CmdLineHelper cmdLineHelper)
