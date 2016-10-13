@@ -15,6 +15,7 @@ namespace PayDay2SaveView
         void UnknownKeysEnd();
         void WriteHeistVillain(Villain villain);
         void WriteHeistEnd();
+        void WriteHeistIsInDlc(bool inDlc);
     }
 
     public class ConsoleFormatter : IFormatter
@@ -39,12 +40,20 @@ namespace PayDay2SaveView
         public void WriteHeistName(Heist heist)
         {
             Console.Write("  ");
-            FormatHeistName(heist);
+            Console.Write(heist.Name);
+            if (heist.IsStealthable)
+                WriteInColor(() => Console.Write("*"), ConsoleColor.DarkCyan);
         }
 
         public void WriteHeistVillain(Villain villain)
         {
             // Wird nicht vom ConsoleFormatter ausgegeben
+        }
+
+        public void WriteHeistIsInDlc(bool inDlc)
+        {
+            if (inDlc)
+                WriteInColor(() => Console.Write(" (DLC)"), ConsoleColor.DarkYellow);
         }
 
         public void WriteHeistEnd()
@@ -102,15 +111,6 @@ namespace PayDay2SaveView
                 default:
                     return defaultColor;
             }
-        }
-
-        private static void FormatHeistName(Heist heist)
-        {
-            Console.Write(heist.Name);
-            if (heist.IsStealthable)
-                WriteInColor(() => Console.Write("*"), ConsoleColor.DarkCyan);
-            if (heist.IsDlc)
-                WriteInColor(() => Console.Write(" (DLC)"), ConsoleColor.DarkYellow);
         }
 
         private static ConsoleColor GetVillainNameColor(Villain villain)

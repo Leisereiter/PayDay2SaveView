@@ -16,7 +16,10 @@ namespace PayDay2SaveView
             Console.Write("\"EW\"".PadLeft(_counterColumnWidth) + " ");
             Console.Write("\"DW\"".PadLeft(_counterColumnWidth) + " ");
             Console.Write("\"SM\"".PadLeft(_counterColumnWidth) + " ");
-            Console.WriteLine("\"Heist\"");
+            Console.Write("\"Heist\" ");
+            Console.Write("\"Villain\" ");
+            Console.Write("\"DLC\"");
+            Console.WriteLine();
         }
 
         public void WriteVillainBegin(Villain villain)
@@ -31,12 +34,18 @@ namespace PayDay2SaveView
 
         public void WriteHeistName(Heist heist)
         {
-            Console.Write(XmlFriendly(heist.Name).PadRight(25));
+            Console.Write(XlsFriendly(heist.Name).PadRight(25));
+        }
+
+        public void WriteHeistIsInDlc(bool inDlc)
+        {
+            var res = XlsFriendly(inDlc);
+            Console.WriteLine(" " + res.PadLeft(5));
         }
 
         public void WriteHeistVillain(Villain villain)
         {
-            Console.Write(XmlFriendly(EnumUtils.GetString(villain)).PadRight(17));
+            Console.Write(XlsFriendly(EnumUtils.GetString(villain)).PadRight(17));
         }
 
         public void WriteHeistEnd()
@@ -64,9 +73,14 @@ namespace PayDay2SaveView
 
         }
 
-        private static string XmlFriendly(string s)
+        private static string XlsFriendly(string s)
         {
             return string.Concat('"', s, '"');
+        }
+
+        private static string XlsFriendly(bool x)
+        {
+            return x ? "TRUE" : "FALSE";
         }
     }
 }

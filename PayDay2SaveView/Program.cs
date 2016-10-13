@@ -101,6 +101,7 @@ namespace PayDay2SaveView
                 PrintCountForDifficulty(Difficulty.SmWish, jobs, heist, context);
                 context.Formatter.WriteHeistName(heist);
                 context.Formatter.WriteHeistVillain(heist.Villain);
+                context.Formatter.WriteHeistIsInDlc(heist.IsDlc);
                 context.Formatter.WriteHeistEnd();
             }
         }
