@@ -55,6 +55,7 @@
     <Compile Include="SessionKeyParser.cs" />
     <Compile Include="SteamUtils.cs" />
     <Compile Include="StringValue.cs" />
+    <Compile Include="ListHeistsAction.cs" />
     <Compile Include="ValueHelper.cs" />
     <Compile Include="XlsFriendlyFormatter.cs" />
   </ItemGroup>

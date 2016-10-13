@@ -13,12 +13,15 @@ namespace PayDay2SaveView
         public static void Main(string[] args)
         {
             var cmdLineHelper = new CmdLineHelper(args);
+            var steamUtils = new SteamUtils();
+            var saveFilePath = cmdLineHelper.Positional.Any() ? cmdLineHelper.Positional.First() : GetSaveFilePath(steamUtils);
 
             var context = new Context
             {
                 HeistDb = new HeistDb(),
                 Args = cmdLineHelper,
-                Formatter = ChooseFormatter(cmdLineHelper)
+                Formatter = ChooseFormatter(cmdLineHelper),
+                SaveFile = new SaveFile(saveFilePath)
             };
 
             if (context.Args.IsHelp)
@@ -27,55 +30,31 @@ namespace PayDay2SaveView
                 return;
             }
 
-            var steamUtils = new SteamUtils();
-
-            var saveFilePath = context.Args.Positional.Any() ? context.Args.Positional.First() : GetSaveFilePath(steamUtils);
-            var saveFile = new SaveFile(saveFilePath);
-
             if (context.Args.IsListUnknownMaps)
             {
-                ListUnknownMaps(context, saveFile);
+                ListUnknownMaps(context);
                 return;
             }
 
             if (context.Args.IsListSessions)
             {
-                ListallSessions(saveFile, context);
+                ListallSessions(context);
                 return;
             }
 
             if (context.Args.IsTreeDump)
             {
-                PrintTreeDump(context, saveFile);
+                PrintTreeDump(context);
                 return;
             }
 
-            var sessions = GetPlayedSessions(saveFile)
-                .Select(x => SessionCount.FromDictKvp(x, context.HeistDb))
-                .GroupBy(x => x.Heist.Key, x => x)
-                .ToDictionary(x => x.Key, x => x.GroupBy(y => y.Difficulty, y => y)
-                                                .ToDictionary(y => y.Key, y => y.ToList()));
-
-            context.Formatter.Begin();
-
-            ShowSessionsPerVillain(context, sessions, Villain.Unknown);
-            ShowSessionsPerVillain(context, sessions, Villain.Bain);
-            ShowSessionsPerVillain(context, sessions, Villain.Classics);
-            ShowSessionsPerVillain(context, sessions, Villain.Events);
-            ShowSessionsPerVillain(context, sessions, Villain.Hector);
-            ShowSessionsPerVillain(context, sessions, Villain.Jimmy);
-            ShowSessionsPerVillain(context, sessions, Villain.Locke);
-            ShowSessionsPerVillain(context, sessions, Villain.TheButcher);
-            ShowSessionsPerVillain(context, sessions, Villain.TheDentist);
-            ShowSessionsPerVillain(context, sessions, Villain.TheElephant);
-            ShowSessionsPerVillain(context, sessions, Villain.Vlad);
-
-            context.Formatter.End();
+            ICallable callable = new ListHeistsAction();
+            callable.Run(context);
         }
 
-        private static void PrintTreeDump(Context context, SaveFile saveFile)
+        private static void PrintTreeDump(Context context)
         {
-            PrintTreeDump(context, saveFile.GameData, depth: 0);
+            PrintTreeDump(context, context.SaveFile.GameData, depth: 0);
         }
 
         private static void PrintTreeDump(Context context, Dictionary<object, object> saveFile, int depth)
@@ -116,54 +95,16 @@ namespace PayDay2SaveView
             return new ConsoleFormatter();
         }
 
-        private static void ShowSessionsPerVillain(Context context, Dictionary<string, Dictionary<Difficulty, List<SessionCount>>> sessions, Villain villain)
+        private static void ListallSessions(Context context)
         {
-            var heistsToList = GetAllJobsFromHeistDbAndSession(context, sessions)
-                .Where(x => x.Value.IsAvailable)
-                .Where(x => !(context.Args.IsHideDlc && x.Value.IsDlc))
-                .Where(x => x.Value.Villain == villain)
-                .ToList();
-
-            if (!heistsToList.Any())
-                return;
-
-            context.Formatter.WriteVillainBegin(villain);
-
-            foreach (var pair in heistsToList.OrderBy(x => x.Value.Name))
-            {
-                var jobs = sessions.ContainsKey(pair.Key) ? sessions[pair.Key] : null;
-                var heist = pair.Value;
-
-                PrintCountForDifficulty(Difficulty.Normal, jobs, heist, context);
-                PrintCountForDifficulty(Difficulty.Hard, jobs, heist, context);
-                PrintCountForDifficulty(Difficulty.Overkill, jobs, heist, context);
-                PrintCountForDifficulty(Difficulty.Overkill145, jobs, heist, context);
-                PrintCountForDifficulty(Difficulty.EasyWish, jobs, heist, context);
-                PrintCountForDifficulty(Difficulty.Overkill290, jobs, heist, context);
-                PrintCountForDifficulty(Difficulty.SmWish, jobs, heist, context);
-                context.Formatter.WriteHeistName(heist);
-                context.Formatter.WriteHeistVillain(heist.Villain);
-                context.Formatter.WriteHeistIsInDlc(heist.IsDlc);
-                context.Formatter.WriteHeistEnd();
-            }
-        }
-
-        private static IEnumerable<KeyValuePair<string, Heist>> GetAllJobsFromHeistDbAndSession(Context context, Dictionary<string, Dictionary<Difficulty, List<SessionCount>>> sessions)
-        {
-            var allHeistsInSessions = sessions.Keys.ToDictionary(x => x, x => context.HeistDb.GetHeistFromNameKey(x));
-            return HeistDb.JobNames.Union(allHeistsInSessions);
-        }
-
-        private static void ListallSessions(SaveFile saveFile, Context context)
-        {
-            var sessions = GetPlayedSessions(saveFile);
+            var sessions = GetPlayedSessions(context.SaveFile);
             foreach (var session in sessions)
                 context.Formatter.WriteRawSession(session);
         }
 
-        private static void ListUnknownMaps(Context context, SaveFile saveFile)
+        private static void ListUnknownMaps(Context context)
         {
-            var sessions = GetPlayedSessions(saveFile);
+            var sessions = GetPlayedSessions(context.SaveFile);
             var counters = sessions.Select(kvp => SessionCount.FromDictKvp(kvp, context.HeistDb));
             ISet<string> allKeys = new SortedSet<string>(counters.Select(x => x.Heist.Key));
 
@@ -175,19 +116,6 @@ namespace PayDay2SaveView
             foreach (var unknownKey in allKeys.Except(allKnwonKeys))
                 context.Formatter.UnknownKeyRaw(unknownKey);
             context.Formatter.UnknownKeysEnd();
-        }
-
-        private static void PrintCountForDifficulty(Difficulty difficulty, IDictionary<Difficulty, List<SessionCount>> sessionsByDifficulty, Heist heist, Context context)
-        {
-            var count = GetCountForDifficulty(difficulty, sessionsByDifficulty);
-            context.Formatter.WriteCounter(count, difficulty, heist);
-        }
-
-        private static int GetCountForDifficulty(Difficulty difficulty, IDictionary<Difficulty, List<SessionCount>> sessionsByDifficulty)
-        {
-            if (!sessionsByDifficulty.ContainsKey(difficulty)) return 0;
-            var completedSessions = sessionsByDifficulty[difficulty].FirstOrDefault(x => x.SessionState == SessionState.Completed);
-            return completedSessions?.Count ?? 0;
         }
 
         private static Dictionary<object, object> GetPlayedSessions(SaveFile saveFile)
@@ -255,5 +183,6 @@ namespace PayDay2SaveView
         public HeistDb HeistDb { set; get; }
         public CmdLineHelper Args { get; set; }
         public IFormatter Formatter { get; set; }
+        public SaveFile SaveFile { get; set; }
     }
 }
