@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using PaydaySaveEditor.PD2;
 
 namespace PayDay2SaveView
 {
@@ -8,7 +7,7 @@ namespace PayDay2SaveView
     {
         public void Run(Context context)
         {
-            var sessions = GetPlayedSessions(context.SaveFile)
+            var sessions = context.SaveFile.GetPlayedSessions()
                 .Select(x => SessionCount.FromDictKvp(x, context.HeistDb))
                 .GroupBy(x => x.Heist.Key, x => x)
                 .ToDictionary(x => x.Key, x => x.GroupBy(y => y.Difficulty, y => y)
@@ -80,20 +79,6 @@ namespace PayDay2SaveView
                 context.Formatter.WriteHeistIsInDlc(heist.IsDlc);
                 context.Formatter.WriteHeistEnd();
             }
-        }
-
-        private static Dictionary<object, object> GetPlayedSessions(SaveFile saveFile)
-        {
-            var gameData = saveFile.GameData;
-            var statisticsManager = (Dictionary<object, object>)gameData["StatisticsManager"];
-            var sessions = (Dictionary<object, object>)statisticsManager["sessions"];
-            var jobs = (Dictionary<object, object>)sessions["jobs"];
-#if DEBUG
-            jobs["foo_normal_completed"] = 1;
-            jobs["foo_hard_completed"] = 23;
-            jobs["bar_sm_wish_started"] = 3;
-#endif
-            return jobs;
         }
     }
 }
