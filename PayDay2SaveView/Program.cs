@@ -30,24 +30,19 @@ namespace PayDay2SaveView
                 return;
             }
 
-            if (context.Args.IsListSessions)
-            {
-                ListallSessions(context);
-                return;
-            }
-
             if (context.Args.IsTreeDump)
             {
                 PrintTreeDump(context);
                 return;
             }
 
-            ICallable callable = GetCallable(context);
-            callable.Run(context);
+            GetCallable(context).Run(context);
         }
 
-        private static ListHeistsAction GetCallable(Context context)
+        private static ICallable GetCallable(Context context)
         {
+            if(context.Args.IsListSessions)
+                return new ListSessionsAction();
             return new ListHeistsAction();
         }
 
@@ -92,13 +87,6 @@ namespace PayDay2SaveView
             if (cmdLineHelper.IsXls)
                 return new XlsFriendlyFormatter();
             return new ConsoleFormatter();
-        }
-
-        private static void ListallSessions(Context context)
-        {
-            var sessions = context.SaveFile.GetPlayedSessions();
-            foreach (var session in sessions)
-                context.Formatter.WriteRawSession(session);
         }
 
         private static string GetSaveFilePath(SteamUtils steamUtils)
