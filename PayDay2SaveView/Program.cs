@@ -44,6 +44,12 @@ namespace PayDay2SaveView
                 return;
             }
 
+            if (context.Args.IsTreeDump)
+            {
+                PrintTreeDump(context, saveFile);
+                return;
+            }
+
             var sessions = GetPlayedSessions(saveFile)
                 .Select(x => SessionCount.FromDictKvp(x, context.HeistDb))
                 .GroupBy(x => x.Heist.Key, x => x)
@@ -65,6 +71,42 @@ namespace PayDay2SaveView
             ShowSessionsPerVillain(context, sessions, Villain.Vlad);
 
             context.Formatter.End();
+        }
+
+        private static void PrintTreeDump(Context context, SaveFile saveFile)
+        {
+            PrintTreeDump(context, saveFile.GameData, depth: 0);
+        }
+
+        private static void PrintTreeDump(Context context, Dictionary<object, object> saveFile, int depth)
+        {
+            var entries = saveFile
+                .OrderBy(x => IsGameDataDict(x.Value))
+                .ThenBy(x => x.Key.ToString());
+
+            foreach (var kv in entries)
+            {
+                if (depth > 0)
+                {
+                    var padding = string.Concat(new string(' ', depth * 2), "- ");
+                    Console.Write(padding);
+                }
+
+                if (IsGameDataDict(kv.Value))
+                {
+                    Console.WriteLine($"{kv.Key}:");
+                    PrintTreeDump(context, (Dictionary<object, object>)kv.Value, depth + 1);
+                }
+                else
+                {
+                    Console.WriteLine($"{kv.Key}: {kv.Value}");
+                }
+            }
+        }
+
+        private static bool IsGameDataDict(object x)
+        {
+            return x is Dictionary<object, object>;
         }
 
         private static IFormatter ChooseFormatter(CmdLineHelper cmdLineHelper)

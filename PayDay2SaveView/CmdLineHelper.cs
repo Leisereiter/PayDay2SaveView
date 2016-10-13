@@ -25,6 +25,9 @@ namespace PayDay2SaveView
         [Argument("xls", "Excel-freundliche Ausgabe, falls verfügbar.")]
         public bool IsXls { get; private set; }
 
+        [Argument("tree-dump", "Gibt das kompletet Savefile als Baum aus")]
+        public bool IsTreeDump { get; private set; }
+
         public IList<string> Positional { get; }
 
         private CmdLineHelper()
