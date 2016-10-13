@@ -13,6 +13,8 @@ namespace PayDay2SaveView
         void WriteRawSession(KeyValuePair<object, object> session);
         void UnknownKeyRaw(string unknownKey);
         void UnknownKeysEnd();
+        void WriteHeistVillain(Villain villain);
+        void WriteHeistEnd();
     }
 
     public class ConsoleFormatter : IFormatter
@@ -38,6 +40,15 @@ namespace PayDay2SaveView
         {
             Console.Write("  ");
             FormatHeistName(heist);
+        }
+
+        public void WriteHeistVillain(Villain villain)
+        {
+            // Wird nicht vom ConsoleFormatter ausgegeben
+        }
+
+        public void WriteHeistEnd()
+        {
             Console.WriteLine();
         }
 

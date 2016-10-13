@@ -31,7 +31,17 @@ namespace PayDay2SaveView
 
         public void WriteHeistName(Heist heist)
         {
-            Console.WriteLine('"' + heist.Name + '"');
+            Console.Write(XmlFriendly(heist.Name).PadRight(25));
+        }
+
+        public void WriteHeistVillain(Villain villain)
+        {
+            Console.Write(XmlFriendly(EnumUtils.GetString(villain)).PadRight(17));
+        }
+
+        public void WriteHeistEnd()
+        {
+            Console.WriteLine();
         }
 
         public void WriteCounter(int count, Difficulty difficulty, Heist heist)
@@ -52,6 +62,11 @@ namespace PayDay2SaveView
         public void UnknownKeysEnd()
         {
 
+        }
+
+        private static string XmlFriendly(string s)
+        {
+            return string.Concat('"', s, '"');
         }
     }
 }
