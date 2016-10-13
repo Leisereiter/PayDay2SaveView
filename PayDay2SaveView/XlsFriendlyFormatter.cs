@@ -10,10 +10,10 @@ namespace PayDay2SaveView
             Console.Write("\"Normal\",");
             Console.Write("\"Hard\",");
             Console.Write("\"Very Hard\",");
-            Console.Write("\"OK\",");
-            Console.Write("\"EW\",");
-            Console.Write("\"DW\",");
-            Console.Write("\"SM\",");
+            Console.Write("\"Overkill\",");
+            Console.Write("\"Mayhem\",");
+            Console.Write("\"Death Wish\",");
+            Console.Write("\"One Down\",");
             Console.Write("\"Heist\",");
             Console.Write("\"Villain\",");
             Console.Write("\"DLC\"");
