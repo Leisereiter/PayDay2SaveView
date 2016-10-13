@@ -5,19 +5,17 @@ namespace PayDay2SaveView
 {
     public class XlsFriendlyFormatter : IFormatter
     {
-        private int _counterColumnWidth = 11;
-
         public void Begin()
         {
-            Console.Write("\"Normal\"".PadLeft(_counterColumnWidth) + " ");
-            Console.Write("\"Hard\"".PadLeft(_counterColumnWidth) + " ");
-            Console.Write("\"Very Hard\"".PadLeft(_counterColumnWidth) + " ");
-            Console.Write("\"OK\"".PadLeft(_counterColumnWidth) + " ");
-            Console.Write("\"EW\"".PadLeft(_counterColumnWidth) + " ");
-            Console.Write("\"DW\"".PadLeft(_counterColumnWidth) + " ");
-            Console.Write("\"SM\"".PadLeft(_counterColumnWidth) + " ");
-            Console.Write("\"Heist\" ");
-            Console.Write("\"Villain\" ");
+            Console.Write("\"Normal\",");
+            Console.Write("\"Hard\",");
+            Console.Write("\"Very Hard\",");
+            Console.Write("\"OK\",");
+            Console.Write("\"EW\",");
+            Console.Write("\"DW\",");
+            Console.Write("\"SM\",");
+            Console.Write("\"Heist\",");
+            Console.Write("\"Villain\",");
             Console.Write("\"DLC\"");
             Console.WriteLine();
         }
@@ -34,18 +32,18 @@ namespace PayDay2SaveView
 
         public void WriteHeistName(Heist heist)
         {
-            Console.Write(XlsFriendly(heist.Name).PadRight(25));
+            Console.Write(XlsFriendly(heist.Name) + ',');
         }
 
         public void WriteHeistIsInDlc(bool inDlc)
         {
             var res = XlsFriendly(inDlc);
-            Console.WriteLine(" " + res.PadLeft(5));
+            Console.Write(res);
         }
 
         public void WriteHeistVillain(Villain villain)
         {
-            Console.Write(XlsFriendly(EnumUtils.GetString(villain)).PadRight(17));
+            Console.Write(XlsFriendly(EnumUtils.GetString(villain)) + ',');
         }
 
         public void WriteHeistEnd()
@@ -55,7 +53,7 @@ namespace PayDay2SaveView
 
         public void WriteCounter(int count, Difficulty difficulty, Heist heist)
         {
-            Console.Write($"{count.ToString().PadLeft(_counterColumnWidth)} ");
+            Console.Write($"{count},");
         }
 
         public void WriteRawSession(KeyValuePair<object, object> session)
