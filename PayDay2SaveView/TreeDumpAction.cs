@@ -8,10 +8,10 @@ namespace PayDay2SaveView
     {
         public void Run(Context context)
         {
-            PrintTreeDump(context, context.SaveFile.GameData, depth: 0);
+            PrintTreeDump(context.SaveFile.GameData, depth: 0);
         }
 
-        private static void PrintTreeDump(Context context, Dictionary<object, object> saveFile, int depth)
+        private static void PrintTreeDump(Dictionary<object, object> saveFile, int depth)
         {
             var entries = saveFile
                 .OrderBy(x => IsGameDataDict(x.Value))
@@ -28,7 +28,7 @@ namespace PayDay2SaveView
                 if (IsGameDataDict(kv.Value))
                 {
                     Console.WriteLine($"{kv.Key}:");
-                    PrintTreeDump(context, (Dictionary<object, object>)kv.Value, depth + 1);
+                    PrintTreeDump((Dictionary<object, object>)kv.Value, depth + 1);
                 }
                 else
                 {
