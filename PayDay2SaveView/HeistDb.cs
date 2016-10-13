@@ -98,6 +98,7 @@ namespace PayDay2SaveView
         {
             new Heist("safehouse", "Safehouse", Villain.None),
             new Heist("chill", "Safehouse II", Villain.None),
+            new Heist("chill_combat", "Safehouse Defense", Villain.None),
 
             // Tutorial
             new Heist("short1", "Tutorial I", Villain.None, isAvailable:false),
