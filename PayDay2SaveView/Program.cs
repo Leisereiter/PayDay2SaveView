@@ -42,8 +42,13 @@ namespace PayDay2SaveView
                 return;
             }
 
-            ICallable callable = new ListHeistsAction();
+            ICallable callable = GetCallable(context);
             callable.Run(context);
+        }
+
+        private static ListHeistsAction GetCallable(Context context)
+        {
+            return new ListHeistsAction();
         }
 
         private static void PrintTreeDump(Context context)
