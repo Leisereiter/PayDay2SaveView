@@ -10,17 +10,26 @@ namespace PayDay2SaveView.Formatter
 
         public override void Write()
         {
-            Console.Write(IsAchieved ? "DONE" : "TODO");
-            Console.Write($" {DisplayName}");
+            ConsoleUtils.WriteInColor(() => Console.Write(IsAchieved ? "DONE" : "TODO"), GetIsAchievedColor(IsAchieved));
+            ConsoleUtils.WriteInColor(() => Console.Write($" {DisplayName}"), ConsoleColor.White);
 
             if (!string.IsNullOrWhiteSpace(HeistName))
-                Console.Write($" | {HeistName}");
+            {
+                Console.Write(" | ");
+                ConsoleUtils.WriteInColor(() => Console.Write(HeistName), ConsoleColor.Red);
+            }
 
             if (Villain != Villain.None)
-                Console.Write($" | {Villain}");
+            {
+                Console.Write(" | ");
+                ConsoleUtils.WriteInColor(() => Console.Write(EnumUtils.GetString(Villain)), ConsoleColor.Yellow);
+            }
 
             if (Difficulty.HasValue)
-                Console.Write($" | {Difficulty.Value}");
+            {
+                Console.Write(" | ");
+                ConsoleUtils.WriteInColor(() => Console.Write(EnumUtils.GetString(Difficulty.Value)), ConsoleColor.Magenta);
+            }
 
             if (!string.IsNullOrWhiteSpace(Description))
             {
@@ -29,6 +38,11 @@ namespace PayDay2SaveView.Formatter
             }
 
             Console.WriteLine();
+        }
+
+        private ConsoleColor GetIsAchievedColor(bool isAchieved)
+        {
+            return isAchieved ? ConsoleColor.DarkGreen : ConsoleColor.Cyan;
         }
     }
 }
