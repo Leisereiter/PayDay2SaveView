@@ -34,12 +34,12 @@ namespace PayDay2SaveView
 
         public void WriteHeistName(Heist heist)
         {
-            Console.Write(XlsFriendlyUtils.Stringify(heist.Name) + ',');
+            Console.Write(XlsFriendlyUtils.StringifyString(heist.Name) + ',');
         }
 
         public void WriteHeistIsInDlc(bool inDlc)
         {
-            var res = XlsFriendlyUtils.Stringify(inDlc);
+            var res = XlsFriendlyUtils.StringifyBool(inDlc);
             Console.Write(res);
         }
 
@@ -50,7 +50,7 @@ namespace PayDay2SaveView
 
         public void WriteHeistVillain(Villain villain)
         {
-            Console.Write(XlsFriendlyUtils.Stringify(EnumUtils.GetString(villain)) + ',');
+            Console.Write(XlsFriendlyUtils.StringifyString(EnumUtils.GetString(villain)) + ',');
         }
 
         public void WriteHeistEnd()

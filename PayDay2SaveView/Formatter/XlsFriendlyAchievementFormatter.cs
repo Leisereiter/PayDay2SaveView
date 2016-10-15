@@ -1,4 +1,6 @@
 using System;
+using System.Linq;
+using PayDay2SaveView.Utils;
 
 namespace PayDay2SaveView.Formatter
 {
@@ -6,8 +8,8 @@ namespace PayDay2SaveView.Formatter
     {
         public override void Write()
         {
-            string[] values = { IsAchieved.ToString(), DisplayName, Description };
-            Console.WriteLine(string.Join(",", values));
+            object[] values = { IsAchieved, DisplayName, Description };
+            Console.WriteLine(string.Join(",", values.Select(XlsFriendlyUtils.Stringify)));
         }
     }
 }
