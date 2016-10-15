@@ -69,6 +69,7 @@
     <Compile Include="Formatter\ConsoleFormatter.cs" />
     <Compile Include="Formatter\IAchievementFormatter.cs" />
     <Compile Include="Formatter\XlsFriendlyAchievementFormatter.cs" />
+    <Compile Include="Utils\XlsFriendlyUtils.cs" />
     <Compile Include="Utils\EnumUtils.cs" />
     <Compile Include="Heist.cs" />
     <Compile Include="HeistDb.cs" />

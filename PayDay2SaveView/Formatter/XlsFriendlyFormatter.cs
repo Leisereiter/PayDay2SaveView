@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using PayDay2SaveView.Formatter;
+using PayDay2SaveView.Utils;
 
 namespace PayDay2SaveView
 {
@@ -33,12 +34,12 @@ namespace PayDay2SaveView
 
         public void WriteHeistName(Heist heist)
         {
-            Console.Write(XlsFriendly(heist.Name) + ',');
+            Console.Write(XlsFriendlyUtils.Stringify(heist.Name) + ',');
         }
 
         public void WriteHeistIsInDlc(bool inDlc)
         {
-            var res = XlsFriendly(inDlc);
+            var res = XlsFriendlyUtils.Stringify(inDlc);
             Console.Write(res);
         }
 
@@ -49,7 +50,7 @@ namespace PayDay2SaveView
 
         public void WriteHeistVillain(Villain villain)
         {
-            Console.Write(XlsFriendly(EnumUtils.GetString(villain)) + ',');
+            Console.Write(XlsFriendlyUtils.Stringify(EnumUtils.GetString(villain)) + ',');
         }
 
         public void WriteHeistEnd()
@@ -75,16 +76,6 @@ namespace PayDay2SaveView
         public void UnknownKeysEnd()
         {
 
-        }
-
-        private static string XlsFriendly(string s)
-        {
-            return string.Concat('"', s, '"');
-        }
-
-        private static string XlsFriendly(bool x)
-        {
-            return x ? "TRUE" : "FALSE";
         }
     }
 }
