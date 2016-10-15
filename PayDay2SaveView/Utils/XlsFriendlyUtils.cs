@@ -1,5 +1,3 @@
-using System;
-
 namespace PayDay2SaveView.Utils
 {
     public static class XlsFriendlyUtils

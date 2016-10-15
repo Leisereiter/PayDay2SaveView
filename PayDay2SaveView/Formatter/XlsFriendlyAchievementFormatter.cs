@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 using System.Linq;
 using PayDay2SaveView.Utils;
