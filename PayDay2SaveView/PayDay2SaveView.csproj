@@ -65,7 +65,7 @@
     <Compile Include="ArgumentAttribute.cs" />
     <Compile Include="CmdLineHelper.cs" />
     <Compile Include="ConsoleFormatter.cs" />
-    <Compile Include="EnumUtils.cs" />
+    <Compile Include="Utils\EnumUtils.cs" />
     <Compile Include="Heist.cs" />
     <Compile Include="HeistDb.cs" />
     <Compile Include="ICallable.cs" />
@@ -75,12 +75,12 @@
     <Compile Include="SaveFileExtensions.cs" />
     <Compile Include="SessionCount.cs" />
     <Compile Include="SessionKeyParser.cs" />
-    <Compile Include="SteamUtils.cs" />
+    <Compile Include="Utils\SteamUtils.cs" />
     <Compile Include="Steam\SteamFacade.cs" />
-    <Compile Include="StringValue.cs" />
+    <Compile Include="Utils\StringValue.cs" />
     <Compile Include="ListHeistsAction.cs" />
     <Compile Include="TreeDumpAction.cs" />
-    <Compile Include="ValueHelper.cs" />
+    <Compile Include="Utils\ValueHelper.cs" />
     <Compile Include="XlsFriendlyFormatter.cs" />
   </ItemGroup>
   <ItemGroup>

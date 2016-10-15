@@ -3,5 +3,5 @@ set "PATH=%PATH%;C:\Program Files\7-Zip"
 call vcvars64
 msbuild PayDay2SaveView.sln /p:Configuration=Release /p:Platform="Any CPU"
 cd PayDay2SaveView\bin\Release\
-7z a D:\LeOwnCloud\PD2SaveView.7z PayDay2SaveView.exe PaydaySaveEditor.dll
+7z a D:\LeOwnCloud\PD2SaveView.7z PayDay2SaveView.exe *.dll
 pause
