@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace PayDay2SaveView
 {
@@ -24,6 +26,12 @@ namespace PayDay2SaveView
                 default:
                     throw new ArgumentOutOfRangeException(nameof(villain), villain, null);
             }
+        }
+
+        public static IEnumerable<KeyValuePair<string, Villain>> GetAllVillainsByName()
+        {
+            var villains = Enum.GetValues(typeof(Villain)).Cast<Villain>();
+            return villains.Select(x => new KeyValuePair<string, Villain>(GetString(x), x));
         }
     }
 }
