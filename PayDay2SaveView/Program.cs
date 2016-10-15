@@ -49,7 +49,13 @@ namespace PayDay2SaveView
         private static IFormatter ChooseFormatter(CmdLineHelper cmdLineHelper)
         {
             if (cmdLineHelper.IsXls)
-                return new XlsFriendlyFormatter();
+            {
+                const string filePath = "output.csv";
+                var stream = File.OpenWrite(filePath);
+                Console.WriteLine($"Output in {filePath}");
+                return new XlsFriendlyFormatter(new StreamWriter(stream));
+            }
+
             return new ConsoleFormatter();
         }
 

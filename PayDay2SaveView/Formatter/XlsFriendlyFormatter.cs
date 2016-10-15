@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.IO;
 using PayDay2SaveView.Formatter;
 using PayDay2SaveView.Utils;
 
@@ -7,19 +7,26 @@ namespace PayDay2SaveView
 {
     public class XlsFriendlyFormatter : IFormatter
     {
+        private TextWriter Writer { get; set; }
+
+        public XlsFriendlyFormatter(TextWriter writer)
+        {
+            Writer = writer;
+        }
+
         public void Begin()
         {
-            Console.Write("\"Normal\",");
-            Console.Write("\"Hard\",");
-            Console.Write("\"Very Hard\",");
-            Console.Write("\"Overkill\",");
-            Console.Write("\"Mayhem\",");
-            Console.Write("\"Death Wish\",");
-            Console.Write("\"One Down\",");
-            Console.Write("\"Heist\",");
-            Console.Write("\"Villain\",");
-            Console.Write("\"DLC\"");
-            Console.WriteLine();
+            Writer.Write("\"Normal\",");
+            Writer.Write("\"Hard\",");
+            Writer.Write("\"Very Hard\",");
+            Writer.Write("\"Overkill\",");
+            Writer.Write("\"Mayhem\",");
+            Writer.Write("\"Death Wish\",");
+            Writer.Write("\"One Down\",");
+            Writer.Write("\"Heist\",");
+            Writer.Write("\"Villain\",");
+            Writer.Write("\"DLC\"");
+            Writer.WriteLine();
         }
 
         public void WriteVillainBegin(Villain villain)
@@ -34,38 +41,38 @@ namespace PayDay2SaveView
 
         public void WriteHeistName(Heist heist)
         {
-            Console.Write(XlsFriendlyUtils.StringifyString(heist.Name) + ',');
+            Writer.Write(XlsFriendlyUtils.StringifyString(heist.Name) + ',');
         }
 
         public void WriteHeistIsInDlc(bool inDlc)
         {
             var res = XlsFriendlyUtils.StringifyBool(inDlc);
-            Console.Write(res);
+            Writer.Write(res);
         }
 
         public IAchievementFormatter Achievement()
         {
-            return new XlsFriendlyAchievementFormatter();
+            return new XlsFriendlyAchievementFormatter(Writer);
         }
 
         public void AchievementsBefore()
         {
-            new XlsFriendlyAchievementFormatter().WriteHeader();
+            new XlsFriendlyAchievementFormatter(Writer).WriteHeader();
         }
 
         public void WriteHeistVillain(Villain villain)
         {
-            Console.Write(XlsFriendlyUtils.StringifyString(EnumUtils.GetString(villain)) + ',');
+            Writer.Write(XlsFriendlyUtils.StringifyString(EnumUtils.GetString(villain)) + ',');
         }
 
         public void WriteHeistEnd()
         {
-            Console.WriteLine();
+            Writer.WriteLine();
         }
 
         public void WriteCounter(int count, Difficulty difficulty, Heist heist)
         {
-            Console.Write($"{count},");
+            Writer.Write($"{count},");
         }
 
         public void WriteRawSession(KeyValuePair<object, object> session)
