@@ -43,6 +43,9 @@ namespace PayDay2SaveView.Actions
 
         private static Heist GuessHeistFromDescription(string description)
         {
+            foreach (var heist in HeistDb.JobNames)
+                if (description.Contains(heist.Value.Name))
+                    return heist.Value;
             return new UnknownHeist("None");
         }
 
