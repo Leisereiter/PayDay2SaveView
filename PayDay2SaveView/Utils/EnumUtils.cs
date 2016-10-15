@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -37,9 +38,9 @@ namespace PayDay2SaveView
                 case Difficulty.Hard: return "Hard";
                 case Difficulty.Overkill: return "Very Hard";
                 case Difficulty.Overkill145: return "Overkill";
-                case Difficulty.EasyWish: return "Meyham";
+                case Difficulty.EasyWish: return "Mayhem";
                 case Difficulty.Overkill290: return "Death Wish";
-                case Difficulty.SmWish: return "One Shot";
+                case Difficulty.SmWish: return "One Down";
 
                 default:
                     throw new ArgumentOutOfRangeException(nameof(difficulty), difficulty, null);
@@ -50,6 +51,12 @@ namespace PayDay2SaveView
         {
             var villains = Enum.GetValues(typeof(Villain)).Cast<Villain>();
             return villains.Select(x => new KeyValuePair<string, Villain>(GetString(x), x));
+        }
+
+        public static IEnumerable<KeyValuePair<string, Difficulty>> GetAllDifficultiesByName()
+        {
+            var difficulties = Enum.GetValues(typeof(Difficulty)).Cast<Difficulty>();
+            return difficulties.Select(x => new KeyValuePair<string, Difficulty>(GetString(x), x));
         }
     }
 }

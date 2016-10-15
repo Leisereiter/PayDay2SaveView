@@ -19,6 +19,9 @@ namespace PayDay2SaveView.Formatter
             if (Villain != Villain.None)
                 Console.WriteLine($"Villain: {Villain}");
 
+            if (Difficulty.HasValue)
+                Console.WriteLine($"Difficulty: {Difficulty.Value}");
+
             if (!string.IsNullOrWhiteSpace(Description))
                 Console.WriteLine($"Description: {Description}");
 

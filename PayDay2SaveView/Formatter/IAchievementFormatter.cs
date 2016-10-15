@@ -7,6 +7,7 @@ namespace PayDay2SaveView
         IAchievementFormatter WithIsAchieved(bool achieved);
         IAchievementFormatter WithHeist(string heist);
         IAchievementFormatter WithVillain(Villain villain);
+        IAchievementFormatter WithDifficulty(Difficulty? difficulty);
 
         void WriteHeader();
         void Write();

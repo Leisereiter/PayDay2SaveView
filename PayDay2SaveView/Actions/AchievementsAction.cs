@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
+using System.Globalization;
 using System.Linq;
 using SteamWebAPI2.Interfaces;
 
@@ -33,8 +35,23 @@ namespace PayDay2SaveView.Actions
                     .WithIsAchieved(achieved.Contains(result.Name))
                     .WithHeist(heist.Name)
                     .WithVillain(villain)
+                    .WithDifficulty(GuessDifficultyFromDescription(description))
                     .Write();
             }
+        }
+
+        private static Difficulty? GuessDifficultyFromDescription(string description)
+        {
+            var comparer = StringComparer.Create(CultureInfo.CurrentCulture, ignoreCase: true);
+
+            foreach (var diff in EnumUtils.GetAllDifficultiesByName())
+            {
+                var pos = description.IndexOf(diff.Key, StringComparison.CurrentCultureIgnoreCase);
+                if (pos >= 0)
+                    return diff.Value;
+            }
+
+            return null;
         }
 
         private static Villain GuessVillainFromDescription(string description)

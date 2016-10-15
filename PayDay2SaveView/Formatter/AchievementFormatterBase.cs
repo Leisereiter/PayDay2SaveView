@@ -9,6 +9,7 @@ namespace PayDay2SaveView.Formatter
         protected bool IsAchieved = false;
         protected string HeistName = string.Empty;
         protected Villain Villain = Villain.None;
+        protected Difficulty? Difficulty;
 
         public IAchievementFormatter WithDisplayName(string displayName)
         {
@@ -37,6 +38,12 @@ namespace PayDay2SaveView.Formatter
         public IAchievementFormatter WithVillain(Villain villain)
         {
             Villain = villain;
+            return this;
+        }
+
+        public IAchievementFormatter WithDifficulty(Difficulty? difficulty)
+        {
+            Difficulty = difficulty;
             return this;
         }
 

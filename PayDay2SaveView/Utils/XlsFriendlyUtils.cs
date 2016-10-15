@@ -9,6 +9,7 @@ namespace PayDay2SaveView.Utils
             if (obj is bool) return StringifyBool((bool)obj);
             if (obj is Villain) return StringifyString(EnumUtils.GetString((Villain)obj));
             if (obj is Difficulty) return StringifyString(EnumUtils.GetString((Difficulty)obj));
+            if (obj == null) return StringifyString(string.Empty);
             return StringifyString(obj.ToString());
         }
 
