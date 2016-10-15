@@ -64,7 +64,7 @@
     <Compile Include="Actions\AchievementsAction.cs" />
     <Compile Include="ArgumentAttribute.cs" />
     <Compile Include="CmdLineHelper.cs" />
-    <Compile Include="ConsoleFormatter.cs" />
+    <Compile Include="Formatter\ConsoleFormatter.cs" />
     <Compile Include="Utils\EnumUtils.cs" />
     <Compile Include="Heist.cs" />
     <Compile Include="HeistDb.cs" />
@@ -81,7 +81,7 @@
     <Compile Include="ListHeistsAction.cs" />
     <Compile Include="TreeDumpAction.cs" />
     <Compile Include="Utils\ValueHelper.cs" />
-    <Compile Include="XlsFriendlyFormatter.cs" />
+    <Compile Include="Formatter\XlsFriendlyFormatter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
