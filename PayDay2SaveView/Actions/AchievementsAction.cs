@@ -30,7 +30,7 @@ namespace PayDay2SaveView.Actions
                     .WithDisplayName(result.DisplayName)
                     .WithDescription(description)
                     .WithIsAchieved(achieved.Contains(result.Name))
-                    .WithHeist(GuessHeistFromDescription(description))
+                    .WithHeist(GuessHeistFromDescription(description).Name)
                     .WithVillain(GuessVillainFromDescription(description))
                     .Write();
             }
@@ -41,9 +41,9 @@ namespace PayDay2SaveView.Actions
             return Villain.None;
         }
 
-        private static string GuessHeistFromDescription(string description)
+        private static Heist GuessHeistFromDescription(string description)
         {
-            return string.Empty;
+            return new UnknownHeist("None");
         }
 
         private static ISet<string> GetAchievedApiNames(ISteamUserStats userStats, long playerSteamId)
