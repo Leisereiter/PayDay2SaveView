@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using SteamWebAPI2.Interfaces;
@@ -23,12 +24,22 @@ namespace PayDay2SaveView.Actions
 
             foreach (var result in gameStats.AvailableGameStats.Achievements)
             {
+                var description = result.Description;
+
+                var heist = GuessHeistFromDescription(description);
+
                 context.Formatter.Achievement()
                     .WithDisplayName(result.DisplayName)
-                    .WithDescription(result.Description)
+                    .WithDescription(description)
                     .WithIsAchieved(achieved.Contains(result.Name))
+                    .WithHeist(heist)
                     .Write();
             }
+        }
+
+        private string GuessHeistFromDescription(string description)
+        {
+            return string.Empty;
         }
 
         private static ISet<string> GetAchievedApiNames(ISteamUserStats userStats, long playerSteamId)

@@ -1,3 +1,5 @@
+using System;
+
 namespace PayDay2SaveView.Formatter
 {
     public abstract class AchievementFormatterBase : IAchievementFormatter
@@ -5,6 +7,8 @@ namespace PayDay2SaveView.Formatter
         protected string DisplayName = string.Empty;
         protected string Description = string.Empty;
         protected bool IsAchieved = false;
+        protected string HeistName = string.Empty;
+        protected Villain Villain = Villain.None;
 
         public IAchievementFormatter WithDisplayName(string displayName)
         {
@@ -21,6 +25,12 @@ namespace PayDay2SaveView.Formatter
         public IAchievementFormatter WithIsAchieved(bool achieved)
         {
             IsAchieved = achieved;
+            return this;
+        }
+
+        public IAchievementFormatter WithHeist(string heist)
+        {
+            HeistName = heist;
             return this;
         }
 

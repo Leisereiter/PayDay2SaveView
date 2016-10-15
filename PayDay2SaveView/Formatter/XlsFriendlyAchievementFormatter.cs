@@ -8,12 +8,12 @@ namespace PayDay2SaveView.Formatter
     {
         public override void WriteHeader()
         {
-            WriteLine("Achieved?", "Name", "Description");
+            WriteLine("Achieved?", "Name", "Heist", "Villain", "Description");
         }
 
         public override void Write()
         {
-            WriteLine(IsAchieved, DisplayName, Description);
+            WriteLine(IsAchieved, DisplayName, HeistName, Villain, Description);
         }
 
         private static void WriteLine(params object[] values)
