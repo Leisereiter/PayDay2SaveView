@@ -25,13 +25,15 @@ namespace PayDay2SaveView.Actions
             foreach (var result in gameStats.AvailableGameStats.Achievements)
             {
                 var description = result.Description;
+                var heist = GuessHeistFromDescription(description);
+                var villain = heist is UnknownHeist ? GuessVillainFromDescription(description) : heist.Villain;
 
                 context.Formatter.Achievement()
                     .WithDisplayName(result.DisplayName)
                     .WithDescription(description)
                     .WithIsAchieved(achieved.Contains(result.Name))
-                    .WithHeist(GuessHeistFromDescription(description).Name)
-                    .WithVillain(GuessVillainFromDescription(description))
+                    .WithHeist(heist.Name)
+                    .WithVillain(villain)
                     .Write();
             }
         }
