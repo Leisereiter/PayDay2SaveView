@@ -26,6 +26,7 @@ namespace PayDay2SaveView.Formatter
         private void WriteLine(params object[] values)
         {
             Writer.WriteLine(string.Join(",", values.Select(XlsFriendlyUtils.Stringify)));
+            Writer.Flush();
         }
     }
 }
