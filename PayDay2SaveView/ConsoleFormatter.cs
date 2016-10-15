@@ -16,6 +16,10 @@ namespace PayDay2SaveView
         void WriteHeistVillain(Villain villain);
         void WriteHeistEnd();
         void WriteHeistIsInDlc(bool inDlc);
+
+        void WriteAchievementName(string displayName);
+        void WriteAchievementDescription(string description);
+        void WriteAchievementEnd();
     }
 
     public class ConsoleFormatter : IFormatter
@@ -54,6 +58,21 @@ namespace PayDay2SaveView
         {
             if (inDlc)
                 WriteInColor(() => Console.Write(" (DLC)"), ConsoleColor.DarkYellow);
+        }
+
+        public void WriteAchievementName(string displayName)
+        {
+            WriteInColor(() => Console.WriteLine("# " + displayName), ConsoleColor.White);
+        }
+
+        public void WriteAchievementDescription(string description)
+        {
+            Console.WriteLine(description);
+        }
+
+        public void WriteAchievementEnd()
+        {
+            Console.WriteLine();
         }
 
         public void WriteHeistEnd()
@@ -125,7 +144,7 @@ namespace PayDay2SaveView
             action();
             Console.ForegroundColor = backup;
         }
-        
+
         #endregion
     }
 }

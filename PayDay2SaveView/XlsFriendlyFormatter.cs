@@ -41,6 +41,22 @@ namespace PayDay2SaveView
             Console.Write(res);
         }
 
+        public void WriteAchievementName(string displayName)
+        {
+            Console.Write($"{displayName},");
+        }
+
+        public void WriteAchievementDescription(string description)
+        {
+            Console.Write($"{description}");
+
+        }
+
+        public void WriteAchievementEnd()
+        {
+            Console.WriteLine();
+        }
+
         public void WriteHeistVillain(Villain villain)
         {
             Console.Write(XlsFriendly(EnumUtils.GetString(villain)) + ',');

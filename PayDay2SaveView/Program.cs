@@ -9,7 +9,7 @@ namespace PayDay2SaveView
 {
     public static class Program
     {
-        private const int Pd2SteamId = 218620;
+        public const int Pd2SteamId = 218620;
 
         public static void Main(string[] args)
         {
