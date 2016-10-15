@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace PayDay2SaveView
 {
@@ -17,10 +18,7 @@ namespace PayDay2SaveView
         void WriteHeistEnd();
         void WriteHeistIsInDlc(bool inDlc);
 
-        void WriteAchievementName(string displayName);
-        void WriteAchievementDescription(string description);
-        void WriteAchievementEnd();
-        void WriteAchievementAchieved(bool achieved);
+        IAchievementFormatter Achievement();
     }
 
     public class ConsoleFormatter : IFormatter
