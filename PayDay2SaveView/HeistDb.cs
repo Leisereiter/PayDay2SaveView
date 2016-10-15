@@ -125,7 +125,7 @@ namespace PayDay2SaveView
             new Heist("arm_hcm", "Transport: Downtown", Villain.Bain, isDlc:true),
             new Heist("arm_fac", "Transport: Harbor", Villain.Bain, isDlc:true),
             new Heist("arm_par", "Transport: Park", Villain.Bain, isDlc:true),
-            new Heist("arm_for", "Transport: Train Heist", Villain.Bain, isDlc:true),
+            new Heist("arm_for", "Transport: Train Heist", Villain.Bain, isStealthable:true, isDlc:true),
             new Heist("arm_und", "Transport: Underpass", Villain.Bain, isDlc:true),
 
             // Classics
