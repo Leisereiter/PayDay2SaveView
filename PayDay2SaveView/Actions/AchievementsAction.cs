@@ -40,6 +40,9 @@ namespace PayDay2SaveView.Actions
 
         private static Villain GuessVillainFromDescription(string description)
         {
+            foreach (var villain in EnumUtils.GetAllVillainsByName())
+                if (description.Contains(villain.Key))
+                    return villain.Value;
             return Villain.None;
         }
 

@@ -13,7 +13,8 @@ namespace PayDay2SaveView.Utils
 
         public static string StringifyString(string s)
         {
-            return string.Concat('"', s, '"');
+            var sanitized = s.Replace("\"", "\"\"");
+            return string.Concat('"', sanitized, '"');
         }
 
         public static string StringifyBool(bool x)
