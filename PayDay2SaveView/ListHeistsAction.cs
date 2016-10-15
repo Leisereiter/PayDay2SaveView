@@ -16,6 +16,7 @@ namespace PayDay2SaveView
             context.Formatter.Begin();
 
             ShowSessionsPerVillain(context, sessions, Villain.Unknown);
+            ShowSessionsPerVillain(context, sessions, Villain.None);
             ShowSessionsPerVillain(context, sessions, Villain.Bain);
             ShowSessionsPerVillain(context, sessions, Villain.Classics);
             ShowSessionsPerVillain(context, sessions, Villain.Events);
@@ -36,17 +37,17 @@ namespace PayDay2SaveView
             return HeistDb.JobNames.Union(allHeistsInSessions);
         }
 
-        private static int GetCountForDifficulty(Difficulty difficulty, IDictionary<Difficulty, List<SessionCount>> sessionsByDifficulty)
-        {
-            if (!sessionsByDifficulty.ContainsKey(difficulty)) return 0;
-            var completedSessions = sessionsByDifficulty[difficulty].FirstOrDefault(x => x.SessionState == SessionState.Completed);
-            return completedSessions?.Count ?? 0;
-        }
-
         private static void PrintCountForDifficulty(Difficulty difficulty, IDictionary<Difficulty, List<SessionCount>> sessionsByDifficulty, Heist heist, Context context)
         {
             var count = GetCountForDifficulty(difficulty, sessionsByDifficulty);
             context.Formatter.WriteCounter(count, difficulty, heist);
+        }
+
+        private static int GetCountForDifficulty(Difficulty difficulty, IDictionary<Difficulty, List<SessionCount>> sessionsByDifficulty)
+        {
+            if (sessionsByDifficulty == null || !sessionsByDifficulty.ContainsKey(difficulty)) return 0;
+            var completedSessions = sessionsByDifficulty[difficulty].FirstOrDefault(x => x.SessionState == SessionState.Completed);
+            return completedSessions?.Count ?? 0;
         }
 
         private static void ShowSessionsPerVillain(Context context, Dictionary<string, Dictionary<Difficulty, List<SessionCount>>> sessions, Villain villain)
