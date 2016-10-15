@@ -23,6 +23,13 @@ namespace PayDay2SaveView.Actions
             }
         }
 
+        private static ISet<string> GetAchievedApiNames(ISteamUserStats userStats, long playerSteamId)
+        {
+            var playerStats = userStats.GetPlayerAchievementsAsync(Program.Pd2SteamId, playerSteamId).Result;
+            var achieved = playerStats.Achievements.Where(x => x.Achieved == 1);
+            return new HashSet<string>(achieved.Select(x => x.APIName));
+        }
+
         private static string GetKey()
         {
             var encryptedKey = ConfigurationManager.AppSettings["SteamApiKey"];
