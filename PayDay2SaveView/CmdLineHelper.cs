@@ -25,6 +25,9 @@ namespace PayDay2SaveView
         [Argument("tree-dump", "Gibt das kompletet Savefile als Baum aus")]
         public bool IsTreeDump { get; private set; }
 
+        [Argument("achievements", "Gibt PD2-Errungenschaften aus")]
+        public bool IsAchievements { get; private set; }
+
         public IList<string> Positional { get; }
 
         private CmdLineHelper()

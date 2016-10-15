@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using PaydaySaveEditor.PD2;
+using PayDay2SaveView.Actions;
 
 namespace PayDay2SaveView
 {
@@ -39,6 +40,8 @@ namespace PayDay2SaveView
                 return new ListSessionsAction();
             if (context.Args.IsTreeDump)
                 return new TreeDumpAction();
+            if (context.Args.IsAchievements)
+                return new AchievementsAction();
 
             return new ListHeistsAction();
         }
