@@ -67,6 +67,7 @@
     <Compile Include="Formatter\AchievementFormatterBase.cs" />
     <Compile Include="Formatter\ConsoleAchievementFormatter.cs" />
     <Compile Include="Formatter\ConsoleFormatter.cs" />
+    <Compile Include="Formatter\ConsoleUtils.cs" />
     <Compile Include="Formatter\IAchievementFormatter.cs" />
     <Compile Include="Formatter\XlsFriendlyAchievementFormatter.cs" />
     <Compile Include="Utils\XlsFriendlyUtils.cs" />

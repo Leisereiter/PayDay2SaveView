@@ -46,7 +46,7 @@ namespace PayDay2SaveView
             Console.Write("  ");
             Console.Write(heist.Name);
             if (heist.IsStealthable)
-                WriteInColor(() => Console.Write("*"), ConsoleColor.DarkCyan);
+                ConsoleUtils.WriteInColor(() => Console.Write("*"), ConsoleColor.DarkCyan);
         }
 
         public void WriteHeistVillain(Villain villain)
@@ -57,7 +57,7 @@ namespace PayDay2SaveView
         public void WriteHeistIsInDlc(bool inDlc)
         {
             if (inDlc)
-                WriteInColor(() => Console.Write(" (DLC)"), ConsoleColor.DarkYellow);
+                ConsoleUtils.WriteInColor(() => Console.Write(" (DLC)"), ConsoleColor.DarkYellow);
         }
 
         public IAchievementFormatter Achievement()
@@ -78,7 +78,7 @@ namespace PayDay2SaveView
         public void WriteCounter(int count, Difficulty difficulty, Heist heist)
         {
             var color = count > 0 ? ConsoleColor.Gray : ColorFromDifficulty(difficulty, heist, ConsoleColor.Gray);
-            WriteInColor(() => Console.Write(count.ToString().PadLeft(4)), color);
+            ConsoleUtils.WriteInColor(() => Console.Write(count.ToString().PadLeft(4)), color);
         }
 
         public void WriteRawSession(KeyValuePair<object, object> session)
@@ -99,7 +99,7 @@ namespace PayDay2SaveView
         public void WriteVillainBegin(Villain villain)
         {
             Console.Write("----------------------------- ");
-            WriteInColor(() => Console.WriteLine(EnumUtils.GetString(villain)), GetVillainNameColor(villain));
+            ConsoleUtils.WriteInColor(() => Console.WriteLine(EnumUtils.GetString(villain)), GetVillainNameColor(villain));
         }
 
         #region Helpers
@@ -130,14 +130,6 @@ namespace PayDay2SaveView
         private static ConsoleColor GetVillainNameColor(Villain villain)
         {
             return villain == Villain.Unknown ? ConsoleColor.Red : ConsoleColor.White;
-        }
-
-        private static void WriteInColor(Action action, ConsoleColor color)
-        {
-            var backup = Console.ForegroundColor;
-            Console.ForegroundColor = color;
-            action();
-            Console.ForegroundColor = backup;
         }
 
         #endregion
