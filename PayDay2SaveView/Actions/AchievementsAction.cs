@@ -30,10 +30,10 @@ namespace PayDay2SaveView.Actions
                 var villain = heist is UnknownHeist ? GuessVillainFromDescription(description) : heist.Villain;
 
                 context.Formatter.Achievement()
-                    .WithDisplayName(result.DisplayName)
-                    .WithDescription(description)
+                    .WithDisplayName(result.DisplayName.Trim())
+                    .WithDescription(description.Trim())
                     .WithIsAchieved(achieved.Contains(result.Name))
-                    .WithHeist(heist.Name)
+                    .WithHeist(heist.Name.Trim())
                     .WithVillain(villain)
                     .WithDifficulty(GuessDifficultyFromDescription(description))
                     .Write();

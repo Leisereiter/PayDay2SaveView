@@ -10,20 +10,23 @@ namespace PayDay2SaveView.Formatter
 
         public override void Write()
         {
-            Console.Write($"# {DisplayName}: ");
-            Console.WriteLine(IsAchieved ? "DONE" : "TBD");
+            Console.Write(IsAchieved ? "DONE" : "TODO");
+            Console.Write($" {DisplayName}");
 
             if (!string.IsNullOrWhiteSpace(HeistName))
-                Console.WriteLine($"Heist: {HeistName}");
+                Console.Write($" | {HeistName}");
 
             if (Villain != Villain.None)
-                Console.WriteLine($"Villain: {Villain}");
+                Console.Write($" | {Villain}");
 
             if (Difficulty.HasValue)
-                Console.WriteLine($"Difficulty: {Difficulty.Value}");
+                Console.Write($" | {Difficulty.Value}");
 
             if (!string.IsNullOrWhiteSpace(Description))
-                Console.WriteLine($"Description: {Description}");
+            {
+                Console.WriteLine();
+                Console.WriteLine($"     {Description}");
+            }
 
             Console.WriteLine();
         }
