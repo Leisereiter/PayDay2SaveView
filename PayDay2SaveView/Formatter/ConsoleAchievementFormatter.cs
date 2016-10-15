@@ -12,7 +12,16 @@ namespace PayDay2SaveView.Formatter
         {
             Console.Write($"# {DisplayName}: ");
             Console.WriteLine(IsAchieved ? "DONE" : "TBD");
-            Console.WriteLine(Description);
+
+            if (!string.IsNullOrWhiteSpace(HeistName))
+                Console.WriteLine($"Heist: {HeistName}");
+
+            if (Villain != Villain.None)
+                Console.WriteLine($"Villain: {Villain}");
+
+            if (!string.IsNullOrWhiteSpace(Description))
+                Console.WriteLine($"Description: {Description}");
+
             Console.WriteLine();
         }
     }
