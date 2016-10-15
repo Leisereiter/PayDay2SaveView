@@ -9,6 +9,8 @@ namespace PayDay2SaveView.Actions
 
         public void Run(Context context)
         {
+            var mySteamId = GetMySteamId();
+
             ISteamUserStats userStats = new SteamUserStats(GetKey());
 
             var task = userStats.GetSchemaForGameAsync(Program.Pd2SteamId, Language);
@@ -28,6 +30,11 @@ namespace PayDay2SaveView.Actions
             var playerStats = userStats.GetPlayerAchievementsAsync(Program.Pd2SteamId, playerSteamId).Result;
             var achieved = playerStats.Achievements.Where(x => x.Achieved == 1);
             return new HashSet<string>(achieved.Select(x => x.APIName));
+        }
+
+        private static long GetMySteamId()
+        {
+            return long.Parse(ConfigurationManager.AppSettings["MySteamId"]);
         }
 
         private static string GetKey()
