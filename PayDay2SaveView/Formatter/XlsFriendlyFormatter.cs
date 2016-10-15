@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using PayDay2SaveView.Formatter;
 
 namespace PayDay2SaveView
 {
@@ -41,25 +42,9 @@ namespace PayDay2SaveView
             Console.Write(res);
         }
 
-        public void WriteAchievementName(string displayName)
+        public IAchievementFormatter Achievement()
         {
-            Console.Write($"{displayName},");
-        }
-
-        public void WriteAchievementDescription(string description)
-        {
-            Console.Write($"{description}");
-
-        }
-
-        public void WriteAchievementEnd()
-        {
-            Console.WriteLine();
-        }
-
-        public void WriteAchievementAchieved(bool achieved)
-        {
-            Console.Write(XlsFriendly(achieved));
+            return new XlsFriendlyAchievementFormatter();
         }
 
         public void WriteHeistVillain(Villain villain)

@@ -20,11 +20,11 @@ namespace PayDay2SaveView.Actions
             var gameStats = userStats.GetSchemaForGameAsync(Program.Pd2SteamId, Language).Result;
             foreach (var result in gameStats.AvailableGameStats.Achievements)
             {
-                var fmt = context.Formatter;
-                fmt.WriteAchievementAchieved(achieved.Contains(result.Name));
-                fmt.WriteAchievementName(result.DisplayName);
-                fmt.WriteAchievementDescription(result.Description);
-                fmt.WriteAchievementEnd();
+                context.Formatter.Achievement()
+                    .WithDisplayName(result.DisplayName)
+                    .WithDescription(result.Description)
+                    .WithIsAchieved(achieved.Contains(result.Name))
+                    .Write();
             }
         }
 

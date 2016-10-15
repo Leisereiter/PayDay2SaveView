@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
+using PayDay2SaveView.Formatter;
 
 namespace PayDay2SaveView
 {
@@ -59,24 +59,9 @@ namespace PayDay2SaveView
                 WriteInColor(() => Console.Write(" (DLC)"), ConsoleColor.DarkYellow);
         }
 
-        public void WriteAchievementName(string displayName)
+        public IAchievementFormatter Achievement()
         {
-            WriteInColor(() => Console.WriteLine("# " + displayName), ConsoleColor.White);
-        }
-
-        public void WriteAchievementDescription(string description)
-        {
-            Console.WriteLine(description);
-        }
-
-        public void WriteAchievementEnd()
-        {
-            Console.WriteLine();
-        }
-
-        public void WriteAchievementAchieved(bool achieved)
-        {
-            
+            return new ConsoleAchievementFormatter();
         }
 
         public void WriteHeistEnd()

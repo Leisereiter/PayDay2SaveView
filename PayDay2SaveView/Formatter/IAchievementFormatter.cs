@@ -1,5 +1,3 @@
-using System.IO;
-
 namespace PayDay2SaveView
 {
     public interface IAchievementFormatter
@@ -8,6 +6,6 @@ namespace PayDay2SaveView
         IAchievementFormatter WithDescription(string description);
         IAchievementFormatter WithIsAchieved(bool achieved);
 
-        void Write(TextWriter writer);
+        void Write();
     }
 }
