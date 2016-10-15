@@ -28,6 +28,24 @@ namespace PayDay2SaveView
             }
         }
 
+        public static string GetString(Difficulty difficulty)
+        {
+            switch (difficulty)
+            {
+                case Difficulty.Easy: return "Easy";
+                case Difficulty.Normal: return "Normal";
+                case Difficulty.Hard: return "Hard";
+                case Difficulty.Overkill: return "Very Hard";
+                case Difficulty.Overkill145: return "Overkill";
+                case Difficulty.EasyWish: return "Meyham";
+                case Difficulty.Overkill290: return "Death Wish";
+                case Difficulty.SmWish: return "One Shot";
+
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(difficulty), difficulty, null);
+            }
+        }
+
         public static IEnumerable<KeyValuePair<string, Villain>> GetAllVillainsByName()
         {
             var villains = Enum.GetValues(typeof(Villain)).Cast<Villain>();
