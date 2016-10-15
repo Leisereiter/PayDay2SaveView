@@ -1,4 +1,6 @@
-﻿using System.Configuration;
+﻿using System.Collections.Generic;
+using System.Configuration;
+using System.Linq;
 using SteamWebAPI2.Interfaces;
 
 namespace PayDay2SaveView.Actions
@@ -13,12 +15,13 @@ namespace PayDay2SaveView.Actions
 
             ISteamUserStats userStats = new SteamUserStats(GetKey());
 
-            var task = userStats.GetSchemaForGameAsync(Program.Pd2SteamId, Language);
-            var results = task.Result;
-            foreach (var result in results.AvailableGameStats.Achievements)
+            var achieved = GetAchievedApiNames(userStats, mySteamId);
+
+            var gameStats = userStats.GetSchemaForGameAsync(Program.Pd2SteamId, Language).Result;
+            foreach (var result in gameStats.AvailableGameStats.Achievements)
             {
                 var fmt = context.Formatter;
-
+                fmt.WriteAchievementAchieved(achieved.Contains(result.Name));
                 fmt.WriteAchievementName(result.DisplayName);
                 fmt.WriteAchievementDescription(result.Description);
                 fmt.WriteAchievementEnd();

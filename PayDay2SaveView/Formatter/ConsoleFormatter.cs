@@ -20,6 +20,7 @@ namespace PayDay2SaveView
         void WriteAchievementName(string displayName);
         void WriteAchievementDescription(string description);
         void WriteAchievementEnd();
+        void WriteAchievementAchieved(bool achieved);
     }
 
     public class ConsoleFormatter : IFormatter
@@ -73,6 +74,11 @@ namespace PayDay2SaveView
         public void WriteAchievementEnd()
         {
             Console.WriteLine();
+        }
+
+        public void WriteAchievementAchieved(bool achieved)
+        {
+            
         }
 
         public void WriteHeistEnd()
