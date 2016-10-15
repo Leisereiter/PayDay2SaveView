@@ -6,9 +6,9 @@ namespace PayDay2SaveView.Utils
     {
         public static string Stringify(object obj)
         {
-            if(obj is string) return StringifyString((string) obj);
-            if(obj is bool) return StringifyBool((bool) obj);
-            throw new ArgumentException();
+            if (obj is string) return StringifyString((string)obj);
+            if (obj is bool) return StringifyBool((bool)obj);
+            return StringifyString(obj.ToString());
         }
 
         public static string StringifyString(string s)
