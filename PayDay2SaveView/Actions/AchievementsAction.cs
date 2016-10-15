@@ -26,18 +26,22 @@ namespace PayDay2SaveView.Actions
             {
                 var description = result.Description;
 
-                var heist = GuessHeistFromDescription(description);
-
                 context.Formatter.Achievement()
                     .WithDisplayName(result.DisplayName)
                     .WithDescription(description)
                     .WithIsAchieved(achieved.Contains(result.Name))
-                    .WithHeist(heist)
+                    .WithHeist(GuessHeistFromDescription(description))
+                    .WithVillain(GuessVillainFromDescription(description))
                     .Write();
             }
         }
 
-        private string GuessHeistFromDescription(string description)
+        private static Villain GuessVillainFromDescription(string description)
+        {
+            return Villain.None;
+        }
+
+        private static string GuessHeistFromDescription(string description)
         {
             return string.Empty;
         }
