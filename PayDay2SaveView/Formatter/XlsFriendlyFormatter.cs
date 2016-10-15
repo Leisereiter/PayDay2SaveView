@@ -48,6 +48,11 @@ namespace PayDay2SaveView
             return new XlsFriendlyAchievementFormatter();
         }
 
+        public void AchievementsBefore()
+        {
+            new XlsFriendlyAchievementFormatter().WriteHeader();
+        }
+
         public void WriteHeistVillain(Villain villain)
         {
             Console.Write(XlsFriendlyUtils.StringifyString(EnumUtils.GetString(villain)) + ',');
