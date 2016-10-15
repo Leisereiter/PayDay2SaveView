@@ -18,6 +18,9 @@ namespace PayDay2SaveView.Actions
             var achieved = GetAchievedApiNames(userStats, mySteamId);
 
             var gameStats = userStats.GetSchemaForGameAsync(Program.Pd2SteamId, Language).Result;
+
+            context.Formatter.AchievementsBefore();
+
             foreach (var result in gameStats.AvailableGameStats.Achievements)
             {
                 context.Formatter.Achievement()

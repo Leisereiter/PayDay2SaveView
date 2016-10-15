@@ -24,6 +24,8 @@ namespace PayDay2SaveView.Formatter
             return this;
         }
 
+        public abstract void WriteHeader();
+
         public abstract void Write();
     }
 }

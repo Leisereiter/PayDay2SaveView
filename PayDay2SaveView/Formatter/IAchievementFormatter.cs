@@ -6,6 +6,7 @@ namespace PayDay2SaveView
         IAchievementFormatter WithDescription(string description);
         IAchievementFormatter WithIsAchieved(bool achieved);
 
+        void WriteHeader();
         void Write();
     }
 }

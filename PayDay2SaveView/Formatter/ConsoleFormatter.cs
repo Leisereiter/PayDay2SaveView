@@ -19,6 +19,7 @@ namespace PayDay2SaveView
         void WriteHeistIsInDlc(bool inDlc);
 
         IAchievementFormatter Achievement();
+        void AchievementsBefore();
     }
 
     public class ConsoleFormatter : IFormatter
@@ -62,6 +63,11 @@ namespace PayDay2SaveView
         public IAchievementFormatter Achievement()
         {
             return new ConsoleAchievementFormatter();
+        }
+
+        public void AchievementsBefore()
+        {
+            new ConsoleAchievementFormatter().WriteHeader();
         }
 
         public void WriteHeistEnd()
