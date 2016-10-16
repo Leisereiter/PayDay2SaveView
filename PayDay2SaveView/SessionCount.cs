@@ -22,28 +22,13 @@ namespace PayDay2SaveView
 
     public enum Difficulty
     {
-        [StringValue("Easy")]
         Easy,
-
-        [StringValue("Normal")]
         Normal,
-
-        [StringValue("Hard")]
         Hard,
-
-        [StringValue("Very Hard")]
         Overkill,
-
-        [StringValue("Overkill")]
         Overkill145,
-
-        [StringValue("Mayhem")]
         EasyWish,
-
-        [StringValue("Death Wish")]
         Overkill290,
-
-        [StringValue("One Down")]
         SmWish
     }
 

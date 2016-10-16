@@ -85,7 +85,6 @@
     <Compile Include="SessionKeyParser.cs" />
     <Compile Include="Utils\SteamUtils.cs" />
     <Compile Include="Steam\SteamFacade.cs" />
-    <Compile Include="Utils\StringValue.cs" />
     <Compile Include="Actions\ListHeistsAction.cs" />
     <Compile Include="Actions\TreeDumpAction.cs" />
     <Compile Include="Utils\ValueHelper.cs" />
