@@ -28,6 +28,9 @@ namespace PayDay2SaveView
         [Argument("achievements", "Gibt PD2-Errungenschaften aus")]
         public bool IsAchievements { get; private set; }
 
+        [Argument("todo", "Nur noch zu erledigendes Zeigen")]
+        public bool IsTodo { get; private set; } = false;
+
         public IList<string> Positional { get; }
 
         private CmdLineHelper()
