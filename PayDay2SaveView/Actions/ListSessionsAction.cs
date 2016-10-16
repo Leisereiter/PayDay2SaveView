@@ -1,4 +1,4 @@
-﻿namespace PayDay2SaveView
+﻿namespace PayDay2SaveView.Actions
 {
     public class ListSessionsAction : ICallable
     {

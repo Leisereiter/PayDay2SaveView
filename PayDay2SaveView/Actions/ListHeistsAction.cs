@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace PayDay2SaveView
+namespace PayDay2SaveView.Actions
 {
     public class ListHeistsAction : ICallable
     {
