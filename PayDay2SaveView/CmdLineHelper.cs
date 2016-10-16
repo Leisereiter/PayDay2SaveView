@@ -11,22 +11,22 @@ namespace PayDay2SaveView
     public class CmdLineHelper
     {
         [Argument("help", "Ähm, ja.")]
-        public bool IsHelp { get; private set; }
+        public bool IsHelp { get; private set; } = false;
 
         [Argument("list-sessions", "Listet alle Name-keys die nicht dem JobNameResolver bekannt sind")]
-        public bool IsListSessions { get; private set; }
+        public bool IsListSessions { get; private set; } = false;
 
         [Argument("hide-dlc", "Verstecke Heists die nur durch DLCs zugänglich sind")]
-        public bool IsHideDlc { get; private set; }
+        public bool IsHideDlc { get; private set; } = false;
 
         [Argument("xls", "Excel-freundliche Ausgabe, falls verfügbar.")]
-        public bool IsXls { get; private set; }
+        public bool IsXls { get; private set; } = false;
 
         [Argument("tree-dump", "Gibt das kompletet Savefile als Baum aus")]
-        public bool IsTreeDump { get; private set; }
+        public bool IsTreeDump { get; private set; } = false;
 
         [Argument("achievements", "Gibt PD2-Errungenschaften aus")]
-        public bool IsAchievements { get; private set; }
+        public bool IsAchievements { get; private set; } = false;
 
         [Argument("todo", "Nur noch zu erledigendes Zeigen")]
         public bool IsTodo { get; private set; } = false;
