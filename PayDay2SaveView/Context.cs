@@ -1,4 +1,5 @@
 ﻿using PaydaySaveEditor.PD2;
+using PayDay2SaveView.Formatter;
 
 namespace PayDay2SaveView
 {

@@ -1,22 +1,5 @@
-﻿namespace PayDay2SaveView
+﻿namespace PayDay2SaveView.Entities
 {
-    public enum Villain
-    {
-        None,
-        Bain,
-        Classics,
-        Events,
-        Hector,
-        Jimmy,
-        Locke,
-        TheButcher,
-        TheDentist,
-        TheElephant,
-        Vlad,
-
-        Unknown
-    }
-
     public class Heist
     {
         public string Key { get; private set; }
@@ -41,7 +24,6 @@
     {
         public UnknownHeist(string key) : base(key, key, Villain.Unknown)
         {
-
         }
     }
 }

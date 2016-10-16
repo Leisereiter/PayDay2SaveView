@@ -1,3 +1,5 @@
+using PayDay2SaveView.Entities;
+
 namespace PayDay2SaveView.Utils
 {
     public static class XlsFriendlyUtils

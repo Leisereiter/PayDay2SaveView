@@ -1,4 +1,6 @@
-namespace PayDay2SaveView
+using PayDay2SaveView.Entities;
+
+namespace PayDay2SaveView.Formatter
 {
     public interface IAchievementFormatter
     {

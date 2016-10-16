@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using PayDay2SaveView.Formatter;
+using PayDay2SaveView.Entities;
 using PayDay2SaveView.Utils;
 
-namespace PayDay2SaveView
+namespace PayDay2SaveView.Formatter
 {
     public class XlsFriendlyFormatter : IFormatter
     {

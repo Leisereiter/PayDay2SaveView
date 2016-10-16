@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Globalization;
 using System.Linq;
+using PayDay2SaveView.Entities;
+using PayDay2SaveView.Utils;
 using SteamWebAPI2.Interfaces;
 
 namespace PayDay2SaveView.Actions

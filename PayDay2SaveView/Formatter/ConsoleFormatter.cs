@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using PayDay2SaveView.Formatter;
+using PayDay2SaveView.Entities;
+using PayDay2SaveView.Utils;
 
-namespace PayDay2SaveView
+namespace PayDay2SaveView.Formatter
 {
     public interface IFormatter
     {

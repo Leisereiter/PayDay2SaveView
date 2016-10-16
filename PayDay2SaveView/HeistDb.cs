@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using PayDay2SaveView.Entities;
 
 namespace PayDay2SaveView
 {

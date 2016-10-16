@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
-using PayDay2SaveView;
+using PayDay2SaveView.Entities;
+using PayDay2SaveView.Utils;
 
 namespace Tests
 {

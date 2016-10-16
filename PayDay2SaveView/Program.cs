@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using PaydaySaveEditor.PD2;
 using PayDay2SaveView.Actions;
+using PayDay2SaveView.Formatter;
 
 namespace PayDay2SaveView
 {
