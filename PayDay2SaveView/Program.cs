@@ -52,13 +52,19 @@ namespace PayDay2SaveView
         {
             if (cmdLineHelper.IsXls)
             {
-                const string filePath = "output.csv";
+                var filePath = GetOutputPath();
                 var stream = File.OpenWrite(filePath);
                 Console.WriteLine($"Output in {filePath}");
                 return new XlsFriendlyFormatter(new StreamWriter(stream));
             }
 
             return new ConsoleFormatter();
+        }
+
+        private static string GetOutputPath()
+        {
+            var outputDirectory = Directory.GetCurrentDirectory();
+            return Path.Combine(outputDirectory, "output.csv");
         }
 
         private static string GetSaveFilePath(SteamUtils steamUtils)
