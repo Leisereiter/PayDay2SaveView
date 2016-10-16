@@ -2,35 +2,6 @@
 
 namespace PayDay2SaveView.Entities
 {
-    public enum SessionType
-    {
-        Day,
-        Level
-    }
-
-    public enum SessionState
-    {
-        Started,
-        Completed,
-        Dropin,
-        Failed,
-        StartedDropin,
-        FailedDropin,
-        CompletedDropin
-    }
-
-    public enum Difficulty
-    {
-        Easy,
-        Normal,
-        Hard,
-        Overkill,
-        Overkill145,
-        EasyWish,
-        Overkill290,
-        SmWish
-    }
-
     public class SessionCount
     {
         public Heist Heist { get; }

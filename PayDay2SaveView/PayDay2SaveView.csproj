@@ -65,6 +65,9 @@
     <Compile Include="ArgumentAttribute.cs" />
     <Compile Include="CmdLineHelper.cs" />
     <Compile Include="Context.cs" />
+    <Compile Include="Entities\Difficulty.cs" />
+    <Compile Include="Entities\SessionState.cs" />
+    <Compile Include="Entities\SessionType.cs" />
     <Compile Include="Entities\Villain.cs" />
     <Compile Include="Formatter\AchievementFormatterBase.cs" />
     <Compile Include="Formatter\ConsoleAchievementFormatter.cs" />
