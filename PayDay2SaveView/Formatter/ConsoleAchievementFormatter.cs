@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace PayDay2SaveView.Formatter
 {
@@ -34,7 +36,23 @@ namespace PayDay2SaveView.Formatter
             if (!string.IsNullOrWhiteSpace(Description))
             {
                 Console.WriteLine();
-                Console.WriteLine($"     {Description}");
+
+                var words = new Queue<string>(Description.Split(' ', '\n'));
+                while (words.Count > 0)
+                {
+                    var columnsLeft = 75;
+
+                    var row = new List<string>();
+                    while (words.Count > 0 && columnsLeft >= words.Peek().Length)
+                    {
+                        var word = words.Dequeue();
+                        row.Add(word);
+                        columnsLeft -= word.Length;
+                    }
+
+                    ConsoleUtils.WriteInColor(() => Console.Write("   | "), GetIsAchievedColor(IsAchieved));
+                    Console.WriteLine(string.Join(" ", row));
+                }
             }
 
             Console.WriteLine();
