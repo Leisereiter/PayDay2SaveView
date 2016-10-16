@@ -64,6 +64,7 @@
     <Compile Include="Actions\AchievementsAction.cs" />
     <Compile Include="ArgumentAttribute.cs" />
     <Compile Include="CmdLineHelper.cs" />
+    <Compile Include="Context.cs" />
     <Compile Include="Formatter\AchievementFormatterBase.cs" />
     <Compile Include="Formatter\ConsoleAchievementFormatter.cs" />
     <Compile Include="Formatter\ConsoleFormatter.cs" />
