@@ -7,7 +7,7 @@ namespace PayDay2SaveView.Formatter
 {
     public class XlsFriendlyFormatter : IFormatter
     {
-        private TextWriter Writer { get; set; }
+        private TextWriter Writer { get; }
 
         public XlsFriendlyFormatter(TextWriter writer)
         {

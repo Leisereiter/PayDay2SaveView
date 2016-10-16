@@ -6,7 +6,7 @@ using Microsoft.Win32;
 
 // ReSharper disable MemberCanBeMadeStatic.Local
 
-namespace PayDay2SaveView
+namespace PayDay2SaveView.Utils
 {
     public class SteamUtils
     {
@@ -35,7 +35,7 @@ namespace PayDay2SaveView
             return uids.First();
         }
 
-        public string GetSteamUserDirectory(long steamUserId)
+        private string GetSteamUserDirectory(long steamUserId)
         {
             return Path.Combine(GetSteamUserdataDirectory(), steamUserId.ToString());
         }

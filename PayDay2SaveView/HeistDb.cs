@@ -14,6 +14,7 @@ namespace PayDay2SaveView
             return JobNames.ContainsKey(key) ? JobNames[key] : new UnknownHeist(key);
         }
 
+        // ReSharper disable once UnusedMember.Global
         public static readonly IDictionary<string, string> DayNames = new Dictionary<string, string>()
         {
             // Armored Transport

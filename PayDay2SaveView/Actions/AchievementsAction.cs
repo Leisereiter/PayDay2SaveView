@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Globalization;
 using System.Linq;
 using PayDay2SaveView.Entities;
 using PayDay2SaveView.Utils;
@@ -44,8 +43,6 @@ namespace PayDay2SaveView.Actions
 
         private static Difficulty? GuessDifficultyFromDescription(string description)
         {
-            var comparer = StringComparer.Create(CultureInfo.CurrentCulture, ignoreCase: true);
-
             foreach (var diff in EnumUtils.GetAllDifficultiesByName())
             {
                 var pos = description.IndexOf(diff.Key, StringComparison.CurrentCultureIgnoreCase);
