@@ -26,6 +26,9 @@ namespace PayDay2SaveView.Actions
 
             foreach (var result in gameStats.AvailableGameStats.Achievements)
             {
+                var isAchieved = achieved.Contains(result.Name);
+                if (context.Args.IsTodo && isAchieved) continue;
+
                 var description = result.Description;
                 var heist = GuessHeistFromDescription(description);
                 var villain = heist is UnknownHeist ? GuessVillainFromDescription(description) : heist.Villain;
@@ -33,7 +36,7 @@ namespace PayDay2SaveView.Actions
                 context.Formatter.Achievement()
                     .WithDisplayName(result.DisplayName.Trim())
                     .WithDescription(description.Trim())
-                    .WithIsAchieved(achieved.Contains(result.Name))
+                    .WithIsAchieved(isAchieved)
                     .WithHeist(heist.Name.Trim())
                     .WithVillain(villain)
                     .WithDifficulty(GuessDifficultyFromDescription(description))
