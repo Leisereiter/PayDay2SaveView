@@ -76,7 +76,7 @@
     <Compile Include="Utils\EnumUtils.cs" />
     <Compile Include="Entities\Heist.cs" />
     <Compile Include="HeistDb.cs" />
-    <Compile Include="ICallable.cs" />
+    <Compile Include="Actions\ICallable.cs" />
     <Compile Include="Actions\ListSessionsAction.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
