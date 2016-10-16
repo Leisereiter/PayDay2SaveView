@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using PayDay2SaveView.Entities;
 
-namespace PayDay2SaveView
+namespace PayDay2SaveView.Utils
 {
     public class SessionKeyParser
     {

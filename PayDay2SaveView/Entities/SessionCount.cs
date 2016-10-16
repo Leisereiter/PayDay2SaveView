@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
+using PayDay2SaveView.Utils;
 
 namespace PayDay2SaveView.Entities
 {
