@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using PayDay2SaveView.Entities;
-using PayDay2SaveView.Utils;
 
 namespace PayDay2SaveView.Actions
 {
@@ -10,8 +9,7 @@ namespace PayDay2SaveView.Actions
     {
         public void Run(Context context)
         {
-            var sessions = context.SaveFile.GetPlayedSessions()
-                .Select(x => SessionCount.FromDictKvp(x, context.HeistDb))
+            var sessions = context.SaveFile.GetAllSessionCounts(context.HeistDb)
                 .GroupBy(x => x.Heist.Key, x => x)
                 .ToDictionary(x => x.Key, x => x.GroupBy(y => y.Difficulty, y => y)
                                                 .ToDictionary(y => y.Key, y => y.ToList()));

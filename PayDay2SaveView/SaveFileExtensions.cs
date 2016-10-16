@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using PaydaySaveEditor.PD2;
+using PayDay2SaveView.Entities;
 
 namespace PayDay2SaveView
 {
@@ -17,6 +19,11 @@ namespace PayDay2SaveView
             jobs["bar_sm_wish_started"] = 3;
 #endif
             return jobs;
+        }
+
+        public static IList<SessionCount> GetAllSessionCounts(this SaveFile saveFile, HeistDb heistDb)
+        {
+            return saveFile.GetPlayedSessions().Select(x => SessionCount.FromDictKvp(x, heistDb)).ToList();
         }
     }
 }
