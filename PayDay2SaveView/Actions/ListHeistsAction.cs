@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using PayDay2SaveView.Entities;
+using PayDay2SaveView.Utils;
 
 namespace PayDay2SaveView.Actions
 {
@@ -53,11 +55,18 @@ namespace PayDay2SaveView.Actions
 
         private static void ShowSessionsPerVillain(Context context, Dictionary<string, Dictionary<Difficulty, List<SessionCount>>> sessions, Villain villain)
         {
-            var heistsToList = GetAllJobsFromHeistDbAndSession(context, sessions)
+            var heistsQuery = GetAllJobsFromHeistDbAndSession(context, sessions)
                 .Where(x => x.Value.IsAvailable)
                 .Where(x => !(context.Args.IsHideDlc && x.Value.IsDlc))
-                .Where(x => x.Value.Villain == villain)
-                .ToList();
+                .Where(x => x.Value.Villain == villain);
+
+            if (context.Args.IsTodo)
+            {
+                var heistDoneInAllDifficulties = new HashSet<string>(sessions.Where(x => HeistIsDone(x.Value)).Select(x => x.Key));
+                heistsQuery = heistsQuery.Where(x => !heistDoneInAllDifficulties.Contains(x.Key));
+            }
+
+            var heistsToList = heistsQuery.ToList();
 
             if (!heistsToList.Any())
                 return;
@@ -81,6 +90,19 @@ namespace PayDay2SaveView.Actions
                 context.Formatter.WriteHeistIsInDlc(heist.IsDlc);
                 context.Formatter.WriteHeistEnd();
             }
+        }
+
+        private static bool HeistIsDone(Dictionary<Difficulty, List<SessionCount>> sessionsByDifficulty)
+        {
+            var activeDifficulties = Enum.GetValues(typeof(Difficulty)).Cast<Difficulty>().Where(x => x >= Difficulty.Normal);
+            return activeDifficulties.All(difficulty => SessionCompletedOnDifficulty(sessionsByDifficulty, difficulty));
+        }
+
+        private static bool SessionCompletedOnDifficulty(IReadOnlyDictionary<Difficulty, List<SessionCount>> sessionsByDifficulty, Difficulty difficulty)
+        {
+            if (!sessionsByDifficulty.ContainsKey(difficulty)) return false;
+            var session = sessionsByDifficulty[difficulty].FirstOrDefault(s => s.SessionState == SessionState.Completed);
+            return session?.Count > 0;
         }
     }
 }
