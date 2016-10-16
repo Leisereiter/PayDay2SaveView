@@ -81,7 +81,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SaveFileExtensions.cs" />
-    <Compile Include="SessionCount.cs" />
+    <Compile Include="Entities\SessionCount.cs" />
     <Compile Include="SessionKeyParser.cs" />
     <Compile Include="Utils\SteamUtils.cs" />
     <Compile Include="Steam\SteamFacade.cs" />
