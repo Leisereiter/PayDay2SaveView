@@ -98,8 +98,8 @@ namespace PayDay2SaveView
 
         public static readonly IList<Heist> Heists = new List<Heist>
         {
-            new Heist("safehouse", "Safehouse", Villain.None),
-            new Heist("chill", "Safehouse II", Villain.None),
+            new Heist("safehouse", "Old Safehouse", Villain.None, isAvailable:false),
+            new Heist("chill", "Safehouse", Villain.None),
             new Heist("chill_combat", "Safehouse Defense", Villain.None),
 
             // Tutorial
