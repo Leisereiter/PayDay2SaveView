@@ -21,9 +21,9 @@ namespace PayDay2SaveView
             return jobs;
         }
 
-        public static IList<SessionCount> GetAllSessionCounts(this SaveFile saveFile, HeistDb heistDb)
+        public static IEnumerable<SessionCount> GetAllSessionCounts(this SaveFile saveFile, HeistDb heistDb)
         {
-            return saveFile.GetPlayedSessions().Select(x => SessionCount.FromDictKvp(x, heistDb)).ToList();
+            return saveFile.GetPlayedSessions().Select(x => SessionCount.FromDictKvp(x, heistDb)).Where(x=>x.Heist.IsAvailable).ToList();
         }
     }
 }
