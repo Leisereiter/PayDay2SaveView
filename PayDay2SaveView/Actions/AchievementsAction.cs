@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Configuration;
 using System.Linq;
 using PayDay2SaveView.Entities;
@@ -46,12 +47,13 @@ namespace PayDay2SaveView.Actions
 
         private static Difficulty? GuessDifficultyFromDescription(string description)
         {
-            foreach (var diff in EnumUtils.GetAllDifficultiesByName())
-            {
-                var pos = description.IndexOf(diff.Key, StringComparison.CurrentCultureIgnoreCase);
-                if (pos >= 0)
-                    return diff.Value;
-            }
+            var difficulties = Enum.GetValues(typeof(Difficulty)).Cast<Difficulty>().OrderByDescending(x => x);
+            var keywords = difficulties.Select(difficulty => new KeyValuePair<Difficulty, string>(
+                difficulty, EnumUtils.GetString(difficulty) + " difficulty"));
+
+            foreach (var pair in keywords)
+                if (description.IndexOf(pair.Value, StringComparison.CurrentCultureIgnoreCase) >= 0)
+                    return pair.Key;
 
             return null;
         }
