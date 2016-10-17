@@ -49,7 +49,9 @@ namespace PayDay2SaveView.Actions
         {
             var difficulties = Enum.GetValues(typeof(Difficulty)).Cast<Difficulty>().OrderByDescending(x => x);
             var keywords = difficulties.Select(difficulty => new KeyValuePair<Difficulty, string>(
-                difficulty, EnumUtils.GetString(difficulty) + " difficulty"));
+                difficulty, EnumUtils.GetString(difficulty) + " difficulty"))
+                .ToList();
+            keywords.Add(new KeyValuePair<Difficulty, string>(Difficulty.Normal, "any difficulty"));
 
             foreach (var pair in keywords)
                 if (description.IndexOf(pair.Value, StringComparison.CurrentCultureIgnoreCase) >= 0)
