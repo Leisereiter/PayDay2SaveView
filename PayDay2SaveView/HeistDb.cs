@@ -135,6 +135,7 @@ namespace PayDay2SaveView
             new Heist("red2", "First World Bank", Villain.Classics, isStealthable:true),
             new Heist("dinner", "Slaughterhouse", Villain.Classics),
             new Heist("man", "Undercover", Villain.Classics, isDlc:true),
+            new Heist("flat", "Panic Room", Villain.Classics),
 
             // Events
             new Heist("nail", "Lab Rats", Villain.Events),
