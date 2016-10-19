@@ -12,7 +12,21 @@ namespace PayDay2SaveView.Actions
             var trophies = GetTrophies(context).OrderBy(x => x.Nr);
             foreach (var trophy in trophies)
             {
-                Console.WriteLine(trophy);
+                Console.WriteLine($"{trophy.Nr,3}: {trophy.Id} (???)");
+                foreach (var objective in trophy.Objectives)
+                {
+                    Console.Write("     ");
+                    if (objective.AchievementId != null)
+                    {
+                        Console.Write($"- Achievement {objective.AchievementId} achieved={objective.IsCompleted}");
+                    }
+                    else
+                    {
+                        Console.Write($"- {objective.ProgressId}: completed={objective.IsCompleted} progress={objective.Progress}/?");
+                    }
+                    Console.WriteLine();
+                }
+                Console.WriteLine();
             }
         }
 
@@ -85,7 +99,7 @@ namespace PayDay2SaveView.Actions
                 IsCompleted = (bool)value["completed"],
                 Progress = GetProgress(value),
                 ProgressId = (string)value.GetOrDefault("progress_id"),
-                AchievementId = (string)value.GetOrDefault("progress_id")
+                AchievementId = (string)value.GetOrDefault("achievement_id")
             };
         }
 
