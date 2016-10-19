@@ -2,7 +2,9 @@
 using System.Diagnostics;
 using System.Linq;
 using AutoMapper.Internal;
-using PayDay2SaveView.Actions;
+
+// ReSharper disable UnusedAutoPropertyAccessor.Global
+// ReSharper disable MemberCanBePrivate.Global
 
 namespace PayDay2SaveView.Entities
 {

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using AutoMapper.Internal;
 using PayDay2SaveView.Entities;
 
 namespace PayDay2SaveView.Actions
