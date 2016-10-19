@@ -29,6 +29,22 @@ namespace PayDay2SaveView.Actions
                         Console.Write($" progress={objective.Progress}/?");
                     }
                     Console.WriteLine();
+
+                    if (!objective.AdditionalFields.Any()) continue;
+
+                    foreach (var kvp in objective.AdditionalFields)
+                    {
+                        Console.Write($"     {kvp.Key}: ");
+                        var value = kvp.Value as Dictionary<object, object>;
+                        if (value == null) Console.Write(kvp.Value);
+                        else
+                        {
+                            Console.WriteLine();
+                            foreach (var unk in value)
+                                Console.WriteLine($"       {unk.Key}: {unk.Value}");
+                        }
+                    }
+                    Console.WriteLine();
                 }
                 Console.WriteLine();
             }
