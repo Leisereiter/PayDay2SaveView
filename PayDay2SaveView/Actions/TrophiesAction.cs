@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using AutoMapper.Internal;
 
@@ -21,28 +22,26 @@ namespace PayDay2SaveView.Actions
                     if (objective.AchievementId != null)
                     {
                         Console.Write("Achievement ");
-                        ConsoleUtils.WriteInColor(() => Console.Write(objective.AchievementId), GetObjectiveColor(objective));
+                        ConsoleUtils.WriteInColor(() => Console.Write(objective.AchievementId),
+                            GetObjectiveColor(objective));
                     }
                     else
                     {
-                        ConsoleUtils.WriteInColor(() => Console.Write($"{objective.ProgressId}"), GetObjectiveColor(objective));
+                        ConsoleUtils.WriteInColor(() => Console.Write($"{objective.ProgressId}"),
+                            GetObjectiveColor(objective));
                         Console.Write($" progress={objective.Progress}/?");
                     }
                     Console.WriteLine();
 
-                    if (!objective.AdditionalFields.Any()) continue;
-
-                    foreach (var kvp in objective.AdditionalFields)
+                    if (!objective.CompletedHeists.Any()) continue;
+                    
+                    // heists_completed
+                    ConsoleUtils.WriteInColor(() => Console.WriteLine("     Completed heists:"), ConsoleColor.DarkGray);
+                    foreach (var heistNameKey in objective.CompletedHeists)
                     {
-                        Console.Write($"     {kvp.Key}: ");
-                        var value = kvp.Value as Dictionary<object, object>;
-                        if (value == null) Console.Write(kvp.Value);
-                        else
-                        {
-                            Console.WriteLine();
-                            foreach (var unk in value)
-                                Console.WriteLine($"       {unk.Key}: {unk.Value}");
-                        }
+                        var heistName = context.HeistDb.GetHeistFromNameKey(heistNameKey).Name;
+                        ConsoleUtils.WriteInColor(() => Console.WriteLine("     - " + heistName),
+                            ConsoleColor.DarkGray);
                     }
                     Console.WriteLine();
                 }
@@ -115,7 +114,7 @@ namespace PayDay2SaveView.Actions
         public int Progress { get; private set; }
         public string ProgressId { get; private set; }
         public string AchievementId { get; private set; }
-        public Dictionary<object, object> AdditionalFields { get; private set; }
+        public IList<string> CompletedHeists { get; private set; }
 
         public static TrophyObjective FromDict(KeyValuePair<object, object> dict)
         {
@@ -128,14 +127,17 @@ namespace PayDay2SaveView.Actions
                 Progress = GetProgress(value),
                 ProgressId = (string)value.GetOrDefault("progress_id"),
                 AchievementId = (string)value.GetOrDefault("achievement_id"),
-                AdditionalFields = value.Where(x => IsUnknownKey(x.Key)).ToDictionary(x => x.Key, x => x.Value)
+                CompletedHeists = GetCompletedHeists(value)
             };
         }
 
-        private static bool IsUnknownKey(object argKey)
+        private static IList<string> GetCompletedHeists(Dictionary<object, object> value)
         {
-            var knownKeys = new HashSet<string> { "completed", "progress", "progress_id", "achievement_id" };
-            return !knownKeys.Contains(argKey);
+            if (!value.ContainsKey("completed_heists")) return new List<string>();
+            var dict = value["completed_heists"] as Dictionary<object, object>;
+
+            Debug.Assert(dict != null, "dict != null");
+            return dict.Select(x => (string)x.Value).ToList();
         }
 
         private static int GetProgress(IReadOnlyDictionary<object, object> value)
