@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="Actions\AchievementsAction.cs" />
     <Compile Include="Actions\HeistChancesAction.cs" />
+    <Compile Include="Entities\Trophy.cs" />
     <Compile Include="ArgumentAttribute.cs" />
     <Compile Include="CmdLineHelper.cs" />
     <Compile Include="Context.cs" />
