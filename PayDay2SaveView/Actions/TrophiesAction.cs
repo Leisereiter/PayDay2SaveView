@@ -99,6 +99,7 @@ namespace PayDay2SaveView.Actions
         public int Progress { get; private set; }
         public string ProgressId { get; private set; }
         public string AchievementId { get; private set; }
+        public Dictionary<object, object> AdditionalFields { get; private set; }
 
         public static TrophyObjective FromDict(KeyValuePair<object, object> dict)
         {
@@ -110,8 +111,15 @@ namespace PayDay2SaveView.Actions
                 IsCompleted = (bool)value["completed"],
                 Progress = GetProgress(value),
                 ProgressId = (string)value.GetOrDefault("progress_id"),
-                AchievementId = (string)value.GetOrDefault("achievement_id")
+                AchievementId = (string)value.GetOrDefault("achievement_id"),
+                AdditionalFields = value.Where(x => IsUnknownKey(x.Key)).ToDictionary(x => x.Key, x => x.Value)
             };
+        }
+
+        private static bool IsUnknownKey(object argKey)
+        {
+            var knownKeys = new HashSet<string> { "completed", "progress", "progress_id", "achievement_id" };
+            return !knownKeys.Contains(argKey);
         }
 
         private static int GetProgress(IReadOnlyDictionary<object, object> value)
