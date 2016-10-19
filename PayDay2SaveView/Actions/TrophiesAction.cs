@@ -12,22 +12,36 @@ namespace PayDay2SaveView.Actions
             var trophies = GetTrophies(context).OrderBy(x => x.Nr);
             foreach (var trophy in trophies)
             {
-                Console.WriteLine($"{trophy.Nr,3}: {trophy.Id} (???)");
+                ConsoleUtils.WriteInColor(() => Console.Write(trophy.IsCompleted ? "TODO " : "DONE "), GetTodoColor(trophy));
+                ConsoleUtils.WriteInColor(() => Console.WriteLine(trophy.Id), ConsoleColor.White);
+
                 foreach (var objective in trophy.Objectives)
                 {
                     Console.Write("     ");
                     if (objective.AchievementId != null)
                     {
-                        Console.Write($"- Achievement {objective.AchievementId} achieved={objective.IsCompleted}");
+                        Console.Write("Achievement ");
+                        ConsoleUtils.WriteInColor(() => Console.Write(objective.AchievementId), GetObjectiveColor(objective));
                     }
                     else
                     {
-                        Console.Write($"- {objective.ProgressId}: completed={objective.IsCompleted} progress={objective.Progress}/?");
+                        ConsoleUtils.WriteInColor(() => Console.Write($"{objective.ProgressId}"), GetObjectiveColor(objective));
+                        Console.Write($" progress={objective.Progress}/?");
                     }
                     Console.WriteLine();
                 }
                 Console.WriteLine();
             }
+        }
+
+        private static ConsoleColor GetObjectiveColor(TrophyObjective objective)
+        {
+            return objective.IsCompleted ? ConsoleColor.Green : ConsoleColor.Red;
+        }
+
+        private static ConsoleColor GetTodoColor(Trophy trophy)
+        {
+            return trophy.IsCompleted ? ConsoleColor.Green : ConsoleColor.Red;
         }
 
         private static IEnumerable<Trophy> GetTrophies(Context context)
@@ -75,10 +89,7 @@ namespace PayDay2SaveView.Actions
             return trophy;
         }
 
-        public override string ToString()
-        {
-            return $"{Nr}: {Id}";
-        }
+        public bool IsCompleted { get { return Objectives.All(x => x.IsCompleted); } }
     }
 
     public class TrophyObjective
