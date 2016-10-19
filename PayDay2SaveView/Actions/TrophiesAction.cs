@@ -10,7 +10,10 @@ namespace PayDay2SaveView.Actions
     {
         public void Run(Context context)
         {
-            var trophies = GetTrophies(context).OrderBy(x => x.Nr);
+            var trophies = GetTrophies(context);
+            if (context.Args.IsTodo) trophies = trophies.Where(x => !x.IsCompleted);
+            trophies = trophies.OrderBy(x => x.Nr);
+
             foreach (var trophy in trophies)
             {
                 ConsoleUtils.WriteInColor(() => Console.Write(trophy.IsCompleted ? "TODO " : "DONE "), GetTodoColor(trophy));
@@ -21,20 +24,19 @@ namespace PayDay2SaveView.Actions
                     Console.Write("     ");
                     if (objective.AchievementId != null)
                     {
-                        Console.Write("Achievement ");
+                        ConsoleUtils.WriteInColor(() => Console.Write("Achievement "), ConsoleColor.DarkGray);
                         ConsoleUtils.WriteInColor(() => Console.Write(objective.AchievementId),
                             GetObjectiveColor(objective));
                     }
                     else
                     {
-                        ConsoleUtils.WriteInColor(() => Console.Write($"{objective.ProgressId}"),
-                            GetObjectiveColor(objective));
+                        ConsoleUtils.WriteInColor(() => Console.Write($"{objective.ProgressId}"), GetObjectiveColor(objective));
                         Console.Write($" progress={objective.Progress}/?");
                     }
                     Console.WriteLine();
 
                     if (!objective.CompletedHeists.Any()) continue;
-                    
+
                     // heists_completed
                     ConsoleUtils.WriteInColor(() => Console.WriteLine("     Completed heists:"), ConsoleColor.DarkGray);
                     foreach (var heistNameKey in objective.CompletedHeists)
