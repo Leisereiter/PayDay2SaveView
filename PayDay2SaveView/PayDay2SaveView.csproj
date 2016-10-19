@@ -76,6 +76,7 @@
     <Compile Include="Formatter\ConsoleUtils.cs" />
     <Compile Include="Formatter\IAchievementFormatter.cs" />
     <Compile Include="Formatter\XlsFriendlyAchievementFormatter.cs" />
+    <Compile Include="Actions\TrophiesAction.cs" />
     <Compile Include="Utils\XlsFriendlyUtils.cs" />
     <Compile Include="Utils\EnumUtils.cs" />
     <Compile Include="Entities\Heist.cs" />

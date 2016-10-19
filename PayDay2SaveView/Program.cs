@@ -46,6 +46,8 @@ namespace PayDay2SaveView
                 return new AchievementsAction();
             if(context.Args.IsHeistChances)
                 return new HeistChancesAction();
+            if (context.Args.IsTrophies)
+                return new TrophiesAction();
 
             return new ListHeistsAction();
         }

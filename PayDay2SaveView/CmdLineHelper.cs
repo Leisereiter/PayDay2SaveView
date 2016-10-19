@@ -34,6 +34,9 @@ namespace PayDay2SaveView
         [Argument("heist-chances", "Zeigt statistiken zu Heists an")]
         public bool IsHeistChances { get; private set; } = false;
 
+        [Argument("trophies", "Listet die Trophäen auf")]
+        public bool IsTrophies { get; private set; } = false;
+
         public IList<string> Positional { get; }
 
         private CmdLineHelper()
