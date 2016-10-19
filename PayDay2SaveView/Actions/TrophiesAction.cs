@@ -66,7 +66,7 @@ namespace PayDay2SaveView.Actions
             return GetRawTrophies(gameData).Select(Trophy.FromDict);
         }
 
-        private static Dictionary<object, object> GetRawTrophies(Dictionary<object, object> gameData)
+        private static Dictionary<object, object> GetRawTrophies(IReadOnlyDictionary<object, object> gameData)
         {
             if (!gameData.ContainsKey("CustomSafehouseManager"))
                 throw new Exception("CustomSafehouseManager non existent");
