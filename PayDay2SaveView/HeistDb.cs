@@ -140,6 +140,7 @@ namespace PayDay2SaveView
             // Events
             new Heist("nail", "Lab Rats", Villain.Events),
             new Heist("haunted", "Safe House Nightmare", Villain.Events),
+            new Heist("help", "Prison Nightmare", Villain.Events),
 
             // Hector
             new Heist("firestarter", "Firestarter", Villain.Hector, isStealthable:true),
@@ -162,6 +163,7 @@ namespace PayDay2SaveView
             // The Butcher
             new Heist("crojob1", "The Bomb: Dockyard", Villain.TheButcher, isStealthable:true, isDlc:true),
             new Heist("crojob2", "The Bomb: Forest", Villain.TheButcher, isDlc:true),
+            new Heist("friend", "Scarface Mansion", Villain.TheButcher, isStealthable:true, isDlc:true),
 
             // The Dentist
             new Heist("kenaz", "Golden Grin Casino", Villain.TheDentist, isStealthable:true, isDlc:true),
@@ -185,6 +187,7 @@ namespace PayDay2SaveView
             new Heist("ukrainian_job", "Ukranian Job (Escape forces)", Villain.Vlad, isAvailable:false, isStealthable:true),
             new Heist("ukrainian_job_prof", "Ukranian Job", Villain.Vlad, isStealthable:true),
             new Heist("pines", "White Xmas", Villain.Vlad),
+            new Heist("moon", "stealing xmas", Villain.Vlad),
 
             // The Elephant
             new Heist("welcome_to_the_jungle", "Big Oil (Prae 109.1)", Villain.TheElephant, isAvailable:false),
