@@ -15,7 +15,7 @@ namespace PayDay2SaveView.Actions
 
             foreach (var trophy in trophies)
             {
-                ConsoleUtils.WriteInColor(() => Console.Write(trophy.IsCompleted ? "TODO " : "DONE "), GetTodoColor(trophy));
+                ConsoleUtils.WriteInColor(() => Console.Write(trophy.IsCompleted ? "DONE " : "TODO "), GetTodoColor(trophy));
                 ConsoleUtils.WriteInColor(() => Console.WriteLine(trophy.Id), ConsoleColor.White);
 
                 foreach (var objective in trophy.Objectives)
