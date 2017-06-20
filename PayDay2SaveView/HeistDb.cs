@@ -101,6 +101,7 @@ namespace PayDay2SaveView
             new Heist("safehouse", "Old Safehouse", Villain.None, isAvailable:false),
             new Heist("chill", "Safehouse", Villain.None),
             new Heist("chill_combat", "Safehouse Defense", Villain.None),
+            new Heist("crime_spree", "Crime Spree", Villain.None),
 
             // Tutorial
             new Heist("short1", "Tutorial I", Villain.None, isAvailable:false),
@@ -136,6 +137,8 @@ namespace PayDay2SaveView
             new Heist("dinner", "Slaughterhouse", Villain.Classics),
             new Heist("man", "Undercover", Villain.Classics, isDlc:true),
             new Heist("flat", "Panic Room", Villain.Classics),
+            new Heist("glace", "Green Bridge", Villain.Classics),
+            new Heist("run", "Heat Street", Villain.Classics),
 
             // Events
             new Heist("nail", "Lab Rats", Villain.Events),
