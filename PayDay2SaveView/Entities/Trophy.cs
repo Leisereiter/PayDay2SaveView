@@ -54,6 +54,7 @@ namespace PayDay2SaveView.Entities
     {
         public int Nr { get; private set; }
         public string Id { get; private set; }
+        public bool Completed { get; private set; }
         public List<TrophyObjective> Objectives { get; private set; }
 
         private Trophy() { }
@@ -70,12 +71,15 @@ namespace PayDay2SaveView.Entities
             {
                 Nr = (byte)dict.Key,
                 Id = (string)value["id"],
+                Completed = (bool)value["completed"],
                 Objectives = objectives
             };
 
             return trophy;
         }
 
-        public bool IsCompleted { get { return Objectives.All(x => x.IsCompleted); } }
+        //old function by checking all objectives
+        //public bool IsCompleted { get { return Objectives.All(x => x.IsCompleted); } }
+        public bool IsCompleted { get { return Completed; } }
     }
 }
