@@ -20,6 +20,7 @@ namespace PayDay2SaveView.Utils
                 case Villain.Jimmy: return "Jimmy";
                 case Villain.Locke: return "Locke";
                 case Villain.TheButcher: return "The Butcher";
+                case Villain.Continental: return "Continental";
                 case Villain.TheDentist: return "The Dentist";
                 case Villain.TheElephant: return "The Elephant";
                 case Villain.Vlad: return "Vlad";
