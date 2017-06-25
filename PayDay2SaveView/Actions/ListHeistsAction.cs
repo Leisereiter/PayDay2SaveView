@@ -25,6 +25,7 @@ namespace PayDay2SaveView.Actions
             ShowSessionsPerVillain(context, sessions, Villain.Jimmy);
             ShowSessionsPerVillain(context, sessions, Villain.Locke);
             ShowSessionsPerVillain(context, sessions, Villain.TheButcher);
+            ShowSessionsPerVillain(context, sessions, Villain.Continental);
             ShowSessionsPerVillain(context, sessions, Villain.TheDentist);
             ShowSessionsPerVillain(context, sessions, Villain.TheElephant);
             ShowSessionsPerVillain(context, sessions, Villain.Vlad);

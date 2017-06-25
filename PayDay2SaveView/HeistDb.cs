@@ -168,6 +168,10 @@ namespace PayDay2SaveView
             new Heist("crojob2", "The Bomb: Forest", Villain.TheButcher, isDlc:true),
             new Heist("friend", "Scarface Mansion", Villain.TheButcher, isStealthable:true, isDlc:true),
 
+            //Continental
+            new Heist("spa", "Brooklyn 10-10", Villain.Continental, isDlc:true),
+            new Heist("fish", "The Yacht Heist", Villain.Continental, isStealthable:true, isDlc:true),
+
             // The Dentist
             new Heist("kenaz", "Golden Grin Casino", Villain.TheDentist, isStealthable:true, isDlc:true),
             new Heist("mia", "Hotline Miami", Villain.TheDentist, isDlc:true),

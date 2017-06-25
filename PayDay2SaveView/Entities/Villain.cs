@@ -10,6 +10,7 @@
         Jimmy,
         Locke,
         TheButcher,
+        Continental,
         TheDentist,
         TheElephant,
         Vlad,
