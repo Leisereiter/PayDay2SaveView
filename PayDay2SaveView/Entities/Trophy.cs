@@ -17,14 +17,15 @@ namespace PayDay2SaveView.Entities
         public string AchievementId { get; private set; }
         public IList<string> CompletedHeists { get; private set; }
 
-        public static TrophyObjective FromDict(KeyValuePair<object, object> dict)
+        public static TrophyObjective FromDict(KeyValuePair<object, object> dict, bool isTrophyCompleted)
         {
             var value = (Dictionary<object, object>)dict.Value;
 
             return new TrophyObjective
             {
                 Id = (byte)dict.Key,
-                IsCompleted = (bool)value["completed"],
+                // Since objective's completenes can be false while the trophy's is true, we need to be creative
+                IsCompleted = isTrophyCompleted || (bool)value["completed"],
                 Progress = GetProgress(value),
                 ProgressId = (string)value.GetOrDefault("progress_id"),
                 AchievementId = (string)value.GetOrDefault("achievement_id"),
@@ -54,7 +55,7 @@ namespace PayDay2SaveView.Entities
     {
         public int Nr { get; private set; }
         public string Id { get; private set; }
-        public bool Completed { get; private set; }
+        public bool IsCompleted { get; private set; }
         public List<TrophyObjective> Objectives { get; private set; }
 
         private Trophy() { }
@@ -62,24 +63,21 @@ namespace PayDay2SaveView.Entities
         public static Trophy FromDict(KeyValuePair<object, object> dict)
         {
             var value = (Dictionary<object, object>)dict.Value;
+            var isTrophyCompleted = (bool)value["completed"];
 
             var objectives = ((Dictionary<object, object>)value["objectives"])
-                .Select(TrophyObjective.FromDict)
+                .Select(pair => TrophyObjective.FromDict(pair, isTrophyCompleted))
                 .ToList();
 
             var trophy = new Trophy
             {
                 Nr = (byte)dict.Key,
                 Id = (string)value["id"],
-                Completed = (bool)value["completed"],
+                IsCompleted = isTrophyCompleted,
                 Objectives = objectives
             };
 
             return trophy;
         }
-
-        //old function by checking all objectives
-        //public bool IsCompleted { get { return Objectives.All(x => x.IsCompleted); } }
-        public bool IsCompleted { get { return Completed; } }
     }
 }
